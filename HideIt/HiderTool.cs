@@ -90,7 +90,7 @@ namespace HideIt
                     ToggleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
                     ToggleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
                     ToggleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
-                    ToggleNotfications(ModConfig.Instance.Notifications);
+                    ToggleNotifications(ModConfig.Instance.Notifications);
                     ToggleBorders(ModConfig.Instance.Borders);
                     ToggleDistrictNames(ModConfig.Instance.DistrictNames);
                     ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
@@ -149,15 +149,15 @@ namespace HideIt
             }
         }
 
-        private void ToggleNotfications(bool disableNotfications)
+        private void ToggleNotifications(bool disableNotifications)
         {
             try
             {
-                Singleton<NotificationManager>.instance.NotificationsVisible = !disableNotfications;
+                Singleton<NotificationManager>.instance.NotificationsVisible = !disableNotifications;
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleNotfications -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleNotifications -> Exception: " + e.Message);
             }
         }
 
