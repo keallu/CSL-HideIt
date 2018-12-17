@@ -27,7 +27,7 @@ namespace HideIt
         {
             try
             {
-                
+
             }
             catch (Exception e)
             {
@@ -90,10 +90,14 @@ namespace HideIt
                     ToggleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
                     ToggleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
                     ToggleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
+                    ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
+                    ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
                     ToggleNotifications(ModConfig.Instance.Notifications);
                     ToggleBorders(ModConfig.Instance.Borders);
                     ToggleDistrictNames(ModConfig.Instance.DistrictNames);
+                    ToggleBuoys(ModConfig.Instance.Buoys);
                     ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
+                    ToggleRuining(ModConfig.Instance.TreeRuining, ModConfig.Instance.PropRuining);
                     ToggleGroundColor(ModConfig.Instance.GrassFertilityGroundColor, ModConfig.Instance.GrassFieldGroundColor, ModConfig.Instance.GrassForestGroundColor, ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
                     ToggleFogEffects(ModConfig.Instance.PollutionFog, ModConfig.Instance.VolumeFog, ModConfig.Instance.DistanceFog, ModConfig.Instance.EdgeFog);
@@ -124,7 +128,7 @@ namespace HideIt
         {
             try
             {
-                
+
             }
             catch (Exception e)
             {
@@ -185,6 +189,41 @@ namespace HideIt
             }
         }
 
+        private void ToggleBuoys(bool disableBuoys)
+        {
+            try
+            {
+                NetInfo netInfo = PrefabCollection<NetInfo>.FindLoaded("Ferry Path");
+
+                if (netInfo != null)
+                {
+                    if (netInfo.m_lanes != null)
+                    {
+                        foreach (NetInfo.Lane lane in netInfo.m_lanes)
+                        {
+                            if (lane?.m_laneProps?.m_props != null)
+                            {
+                                foreach (NetLaneProps.Prop laneProp in lane.m_laneProps.m_props)
+                                {
+                                    if (laneProp != null)
+                                    {
+                                        if (laneProp.m_finalProp.name == "Nautical Marker")
+                                        {
+                                            laneProp.m_probability = disableBuoys ? 0 : 100;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] Hider:ToggleBuoys -> Exception: " + e.Message);
+            }
+        }
+
         private void ToggleDecorations(bool disableCliff, bool disableFertile, bool disableGrass)
         {
             try
@@ -205,7 +244,7 @@ namespace HideIt
         private void ToggleGroundColor(bool disableGrassFertility, bool disableGrassField, bool disableGrassForest, bool disableGrassPollution)
         {
             try
-            {                
+            {
                 Shader.SetGlobalVector("_GrassFertilityColorOffset", disableGrassFertility ? _noColorOffset : _defaultGrassFertilityColorOffset);
                 Shader.SetGlobalVector("_GrassFieldColorOffset", disableGrassField ? _noColorOffset : _defaultGrassFieldColorOffset);
                 Shader.SetGlobalVector("_GrassForestColorOffset", disableGrassForest ? _noColorOffset : _defaultGrassForestColorOffset);
@@ -244,6 +283,40 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] Hider:ToggleFogEffects -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleRuining(bool disableTreeRuining, bool disablePropRuining)
+        {
+            try
+            {
+                TreeInfo treeInfo;
+
+                for (uint i = 0; i < PrefabCollection<TreeInfo>.LoadedCount(); i++)
+                {
+                    treeInfo = PrefabCollection<TreeInfo>.GetPrefab(i);
+
+                    if (treeInfo != null)
+                    {
+                        treeInfo.m_createRuining = !disableTreeRuining;
+                    }
+                }
+
+                PropInfo propInfo;
+
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+                {
+                    propInfo = PrefabCollection<PropInfo>.GetPrefab(i);
+
+                    if (propInfo != null)
+                    {
+                        propInfo.m_createRuining = !disablePropRuining;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
             }
         }
     }

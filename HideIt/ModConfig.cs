@@ -12,12 +12,17 @@
         public bool ZoomButton { get; set; }
         public bool UnlockButton { get; set; }
         public bool AdvisorButton { get; set; }
+        public bool CinematicCameraButton { get; set; }
+        public bool FreeCameraButton { get; set; }
         public bool Notifications { get; set; }
         public bool Borders { get; set; }
         public bool DistrictNames { get; set; }
+        public bool Buoys { get; set; }
         public bool CliffDecorations { get; set; }
         public bool FertileDecorations { get; set; }
         public bool GrassDecorations { get; set; }
+        public bool TreeRuining { get; set; }
+        public bool PropRuining { get; set; }
         public bool GrassFertilityGroundColor { get; set; }
         public bool GrassFieldGroundColor { get; set; }
         public bool GrassForestGroundColor { get; set; }

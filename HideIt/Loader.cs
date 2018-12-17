@@ -29,6 +29,15 @@ namespace HideIt
                     _gameObject.transform.parent = objectOfType.transform;
                     _gameObject.AddComponent<HiderTool>();
                 }
+
+                if (ModConfig.Instance.TreeRuining)
+                {
+                    HiderUtils.UpdateExistingTreeRuining(true);
+                }
+                if (ModConfig.Instance.PropRuining)
+                {
+                    HiderUtils.UpdateExistingPropRuining(true);
+                }
             }
             catch (Exception e)
             {

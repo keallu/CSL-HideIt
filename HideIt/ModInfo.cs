@@ -1,4 +1,6 @@
-﻿using ICities;
+﻿using Harmony;
+using ICities;
+using System.Reflection;
 
 namespace HideIt
 {
@@ -9,12 +11,14 @@ namespace HideIt
 
         public void OnEnabled()
         {
-            
+            var harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         public void OnDisabled()
         {
-            
+            var harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
+            harmony.UnpatchAll();
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -84,6 +88,20 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.CinematicCameraButton;
+            group.AddCheckbox("Cinematic Camera Button", selected, sel =>
+            {
+                ModConfig.Instance.CinematicCameraButton = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.FreeCameraButton;
+            group.AddCheckbox("Free Camera Button", selected, sel =>
+            {
+                ModConfig.Instance.FreeCameraButton = sel;
+                ModConfig.Instance.Save();
+            });
+
             group = helper.AddGroup("Gameplay");
 
             selected = ModConfig.Instance.Notifications;
@@ -107,6 +125,15 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            group = helper.AddGroup("Objects");
+
+            selected = ModConfig.Instance.Buoys;
+            group.AddCheckbox("Buoys", selected, sel =>
+            {
+                ModConfig.Instance.Buoys = sel;
+                ModConfig.Instance.Save();
+            });
+
             group = helper.AddGroup("Decorations");
 
             selected = ModConfig.Instance.CliffDecorations;
@@ -127,6 +154,22 @@ namespace HideIt
             group.AddCheckbox("Fertile Decorations", selected, sel =>
             {
                 ModConfig.Instance.FertileDecorations = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Ruining");
+
+            selected = ModConfig.Instance.TreeRuining;
+            group.AddCheckbox("Trees (requires reload to update existing trees)", selected, sel =>
+            {
+                ModConfig.Instance.TreeRuining = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PropRuining;
+            group.AddCheckbox("Props (requires reload to update existing props)", selected, sel =>
+            {
+                ModConfig.Instance.PropRuining = sel;
                 ModConfig.Instance.Save();
             });
 
