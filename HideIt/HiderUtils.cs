@@ -1,11 +1,44 @@
 ﻿using ColossalFramework;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace HideIt
 {
     public static class HiderUtils
     {
+        public static void RefreshTexture()
+        {
+            try
+            {
+                if (SimulationManager.exists)
+                {
+                    SimulationManager.instance.AddAction(RefreshTextureAction());
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderUtils:RefreshTexture -> Exception: " + e.Message);
+            }
+        }
+
+        private static IEnumerator RefreshTextureAction()
+        {
+            try
+            {
+                if (NaturalResourceManager.exists)
+                {
+                    NaturalResourceManager.instance.AreaModified(0, 0, 511, 511);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderUtils:RefreshTextureAction -> Exception: " + e.Message);
+            }
+
+            yield return null;
+        }
+
         public static void UpdateExistingPropRuining(bool disableRuining)
         {
             try

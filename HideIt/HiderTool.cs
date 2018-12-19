@@ -59,7 +59,7 @@ namespace HideIt
                 _defaultGrassForestColorOffset = Shader.GetGlobalVector("_GrassForestColorOffset");
                 _defaultGrassPollutionColorOffset = Shader.GetGlobalVector("_GrassPollutionColorOffset");
                 _defaultWaterColorClean = Shader.GetGlobalColor("_WaterColorClean");
-                _defaultWaterColorDirty = Shader.GetGlobalColor("_WaterColorDirty");
+                _defaultWaterColorDirty = Shader.GetGlobalColor("_WaterColorDirty");                
 
                 _fogProperties = FindObjectOfType<FogProperties>();
 
@@ -93,7 +93,8 @@ namespace HideIt
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
                     ToggleNotifications(ModConfig.Instance.Notifications);
-                    ToggleBorders(ModConfig.Instance.Borders);
+                    ToggleLineBorders(ModConfig.Instance.LineBorders);
+                    ToggleCameraBorders(ModConfig.Instance.CameraBorders);
                     ToggleDistrictNames(ModConfig.Instance.DistrictNames);
                     ToggleBuoys(ModConfig.Instance.Buoys);
                     ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
@@ -102,9 +103,13 @@ namespace HideIt
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
                     ToggleFogEffects(ModConfig.Instance.PollutionFog, ModConfig.Instance.VolumeFog, ModConfig.Instance.DistanceFog, ModConfig.Instance.EdgeFog);
 
+                    HiderUtils.RefreshTexture();
+
                     _initialized = true;
                     ModConfig.Instance.ConfigUpdated = false;
                 }
+
+                InfoViewHelper.Instance.UpdateInfoView();
             }
             catch (Exception e)
             {
@@ -165,15 +170,27 @@ namespace HideIt
             }
         }
 
-        private void ToggleBorders(bool disableBorders)
+        private void ToggleLineBorders(bool disableLineBorders)
         {
             try
             {
-                Singleton<GameAreaManager>.instance.BordersVisible = !disableBorders;
+                Singleton<GameAreaManager>.instance.BordersVisible = !disableLineBorders;
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleLineBorders -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleCameraBorders(bool disableCameraBorders)
+        {
+            try
+            {
+                Camera.main.GetComponent<CameraController>().m_unlimitedCamera = disableCameraBorders;
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] Hider:ToggleCameraBorders -> Exception: " + e.Message);
             }
         }
 
@@ -241,14 +258,51 @@ namespace HideIt
             }
         }
 
+        private void ToggleRuining(bool disableTreeRuining, bool disablePropRuining)
+        {
+            try
+            {
+                TreeInfo treeInfo;
+
+                for (uint i = 0; i < PrefabCollection<TreeInfo>.LoadedCount(); i++)
+                {
+                    treeInfo = PrefabCollection<TreeInfo>.GetPrefab(i);
+
+                    if (treeInfo != null)
+                    {
+                        treeInfo.m_createRuining = !disableTreeRuining;
+                    }
+                }
+
+                PropInfo propInfo;
+
+                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
+                {
+                    propInfo = PrefabCollection<PropInfo>.GetPrefab(i);
+
+                    if (propInfo != null)
+                    {
+                        propInfo.m_createRuining = !disablePropRuining;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
+            }
+        }
+
         private void ToggleGroundColor(bool disableGrassFertility, bool disableGrassField, bool disableGrassForest, bool disableGrassPollution)
         {
             try
             {
-                Shader.SetGlobalVector("_GrassFertilityColorOffset", disableGrassFertility ? _noColorOffset : _defaultGrassFertilityColorOffset);
-                Shader.SetGlobalVector("_GrassFieldColorOffset", disableGrassField ? _noColorOffset : _defaultGrassFieldColorOffset);
-                Shader.SetGlobalVector("_GrassForestColorOffset", disableGrassForest ? _noColorOffset : _defaultGrassForestColorOffset);
-                Shader.SetGlobalVector("_GrassPollutionColorOffset", disableGrassPollution ? _noColorOffset : _defaultGrassPollutionColorOffset);
+                if (_terrainProperties != null)
+                {
+                    Shader.SetGlobalVector("_GrassFertilityColorOffset", disableGrassFertility ? _noColorOffset : _defaultGrassFertilityColorOffset);
+                    Shader.SetGlobalVector("_GrassFieldColorOffset", disableGrassField ? _noColorOffset : _defaultGrassFieldColorOffset);
+                    Shader.SetGlobalVector("_GrassForestColorOffset", disableGrassForest ? _noColorOffset : _defaultGrassForestColorOffset);
+                    Shader.SetGlobalVector("_GrassPollutionColorOffset", disableGrassPollution ? new Vector4(_noColorOffset.x, _noColorOffset.y, _noColorOffset.z, _terrainProperties.m_cliffSandNormalTiling) : new Vector4(_defaultGrassPollutionColorOffset.x, _defaultGrassPollutionColorOffset.y, _defaultGrassPollutionColorOffset.z, _terrainProperties.m_cliffSandNormalTiling));
+                }
             }
             catch (Exception e)
             {
@@ -283,40 +337,6 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] Hider:ToggleFogEffects -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleRuining(bool disableTreeRuining, bool disablePropRuining)
-        {
-            try
-            {
-                TreeInfo treeInfo;
-
-                for (uint i = 0; i < PrefabCollection<TreeInfo>.LoadedCount(); i++)
-                {
-                    treeInfo = PrefabCollection<TreeInfo>.GetPrefab(i);
-
-                    if (treeInfo != null)
-                    {
-                        treeInfo.m_createRuining = !disableTreeRuining;
-                    }
-                }
-
-                PropInfo propInfo;
-
-                for (uint i = 0; i < PrefabCollection<PropInfo>.LoadedCount(); i++)
-                {
-                    propInfo = PrefabCollection<PropInfo>.GetPrefab(i);
-
-                    if (propInfo != null)
-                    {
-                        propInfo.m_createRuining = !disablePropRuining;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
             }
         }
     }

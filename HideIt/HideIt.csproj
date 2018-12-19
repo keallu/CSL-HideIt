@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Helpers\InfoViewHelper.cs" />
     <Compile Include="HiderTool.cs" />
     <Compile Include="HiderUtils.cs" />
     <Compile Include="Loader.cs" />

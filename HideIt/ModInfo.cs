@@ -111,10 +111,17 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.Borders;
-            group.AddCheckbox("Borders", selected, sel =>
+            selected = ModConfig.Instance.LineBorders;
+            group.AddCheckbox("Line Borders", selected, sel =>
             {
-                ModConfig.Instance.Borders = sel;
+                ModConfig.Instance.LineBorders = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.CameraBorders;
+            group.AddCheckbox("Camera Borders", selected, sel =>
+            {
+                ModConfig.Instance.CameraBorders = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -211,6 +218,69 @@ namespace HideIt
             });
 
             group = helper.AddGroup("Effects");
+
+            selected = ModConfig.Instance.OreArea;
+            group.AddCheckbox("Ore Area", selected, sel =>
+            {
+                ModConfig.Instance.OreArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.OilArea;
+            group.AddCheckbox("Oil Area", selected, sel =>
+            {
+                ModConfig.Instance.OilArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SandArea;
+            group.AddCheckbox("Sand Area", selected, sel =>
+            {
+                ModConfig.Instance.SandArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.FertilityArea;
+            group.AddCheckbox("Fertility Area", selected, sel =>
+            {
+                ModConfig.Instance.FertilityArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ForestArea;
+            group.AddCheckbox("Forest Area", selected, sel =>
+            {
+                ModConfig.Instance.ForestArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ShoreArea;
+            group.AddCheckbox("Shore Area", selected, sel =>
+            {
+                ModConfig.Instance.ShoreArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PollutedArea;
+            group.AddCheckbox("Polluted Area", selected, sel =>
+            {
+                ModConfig.Instance.PollutedArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BurnedArea;
+            group.AddCheckbox("Burned Area", selected, sel =>
+            {
+                ModConfig.Instance.BurnedArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.DestroyedArea;
+            group.AddCheckbox("Destroyed Area", selected, sel =>
+            {
+                ModConfig.Instance.DestroyedArea = sel;
+                ModConfig.Instance.Save();
+            });
 
             selected = ModConfig.Instance.PollutionFog;
             group.AddCheckbox("Pollution Fog", selected, sel =>

@@ -15,7 +15,8 @@
         public bool CinematicCameraButton { get; set; }
         public bool FreeCameraButton { get; set; }
         public bool Notifications { get; set; }
-        public bool Borders { get; set; }
+        public bool LineBorders { get; set; }
+        public bool CameraBorders { get; set; }
         public bool DistrictNames { get; set; }
         public bool Buoys { get; set; }
         public bool CliffDecorations { get; set; }
@@ -28,6 +29,15 @@
         public bool GrassForestGroundColor { get; set; }
         public bool GrassPollutionGroundColor { get; set; }
         public bool DirtyWaterColor { get; set; }
+        public bool OreArea { get; set; }
+        public bool OilArea { get; set; }
+        public bool SandArea { get; set; }
+        public bool FertilityArea { get; set; }
+        public bool ForestArea { get; set; }
+        public bool ShoreArea { get; set; }
+        public bool PollutedArea { get; set; }
+        public bool BurnedArea { get; set; }
+        public bool DestroyedArea { get; set; }
         public bool PollutionFog { get; set; }
         public bool VolumeFog { get; set; }
         public bool DistanceFog { get; set; }
