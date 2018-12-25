@@ -8,7 +8,7 @@
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
         public bool RadioButton { get; set; }
-        public bool PauseButton { get; set; }
+        public bool GearButton { get; set; }
         public bool ZoomButton { get; set; }
         public bool UnlockButton { get; set; }
         public bool AdvisorButton { get; set; }
@@ -18,7 +18,15 @@
         public bool LineBorders { get; set; }
         public bool CameraBorders { get; set; }
         public bool DistrictNames { get; set; }
+        public bool ValidColor { get; set; }
+        public bool WarningColor { get; set; }
+        public bool ErrorColor { get; set; }
+        public bool ValidColorInfo { get; set; }
+        public bool WarningColorInfo { get; set; }
+        public bool ErrorColorInfo { get; set; }
         public bool Buoys { get; set; }
+        public bool Seagulls { get; set; }
+        public bool Wildlife { get; set; }
         public bool CliffDecorations { get; set; }
         public bool FertileDecorations { get; set; }
         public bool GrassDecorations { get; set; }

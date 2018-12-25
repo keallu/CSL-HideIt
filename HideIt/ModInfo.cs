@@ -60,10 +60,10 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.PauseButton;
-            group.AddCheckbox("Pause Button", selected, sel =>
+            selected = ModConfig.Instance.GearButton;
+            group.AddCheckbox("Gear Button", selected, sel =>
             {
-                ModConfig.Instance.PauseButton = sel;
+                ModConfig.Instance.GearButton = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -130,7 +130,7 @@ namespace HideIt
             {
                 ModConfig.Instance.DistrictNames = sel;
                 ModConfig.Instance.Save();
-            });
+            });            
 
             group = helper.AddGroup("Objects");
 
@@ -138,6 +138,64 @@ namespace HideIt
             group.AddCheckbox("Buoys", selected, sel =>
             {
                 ModConfig.Instance.Buoys = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Seagulls;
+            group.AddCheckbox("Seagulls", selected, sel =>
+            {
+                ModConfig.Instance.Seagulls = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Wildlife;
+            group.AddCheckbox("Wildlife", selected, sel =>
+            {
+                ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Tools");
+
+            selected = ModConfig.Instance.ValidColor;
+            group.AddCheckbox("Valid Color", selected, sel =>
+            {
+                ModConfig.Instance.ValidColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.WarningColor;
+            group.AddCheckbox("Warning Color", selected, sel =>
+            {
+                ModConfig.Instance.WarningColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ErrorColor;
+            group.AddCheckbox("Error Color", selected, sel =>
+            {
+                ModConfig.Instance.ErrorColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ValidColorInfo;
+            group.AddCheckbox("Valid Color Info", selected, sel =>
+            {
+                ModConfig.Instance.ValidColorInfo = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.WarningColorInfo;
+            group.AddCheckbox("Warning Color Info", selected, sel =>
+            {
+                ModConfig.Instance.WarningColorInfo = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ErrorColorInfo;
+            group.AddCheckbox("Error Color Info", selected, sel =>
+            {
+                ModConfig.Instance.ErrorColorInfo = sel;
                 ModConfig.Instance.Save();
             });
 

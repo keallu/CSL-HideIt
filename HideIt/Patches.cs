@@ -7,6 +7,198 @@ using UnityEngine;
 
 namespace HideIt
 {
+    [HarmonyPatch(typeof(CargoHarborAI), "CountAnimals")]
+    public static class CargoHarborAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] CargoHarborAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(HarborAI), "CountAnimals")]
+    public static class HarborAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HarborAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(IndustryBuildingAI), "CountAnimals")]
+    public static class IndustryBuildingAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] IndustryBuildingAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(LandfillSiteAI), "CountAnimals")]
+    public static class LandfillSiteAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] LandfillSiteAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ParkAI), "CountAnimals")]
+    public static class ParkAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ParkAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ParkBuildingAI), "CountAnimals")]
+    public static class ParkBuildingAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ParkBuildingAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(WarehouseAI), "CountAnimals")]
+    public static class WarehouseAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Seagulls)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] WarehouseAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(WildlifeSpawnPointAI), "CountAnimals")]
+    public static class WildlifeSpawnPointAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Wildlife)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] WildlifeSpawnPointAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(NaturalResourceManager), "UpdateTexture")]
     public static class NaturalResourceManagerUpdateTexturePatch
     {

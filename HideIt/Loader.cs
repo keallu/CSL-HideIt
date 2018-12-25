@@ -25,7 +25,7 @@ namespace HideIt
                 UIView objectOfType = UnityEngine.Object.FindObjectOfType<UIView>();
                 if (objectOfType != null)
                 {
-                    _gameObject = new GameObject("Hider");
+                    _gameObject = new GameObject("HiderTool");
                     _gameObject.transform.parent = objectOfType.transform;
                     _gameObject.AddComponent<HiderTool>();
                 }

@@ -10,6 +10,12 @@ namespace HideIt
         private bool _initialized;
 
         private UIComponent _component;
+        private Color _defaultValidColor;
+        private Color _defaultWarningColor;
+        private Color _defaultErrorColor;
+        private Color _defaultValidColorInfo;
+        private Color _defaultWarningColorInfo;
+        private Color _defaultErrorColorInfo;
         private TerrainProperties _terrainProperties;
         private Vector3 _noColorOffset;
         private Vector3 _defaultGrassFertilityColorOffset;
@@ -31,7 +37,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:Awake -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:Awake -> Exception: " + e.Message);
             }
         }
 
@@ -43,7 +49,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:OnEnable -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:OnEnable -> Exception: " + e.Message);
             }
         }
 
@@ -51,6 +57,15 @@ namespace HideIt
         {
             try
             {
+                ToolController toolController = ToolsModifierControl.toolController;
+
+                _defaultValidColor = toolController.m_validColor;
+                _defaultWarningColor = toolController.m_warningColor;
+                _defaultErrorColor = toolController.m_errorColor;
+                _defaultValidColorInfo = toolController.m_validColorInfo;
+                _defaultWarningColorInfo = toolController.m_warningColorInfo;
+                _defaultErrorColorInfo = toolController.m_errorColorInfo;
+
                 _terrainProperties = FindObjectOfType<TerrainProperties>();
 
                 _noColorOffset = new Vector3(0f, 0f, 0f);
@@ -59,7 +74,7 @@ namespace HideIt
                 _defaultGrassForestColorOffset = Shader.GetGlobalVector("_GrassForestColorOffset");
                 _defaultGrassPollutionColorOffset = Shader.GetGlobalVector("_GrassPollutionColorOffset");
                 _defaultWaterColorClean = Shader.GetGlobalColor("_WaterColorClean");
-                _defaultWaterColorDirty = Shader.GetGlobalColor("_WaterColorDirty");                
+                _defaultWaterColorDirty = Shader.GetGlobalColor("_WaterColorDirty");
 
                 _fogProperties = FindObjectOfType<FogProperties>();
 
@@ -72,7 +87,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:Start -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:Start -> Exception: " + e.Message);
             }
         }
 
@@ -86,7 +101,7 @@ namespace HideIt
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
                     ToggleUIComponent("RadioPanel", ModConfig.Instance.RadioButton);
-                    ToggleUIComponent("Esc", ModConfig.Instance.PauseButton);
+                    ToggleUIComponent("Esc", ModConfig.Instance.GearButton);
                     ToggleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
                     ToggleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
                     ToggleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
@@ -97,11 +112,22 @@ namespace HideIt
                     ToggleCameraBorders(ModConfig.Instance.CameraBorders);
                     ToggleDistrictNames(ModConfig.Instance.DistrictNames);
                     ToggleBuoys(ModConfig.Instance.Buoys);
+                    ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.ValidColorInfo, ModConfig.Instance.WarningColorInfo, ModConfig.Instance.ErrorColorInfo);
                     ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
                     ToggleRuining(ModConfig.Instance.TreeRuining, ModConfig.Instance.PropRuining);
                     ToggleGroundColor(ModConfig.Instance.GrassFertilityGroundColor, ModConfig.Instance.GrassFieldGroundColor, ModConfig.Instance.GrassForestGroundColor, ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
                     ToggleFogEffects(ModConfig.Instance.PollutionFog, ModConfig.Instance.VolumeFog, ModConfig.Instance.DistanceFog, ModConfig.Instance.EdgeFog);
+
+                    if (ModConfig.Instance.Seagulls)
+                    {
+                        HiderUtils.RefreshSeagulls();
+                    }
+
+                    if (ModConfig.Instance.Wildlife)
+                    {
+                        HiderUtils.RefreshWildlife();
+                    }
 
                     HiderUtils.RefreshTexture();
 
@@ -113,7 +139,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:Update -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:Update -> Exception: " + e.Message);
             }
         }
 
@@ -125,7 +151,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:OnDisable -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:OnDisable -> Exception: " + e.Message);
             }
         }
 
@@ -137,7 +163,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:OnDestroy -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:OnDestroy -> Exception: " + e.Message);
             }
         }
 
@@ -154,7 +180,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -166,7 +192,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleNotifications -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleNotifications -> Exception: " + e.Message);
             }
         }
 
@@ -178,7 +204,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleLineBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleLineBorders -> Exception: " + e.Message);
             }
         }
 
@@ -190,7 +216,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleCameraBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleCameraBorders -> Exception: " + e.Message);
             }
         }
 
@@ -202,7 +228,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleDistrictNames -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleDistrictNames -> Exception: " + e.Message);
             }
         }
 
@@ -237,7 +263,29 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleBuoys -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleBuoys -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableValidColorInfo, bool disableWarningColorInfo, bool disableErrorColorInfo)
+        {
+            try
+            {
+                ToolController toolController = ToolsModifierControl.toolController;
+
+                if (toolController != null)
+                {
+                    toolController.m_validColor.a = disableValidColor ? 0f : _defaultValidColor.a;
+                    toolController.m_warningColor.a = disableWarningColor ? 0f : _defaultWarningColor.a;
+                    toolController.m_errorColor.a = disableErrorColor ? 0f : _defaultErrorColor.a;
+                    toolController.m_validColorInfo.a = disableValidColorInfo ? 0f : _defaultValidColorInfo.a;
+                    toolController.m_warningColorInfo.a = disableWarningColorInfo ? 0f : _defaultWarningColorInfo.a;
+                    toolController.m_errorColorInfo.a = disableErrorColorInfo ? 0f : _defaultErrorColorInfo.a;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleToolColor -> Exception: " + e.Message);
             }
         }
 
@@ -254,7 +302,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleDecorations -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleDecorations -> Exception: " + e.Message);
             }
         }
 
@@ -288,7 +336,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleRuining -> Exception: " + e.Message);
             }
         }
 
@@ -306,7 +354,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleGroundColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleGroundColor -> Exception: " + e.Message);
             }
         }
 
@@ -318,7 +366,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleWaterColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleWaterColor -> Exception: " + e.Message);
             }
         }
 
@@ -336,7 +384,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleFogEffects -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleFogEffects -> Exception: " + e.Message);
             }
         }
     }
