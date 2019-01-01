@@ -1,5 +1,6 @@
 ﻿using Harmony;
 using ICities;
+using System;
 using System.Reflection;
 
 namespace HideIt
@@ -21,14 +22,122 @@ namespace HideIt
             harmony.UnpatchAll();
         }
 
+        private static readonly string[] KeymappingLabels =
+        {
+            "Notification Icons",
+            "District Names",
+            "District Icons",
+            "Line Borders",
+            "Camera Borders"
+        };
+
+        private static readonly string[] KeymappingValues =
+        {
+            "Notification Icons",
+            "District Names",
+            "District Icons",
+            "Line Borders",
+            "Camera Borders"
+        };
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             UIHelperBase group;
             bool selected;
+            int selectedIndex;
 
             group = helper.AddGroup(Name);
 
-            group.AddSpace(20);
+            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping1);
+
+            group.AddDropdown("LEFT CTRL + H", KeymappingLabels, selectedIndex, sel =>
+            {
+                ModConfig.Instance.Keymapping1 = KeymappingValues[sel];
+                ModConfig.Instance.Save();
+            });
+
+            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping2);
+
+            group.AddDropdown("LEFT CTRL + I", KeymappingLabels, selectedIndex, sel =>
+            {
+                ModConfig.Instance.Keymapping2 = KeymappingValues[sel];
+                ModConfig.Instance.Save();
+            });
+
+            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping3);
+
+            group.AddDropdown("LEFT CTRL + J", KeymappingLabels, selectedIndex, sel =>
+            {
+                ModConfig.Instance.Keymapping3 = KeymappingValues[sel];
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.KeymappingsEnabled;
+            group.AddCheckbox("Keymappings enabled", selected, sel =>
+            {
+                ModConfig.Instance.KeymappingsEnabled = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Gameplay");
+
+            selected = ModConfig.Instance.NotificationIcons;
+            group.AddCheckbox("Notification Icons", selected, sel =>
+            {
+                ModConfig.Instance.NotificationIcons = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.DistrictNames;
+            group.AddCheckbox("District Names", selected, sel =>
+            {
+                ModConfig.Instance.DistrictNames = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.DistrictIcons;
+            group.AddCheckbox("District Icons", selected, sel =>
+            {
+                ModConfig.Instance.DistrictIcons = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.LineBorders;
+            group.AddCheckbox("Line Borders", selected, sel =>
+            {
+                ModConfig.Instance.LineBorders = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.CameraBorders;
+            group.AddCheckbox("Camera Borders", selected, sel =>
+            {
+                ModConfig.Instance.CameraBorders = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Objects");
+
+            selected = ModConfig.Instance.Buoys;
+            group.AddCheckbox("Buoys", selected, sel =>
+            {
+                ModConfig.Instance.Buoys = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Seagulls;
+            group.AddCheckbox("Seagulls", selected, sel =>
+            {
+                ModConfig.Instance.Seagulls = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Wildlife;
+            group.AddCheckbox("Wildlife", selected, sel =>
+            {
+                ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.Save();
+            });
 
             group = helper.AddGroup("Graphical User Interface");
 
@@ -88,6 +197,13 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.BulldozerButton;
+            group.AddCheckbox("Bulldozer Button", selected, sel =>
+            {
+                ModConfig.Instance.BulldozerButton = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.CinematicCameraButton;
             group.AddCheckbox("Cinematic Camera Button", selected, sel =>
             {
@@ -99,59 +215,6 @@ namespace HideIt
             group.AddCheckbox("Free Camera Button", selected, sel =>
             {
                 ModConfig.Instance.FreeCameraButton = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Gameplay");
-
-            selected = ModConfig.Instance.Notifications;
-            group.AddCheckbox("Notifications", selected, sel =>
-            {
-                ModConfig.Instance.Notifications = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.LineBorders;
-            group.AddCheckbox("Line Borders", selected, sel =>
-            {
-                ModConfig.Instance.LineBorders = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.CameraBorders;
-            group.AddCheckbox("Camera Borders", selected, sel =>
-            {
-                ModConfig.Instance.CameraBorders = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.DistrictNames;
-            group.AddCheckbox("District Names", selected, sel =>
-            {
-                ModConfig.Instance.DistrictNames = sel;
-                ModConfig.Instance.Save();
-            });            
-
-            group = helper.AddGroup("Objects");
-
-            selected = ModConfig.Instance.Buoys;
-            group.AddCheckbox("Buoys", selected, sel =>
-            {
-                ModConfig.Instance.Buoys = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.Seagulls;
-            group.AddCheckbox("Seagulls", selected, sel =>
-            {
-                ModConfig.Instance.Seagulls = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.Wildlife;
-            group.AddCheckbox("Wildlife", selected, sel =>
-            {
-                ModConfig.Instance.Wildlife = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -367,6 +430,14 @@ namespace HideIt
                 ModConfig.Instance.EdgeFog = sel;
                 ModConfig.Instance.Save();
             });
+        }
+
+        private int GetSelectedOptionIndex(string[] option, string value)
+        {
+            int index = Array.IndexOf(option, value);
+            if (index < 0) index = 0;
+
+            return index;
         }
     }
 }

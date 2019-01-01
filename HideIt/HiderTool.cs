@@ -10,6 +10,7 @@ namespace HideIt
         private bool _initialized;
 
         private UIComponent _component;
+        private UITextureAtlas _defaultIngameTextureAtlas;
         private Color _defaultValidColor;
         private Color _defaultWarningColor;
         private Color _defaultErrorColor;
@@ -57,6 +58,8 @@ namespace HideIt
         {
             try
             {
+                _defaultIngameTextureAtlas = Singleton<DistrictManager>.instance.m_properties.m_areaIconAtlas;
+
                 ToolController toolController = ToolsModifierControl.toolController;
 
                 _defaultValidColor = toolController.m_validColor;
@@ -97,6 +100,12 @@ namespace HideIt
             {
                 if (!_initialized || ModConfig.Instance.ConfigUpdated)
                 {
+                    ToggleNotificationIcons(ModConfig.Instance.NotificationIcons);
+                    ToggleDistrictNames(ModConfig.Instance.DistrictNames);
+                    ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
+                    ToggleLineBorders(ModConfig.Instance.LineBorders);
+                    ToggleCameraBorders(ModConfig.Instance.CameraBorders);
+                    ToggleBuoys(ModConfig.Instance.Buoys);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
@@ -105,13 +114,9 @@ namespace HideIt
                     ToggleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
                     ToggleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
                     ToggleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
+                    ToggleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
-                    ToggleNotifications(ModConfig.Instance.Notifications);
-                    ToggleLineBorders(ModConfig.Instance.LineBorders);
-                    ToggleCameraBorders(ModConfig.Instance.CameraBorders);
-                    ToggleDistrictNames(ModConfig.Instance.DistrictNames);
-                    ToggleBuoys(ModConfig.Instance.Buoys);
                     ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.ValidColorInfo, ModConfig.Instance.WarningColorInfo, ModConfig.Instance.ErrorColorInfo);
                     ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
                     ToggleRuining(ModConfig.Instance.TreeRuining, ModConfig.Instance.PropRuining);
@@ -136,6 +141,22 @@ namespace HideIt
                 }
 
                 InfoViewHelper.Instance.UpdateInfoView();
+
+                if (ModConfig.Instance.KeymappingsEnabled)
+                {
+                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.H))
+                    {
+                        SelectToggle(ModConfig.Instance.Keymapping1);
+                    }
+                    else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.I))
+                    {
+                        SelectToggle(ModConfig.Instance.Keymapping2);
+                    }
+                    else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.J))
+                    {
+                        SelectToggle(ModConfig.Instance.Keymapping3);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -167,32 +188,87 @@ namespace HideIt
             }
         }
 
-        private void ToggleUIComponent(string name, bool disable)
+        private void SelectToggle(string keymapping)
         {
             try
             {
-                _component = GameObject.Find(name).GetComponent<UIComponent>();
-
-                if (_component != null)
+                switch (keymapping)
                 {
-                    _component.enabled = !disable;
+                    case "Notification Icons":
+                        ModConfig.Instance.NotificationIcons = !ModConfig.Instance.NotificationIcons;
+                        ToggleNotificationIcons(ModConfig.Instance.NotificationIcons);
+                        break;
+                    case "District Names":
+                        ModConfig.Instance.DistrictNames = !ModConfig.Instance.DistrictNames;
+                        ToggleDistrictNames(ModConfig.Instance.DistrictNames);
+                        break;
+                    case "District Icons":
+                        ModConfig.Instance.DistrictIcons = !ModConfig.Instance.DistrictIcons;
+                        ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
+                        break;
+                    case "Line Borders":
+                        ModConfig.Instance.LineBorders = !ModConfig.Instance.LineBorders;
+                        ToggleLineBorders(ModConfig.Instance.LineBorders);
+                        break;
+                    case "Camera Borders":
+                        ModConfig.Instance.CameraBorders = !ModConfig.Instance.CameraBorders;
+                        ToggleCameraBorders(ModConfig.Instance.CameraBorders);
+                        break;
+                    default:
+                        break;
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:SelectToggle -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleNotifications(bool disableNotifications)
+        private void ToggleNotificationIcons(bool disableNotificationIcons)
         {
             try
             {
-                Singleton<NotificationManager>.instance.NotificationsVisible = !disableNotifications;
+                Singleton<NotificationManager>.instance.NotificationsVisible = !disableNotificationIcons;
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleNotifications -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleNotificationIcons -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleDistrictNames(bool disableDistrictNames)
+        {
+            try
+            {
+                Singleton<DistrictManager>.instance.NamesVisible = !disableDistrictNames;
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleDistrictNames -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleDistrictIcons(bool disableDistrictIcons)
+        {
+            try
+            {
+                DistrictManager districtManager = Singleton<DistrictManager>.instance;
+
+                if (disableDistrictIcons)
+                {
+                    districtManager.m_properties.m_areaIconAtlas = null;
+                }
+                else
+                {
+                    districtManager.m_properties.m_areaIconAtlas = _defaultIngameTextureAtlas;
+                }
+
+                districtManager.NamesModified();
+                districtManager.ParkNamesModified();
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleDistrictIcons -> Exception: " + e.Message);
             }
         }
 
@@ -217,18 +293,6 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] HiderTool:ToggleCameraBorders -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleDistrictNames(bool disableDistrictNames)
-        {
-            try
-            {
-                Singleton<DistrictManager>.instance.NamesVisible = !disableDistrictNames;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HiderTool:ToggleDistrictNames -> Exception: " + e.Message);
             }
         }
 
@@ -264,6 +328,23 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] HiderTool:ToggleBuoys -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleUIComponent(string name, bool disable)
+        {
+            try
+            {
+                _component = GameObject.Find(name).GetComponent<UIComponent>();
+
+                if (_component != null)
+                {
+                    _component.enabled = !disable;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
             }
         }
 

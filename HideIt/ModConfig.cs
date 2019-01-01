@@ -4,6 +4,15 @@
     public class ModConfig
     {
         public bool ConfigUpdated { get; set; }
+        public string Keymapping1 { get; set; } = "Notification Icons";
+        public string Keymapping2 { get; set; } = "District Names";
+        public string Keymapping3 { get; set; } = "District Icons";
+        public bool KeymappingsEnabled { get; set; } = true;
+        public bool NotificationIcons { get; set; }
+        public bool DistrictNames { get; set; }
+        public bool DistrictIcons { get; set; }
+        public bool LineBorders { get; set; }
+        public bool CameraBorders { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -12,12 +21,9 @@
         public bool ZoomButton { get; set; }
         public bool UnlockButton { get; set; }
         public bool AdvisorButton { get; set; }
+        public bool BulldozerButton { get; set; }
         public bool CinematicCameraButton { get; set; }
         public bool FreeCameraButton { get; set; }
-        public bool Notifications { get; set; }
-        public bool LineBorders { get; set; }
-        public bool CameraBorders { get; set; }
-        public bool DistrictNames { get; set; }
         public bool ValidColor { get; set; }
         public bool WarningColor { get; set; }
         public bool ErrorColor { get; set; }
