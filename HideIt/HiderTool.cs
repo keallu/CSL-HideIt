@@ -1,6 +1,7 @@
 ﻿using ColossalFramework;
 using ColossalFramework.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HideIt
@@ -105,7 +106,7 @@ namespace HideIt
                     ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
                     ToggleLineBorders(ModConfig.Instance.LineBorders);
                     ToggleCameraBorders(ModConfig.Instance.CameraBorders);
-                    ToggleBuoys(ModConfig.Instance.Buoys);
+                    ToggleLaneProps(ModConfig.Instance.RoadArrows, ModConfig.Instance.TramArrows, ModConfig.Instance.BikeLanes, ModConfig.Instance.BusLanes, ModConfig.Instance.BusStop, ModConfig.Instance.SightseeingBusStop, ModConfig.Instance.TramStop, ModConfig.Instance.Buoys);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
@@ -157,6 +158,7 @@ namespace HideIt
                         SelectToggle(ModConfig.Instance.Keymapping3);
                     }
                 }
+
             }
             catch (Exception e)
             {
@@ -213,6 +215,15 @@ namespace HideIt
                     case "Camera Borders":
                         ModConfig.Instance.CameraBorders = !ModConfig.Instance.CameraBorders;
                         ToggleCameraBorders(ModConfig.Instance.CameraBorders);
+                        break;
+                    case "Tool Colors":
+                        ModConfig.Instance.ValidColor = !ModConfig.Instance.ValidColor;
+                        ModConfig.Instance.WarningColor = !ModConfig.Instance.WarningColor;
+                        ModConfig.Instance.ErrorColor = !ModConfig.Instance.ErrorColor;
+                        ModConfig.Instance.ValidColorInfo = !ModConfig.Instance.ValidColorInfo;
+                        ModConfig.Instance.WarningColorInfo = !ModConfig.Instance.WarningColorInfo;
+                        ModConfig.Instance.ErrorColorInfo = !ModConfig.Instance.ErrorColorInfo;
+                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.ValidColorInfo, ModConfig.Instance.WarningColorInfo, ModConfig.Instance.ErrorColorInfo);
                         break;
                     default:
                         break;
@@ -296,38 +307,51 @@ namespace HideIt
             }
         }
 
-        private void ToggleBuoys(bool disableBuoys)
+        private void AddLaneProps(bool disable, string propName, ref List<string> enablePropNames, ref List<string> disablePropNames)
+        {
+            if (disable)
+            {
+                disablePropNames.Add(propName);
+            }
+            else
+            {
+                enablePropNames.Add(propName);
+            }
+        }
+
+        private void AddLaneProps(bool disable, string[] propNames, ref List<string> enablePropNames, ref List<string> disablePropNames)
+        {
+            if (disable)
+            {
+                disablePropNames.AddRange(propNames);
+            }
+            else
+            {
+                enablePropNames.AddRange(propNames);
+            }
+        }
+
+        private void ToggleLaneProps(bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStop, bool disableSightseeingBusStop, bool disableTramStop, bool disableBuoys)
         {
             try
             {
-                NetInfo netInfo = PrefabCollection<NetInfo>.FindLoaded("Ferry Path");
+                List<string> enablePropNames = new List<string>();
+                List<string> disablePropNames = new List<string>();
 
-                if (netInfo != null)
-                {
-                    if (netInfo.m_lanes != null)
-                    {
-                        foreach (NetInfo.Lane lane in netInfo.m_lanes)
-                        {
-                            if (lane?.m_laneProps?.m_props != null)
-                            {
-                                foreach (NetLaneProps.Prop laneProp in lane.m_laneProps.m_props)
-                                {
-                                    if (laneProp != null)
-                                    {
-                                        if (laneProp.m_finalProp.name == "Nautical Marker")
-                                        {
-                                            laneProp.m_probability = disableBuoys ? 0 : 100;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                AddLaneProps(disableRoadArrows, HiderUtils.ROAD_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableTramArrows, HiderUtils.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBikeLanes, HiderUtils.BIKE_LANES, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBusLanes, HiderUtils.BUS_LANES, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBusStop, HiderUtils.BUS_STOP, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableSightseeingBusStop, HiderUtils.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableTramStop, HiderUtils.TRAM_STOP, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBuoys, HiderUtils.BUOYS, ref enablePropNames, ref disablePropNames);
+
+                HiderUtils.UpdateLaneProps(enablePropNames, disablePropNames);
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleBuoys -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleLaneProps -> Exception: " + e.Message);
             }
         }
 

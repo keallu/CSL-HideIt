@@ -30,9 +30,16 @@
         public bool ValidColorInfo { get; set; }
         public bool WarningColorInfo { get; set; }
         public bool ErrorColorInfo { get; set; }
-        public bool Buoys { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
+        public bool RoadArrows { get; set; }
+        public bool TramArrows { get; set; }
+        public bool BikeLanes { get; set; }
+        public bool BusLanes { get; set; }
+        public bool BusStop { get; set; }
+        public bool SightseeingBusStop { get; set; }
+        public bool TramStop { get; set; }
+        public bool Buoys { get; set; }
         public bool CliffDecorations { get; set; }
         public bool FertileDecorations { get; set; }
         public bool GrassDecorations { get; set; }

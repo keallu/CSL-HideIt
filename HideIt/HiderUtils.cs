@@ -1,12 +1,106 @@
 ﻿using ColossalFramework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HideIt
 {
     public static class HiderUtils
     {
+        public static readonly string[] ROAD_ARROWS = { "Road Arrow F", "Road Arrow FR", "Road Arrow L", "Road Arrow LF", "Road Arrow LFR", "Road Arrow LR", "Road Arrow R" };
+        public static readonly string TRAM_ARROWS = "Tram Arrow";
+        public static readonly string BIKE_LANES = "Bike Lane";
+        public static readonly string BUS_LANES = "Bus Lane";
+        public static readonly string[] BUS_STOP = { "Bus Stop Large", "Bus Stop Small" };
+        public static readonly string[] SIGHTSEEING_BUS_STOP = { "Sightseeing Bus Stop Large", "Sightseeing Bus Stop Small" };
+        public static readonly string TRAM_STOP = "Tram Stop";
+        public static readonly string BUOYS = "Nautical Marker";
+
+        public static void UpdateLaneProps(List<string> enablePropNames, List<string> disablePropNames)
+        {
+            UpdateLaneProps(enablePropNames, false);
+            UpdateLaneProps(disablePropNames, true);
+        }
+
+        public static void UpdateLaneProp(string propName, bool disable)
+        {
+            List<string> propNames = new List<string>() { propName };
+
+            UpdateLaneProps(propNames, disable);
+        }
+
+        public static void UpdateLaneProps(List<string> propNames, bool disable)
+        {
+            try
+            {
+                for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+                {
+                    var netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
+
+                    UpdateLaneProps(netInfo, propNames, disable);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderUtils:UpdateLaneProp -> Exception: " + e.Message);
+            }
+        }
+
+        public static void UpdateLaneProp(string prefabName, string propName, bool disable)
+        {
+            List<string> propNames = new List<string>() { propName };
+
+            UpdateLaneProps(prefabName, propNames, disable);
+        }
+
+        public static void UpdateLaneProps(string prefabName, List<string> propNames, bool disable)
+        {
+            try
+            {
+                NetInfo netInfo = PrefabCollection<NetInfo>.FindLoaded(prefabName);
+
+                UpdateLaneProps(netInfo, propNames, disable);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderUtils:UpdateLaneProp -> Exception: " + e.Message);
+            }
+        }
+
+        private static void UpdateLaneProps(NetInfo netInfo, List<string> propNames, bool disable)
+        {
+            try
+            {
+                if (netInfo != null)
+                {
+                    if (netInfo.m_lanes != null)
+                    {
+                        foreach (NetInfo.Lane lane in netInfo.m_lanes)
+                        {
+                            if (lane?.m_laneProps?.m_props != null)
+                            {
+                                foreach (NetLaneProps.Prop laneProp in lane.m_laneProps.m_props)
+                                {
+                                    if (laneProp != null)
+                                    {
+                                        if (propNames.Contains(laneProp.m_finalProp?.name))
+                                        {
+                                            laneProp.m_probability = disable ? 0 : 100;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderUtils:UpdateLaneProp -> Exception: " + e.Message);
+            }
+        }
+
         public static void RefreshSeagulls()
         {
             try

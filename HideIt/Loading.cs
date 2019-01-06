@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HideIt
 {
 
-    public class Loader : LoadingExtensionBase
+    public class Loading : LoadingExtensionBase
     {
         private LoadMode _loadMode;
         private GameObject _gameObject;
@@ -41,7 +41,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Loader:OnLevelLoaded -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Loading:OnLevelLoaded -> Exception: " + e.Message);
             }
         }
 
@@ -63,7 +63,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Loader:OnLevelUnloading -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Loading:OnLevelUnloading -> Exception: " + e.Message);
             }
         }
     }

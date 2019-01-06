@@ -28,7 +28,8 @@ namespace HideIt
             "District Names",
             "District Icons",
             "Line Borders",
-            "Camera Borders"
+            "Camera Borders",
+            "Tool Colors"
         };
 
         private static readonly string[] KeymappingValues =
@@ -37,7 +38,8 @@ namespace HideIt
             "District Names",
             "District Icons",
             "Line Borders",
-            "Camera Borders"
+            "Camera Borders",
+            "Tool Colors"
         };
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -116,14 +118,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Objects");
-
-            selected = ModConfig.Instance.Buoys;
-            group.AddCheckbox("Buoys", selected, sel =>
-            {
-                ModConfig.Instance.Buoys = sel;
-                ModConfig.Instance.Save();
-            });
+            group = helper.AddGroup("Objects & props");
 
             selected = ModConfig.Instance.Seagulls;
             group.AddCheckbox("Seagulls", selected, sel =>
@@ -136,6 +131,62 @@ namespace HideIt
             group.AddCheckbox("Wildlife", selected, sel =>
             {
                 ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.RoadArrows;
+            group.AddCheckbox("Road Arrows", selected, sel =>
+            {
+                ModConfig.Instance.RoadArrows = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TramArrows;
+            group.AddCheckbox("Tram Arrows", selected, sel =>
+            {
+                ModConfig.Instance.TramArrows = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BikeLanes;
+            group.AddCheckbox("Bike Lanes", selected, sel =>
+            {
+                ModConfig.Instance.BikeLanes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BusLanes;
+            group.AddCheckbox("Bus Lanes", selected, sel =>
+            {
+                ModConfig.Instance.BusLanes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BusStop;
+            group.AddCheckbox("Bus Stop", selected, sel =>
+            {
+                ModConfig.Instance.BusStop = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SightseeingBusStop;
+            group.AddCheckbox("Sightseeing Bus Stop", selected, sel =>
+            {
+                ModConfig.Instance.SightseeingBusStop = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TramStop;
+            group.AddCheckbox("Tram Stop", selected, sel =>
+            {
+                ModConfig.Instance.TramStop = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Buoys;
+            group.AddCheckbox("Buoys", selected, sel =>
+            {
+                ModConfig.Instance.Buoys = sel;
                 ModConfig.Instance.Save();
             });
 
