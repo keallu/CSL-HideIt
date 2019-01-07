@@ -13,6 +13,12 @@
         public bool DistrictIcons { get; set; }
         public bool LineBorders { get; set; }
         public bool CameraBorders { get; set; }
+        public bool ValidColor { get; set; }
+        public bool WarningColor { get; set; }
+        public bool ErrorColor { get; set; }
+        public bool ValidColorInfo { get; set; }
+        public bool WarningColorInfo { get; set; }
+        public bool ErrorColorInfo { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -24,21 +30,28 @@
         public bool BulldozerButton { get; set; }
         public bool CinematicCameraButton { get; set; }
         public bool FreeCameraButton { get; set; }
-        public bool ValidColor { get; set; }
-        public bool WarningColor { get; set; }
-        public bool ErrorColor { get; set; }
-        public bool ValidColorInfo { get; set; }
-        public bool WarningColorInfo { get; set; }
-        public bool ErrorColorInfo { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
+        public bool Delineators { get; set; }
         public bool RoadArrows { get; set; }
         public bool TramArrows { get; set; }
         public bool BikeLanes { get; set; }
         public bool BusLanes { get; set; }
-        public bool BusStop { get; set; }
-        public bool SightseeingBusStop { get; set; }
-        public bool TramStop { get; set; }
+        public bool BusStops { get; set; }
+        public bool SightseeingBusStops { get; set; }
+        public bool TramStops { get; set; }
+        public bool RailwayCrossings { get; set; }
+        public bool StreetNameSigns { get; set; }
+        public bool StopSigns { get; set; }
+        public bool TurnSigns { get; set; }
+        public bool SpeedLimitSigns { get; set; }
+        public bool NoParkingSigns { get; set; }
+        public bool HighwaySigns { get; set; }
+        public bool PedestrianAndBikeStreetLights { get; set; }
+        public bool RoadStreetLights { get; set; }
+        public bool AvenueStreetLights { get; set; }
+        public bool HighwayStreetLights { get; set; }
+        public bool RandomStreetDecorations { get; set; }
         public bool Buoys { get; set; }
         public bool CliffDecorations { get; set; }
         public bool FertileDecorations { get; set; }

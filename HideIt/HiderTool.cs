@@ -106,7 +106,13 @@ namespace HideIt
                     ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
                     ToggleLineBorders(ModConfig.Instance.LineBorders);
                     ToggleCameraBorders(ModConfig.Instance.CameraBorders);
-                    ToggleLaneProps(ModConfig.Instance.RoadArrows, ModConfig.Instance.TramArrows, ModConfig.Instance.BikeLanes, ModConfig.Instance.BusLanes, ModConfig.Instance.BusStop, ModConfig.Instance.SightseeingBusStop, ModConfig.Instance.TramStop, ModConfig.Instance.Buoys);
+                    ToggleToolColor(
+                        ModConfig.Instance.ValidColor,
+                        ModConfig.Instance.WarningColor,
+                        ModConfig.Instance.ErrorColor,
+                        ModConfig.Instance.ValidColorInfo,
+                        ModConfig.Instance.WarningColorInfo,
+                        ModConfig.Instance.ErrorColorInfo);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
@@ -118,12 +124,46 @@ namespace HideIt
                     ToggleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
-                    ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.ValidColorInfo, ModConfig.Instance.WarningColorInfo, ModConfig.Instance.ErrorColorInfo);
-                    ToggleDecorations(ModConfig.Instance.CliffDecorations, ModConfig.Instance.FertileDecorations, ModConfig.Instance.GrassDecorations);
-                    ToggleRuining(ModConfig.Instance.TreeRuining, ModConfig.Instance.PropRuining);
-                    ToggleGroundColor(ModConfig.Instance.GrassFertilityGroundColor, ModConfig.Instance.GrassFieldGroundColor, ModConfig.Instance.GrassForestGroundColor, ModConfig.Instance.GrassPollutionGroundColor);
+                    ToggleLaneProps(
+                        ModConfig.Instance.Delineators,
+                        ModConfig.Instance.RoadArrows,
+                        ModConfig.Instance.TramArrows,
+                        ModConfig.Instance.BikeLanes,
+                        ModConfig.Instance.BusLanes,
+                        ModConfig.Instance.BusStops,
+                        ModConfig.Instance.SightseeingBusStops,
+                        ModConfig.Instance.TramStops,
+                        ModConfig.Instance.RailwayCrossings,
+                        ModConfig.Instance.StreetNameSigns,
+                        ModConfig.Instance.StopSigns,
+                        ModConfig.Instance.TurnSigns,
+                        ModConfig.Instance.SpeedLimitSigns,
+                        ModConfig.Instance.NoParkingSigns,
+                        ModConfig.Instance.HighwaySigns,
+                        ModConfig.Instance.PedestrianAndBikeStreetLights,
+                        ModConfig.Instance.RoadStreetLights,
+                        ModConfig.Instance.AvenueStreetLights,
+                        ModConfig.Instance.HighwayStreetLights,
+                        ModConfig.Instance.RandomStreetDecorations,
+                        ModConfig.Instance.Buoys);
+                    ToggleDecorations(
+                        ModConfig.Instance.CliffDecorations, 
+                        ModConfig.Instance.FertileDecorations, 
+                        ModConfig.Instance.GrassDecorations);
+                    ToggleRuining(
+                        ModConfig.Instance.TreeRuining, 
+                        ModConfig.Instance.PropRuining);
+                    ToggleGroundColor(
+                        ModConfig.Instance.GrassFertilityGroundColor, 
+                        ModConfig.Instance.GrassFieldGroundColor, 
+                        ModConfig.Instance.GrassForestGroundColor, 
+                        ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
-                    ToggleFogEffects(ModConfig.Instance.PollutionFog, ModConfig.Instance.VolumeFog, ModConfig.Instance.DistanceFog, ModConfig.Instance.EdgeFog);
+                    ToggleFogEffects(
+                        ModConfig.Instance.PollutionFog, 
+                        ModConfig.Instance.VolumeFog, 
+                        ModConfig.Instance.DistanceFog, 
+                        ModConfig.Instance.EdgeFog);
 
                     if (ModConfig.Instance.Seagulls)
                     {
@@ -307,6 +347,82 @@ namespace HideIt
             }
         }
 
+        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableValidColorInfo, bool disableWarningColorInfo, bool disableErrorColorInfo)
+        {
+            try
+            {
+                ToolController toolController = ToolsModifierControl.toolController;
+
+                if (toolController != null)
+                {
+                    toolController.m_validColor.a = disableValidColor ? 0f : _defaultValidColor.a;
+                    toolController.m_warningColor.a = disableWarningColor ? 0f : _defaultWarningColor.a;
+                    toolController.m_errorColor.a = disableErrorColor ? 0f : _defaultErrorColor.a;
+                    toolController.m_validColorInfo.a = disableValidColorInfo ? 0f : _defaultValidColorInfo.a;
+                    toolController.m_warningColorInfo.a = disableWarningColorInfo ? 0f : _defaultWarningColorInfo.a;
+                    toolController.m_errorColorInfo.a = disableErrorColorInfo ? 0f : _defaultErrorColorInfo.a;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleToolColor -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleUIComponent(string name, bool disable)
+        {
+            try
+            {
+                _component = GameObject.Find(name).GetComponent<UIComponent>();
+
+                if (_component != null)
+                {
+                    _component.enabled = !disable;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleLaneProps(bool disableDelineators, bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStops, bool disableSightseeingBusStops, bool disableTramStops, bool disableRailwayCrossings, bool disableStreetNameSigns, bool disableStopSigns, bool disableTurnSigns, bool disableSpeedLimitSigns, bool disableNoParkingSigns, bool disableHighwaySigns, bool disablePedestrianAndBikeStreetLights, bool disableRoadStreetLights, bool disableAvenueStreetLights, bool disableHighwayStreetLights, bool disableRandomStreetDecorations, bool disableBuoys)
+        {
+            try
+            {
+                List<string> enablePropNames = new List<string>();
+                List<string> disablePropNames = new List<string>();
+
+                AddLaneProps(disableDelineators, HiderUtils.DELINEATORS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableRoadArrows, HiderUtils.ROAD_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableTramArrows, HiderUtils.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBikeLanes, HiderUtils.BIKE_LANES, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBusLanes, HiderUtils.BUS_LANES, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBusStops, HiderUtils.BUS_STOPS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableSightseeingBusStops, HiderUtils.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableTramStops, HiderUtils.TRAM_STOPS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableRailwayCrossings, HiderUtils.RAILWAY_CROSSINGS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableStreetNameSigns, HiderUtils.STREET_NAME_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableStopSigns, HiderUtils.STOP_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableTurnSigns, HiderUtils.TURN_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableSpeedLimitSigns, HiderUtils.SPEED_LIMIT_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableNoParkingSigns, HiderUtils.NO_PARKING_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableHighwaySigns, HiderUtils.HIGHWAY_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disablePedestrianAndBikeStreetLights, HiderUtils.PEDESTRIAN_AND_BIKE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableRoadStreetLights, HiderUtils.ROAD_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableAvenueStreetLights, HiderUtils.AVENUE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableHighwayStreetLights, HiderUtils.HIGHWAY_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableRandomStreetDecorations, HiderUtils.RANDOM_STREET_DECORATIONS, ref enablePropNames, ref disablePropNames);
+                AddLaneProps(disableBuoys, HiderUtils.BUOYS, ref enablePropNames, ref disablePropNames);
+
+                HiderUtils.UpdateLaneProps(enablePropNames, disablePropNames);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleLaneProps -> Exception: " + e.Message);
+            }
+        }
+
         private void AddLaneProps(bool disable, string propName, ref List<string> enablePropNames, ref List<string> disablePropNames)
         {
             if (disable)
@@ -328,69 +444,6 @@ namespace HideIt
             else
             {
                 enablePropNames.AddRange(propNames);
-            }
-        }
-
-        private void ToggleLaneProps(bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStop, bool disableSightseeingBusStop, bool disableTramStop, bool disableBuoys)
-        {
-            try
-            {
-                List<string> enablePropNames = new List<string>();
-                List<string> disablePropNames = new List<string>();
-
-                AddLaneProps(disableRoadArrows, HiderUtils.ROAD_ARROWS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableTramArrows, HiderUtils.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBikeLanes, HiderUtils.BIKE_LANES, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBusLanes, HiderUtils.BUS_LANES, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBusStop, HiderUtils.BUS_STOP, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableSightseeingBusStop, HiderUtils.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableTramStop, HiderUtils.TRAM_STOP, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBuoys, HiderUtils.BUOYS, ref enablePropNames, ref disablePropNames);
-
-                HiderUtils.UpdateLaneProps(enablePropNames, disablePropNames);
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HiderTool:ToggleLaneProps -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleUIComponent(string name, bool disable)
-        {
-            try
-            {
-                _component = GameObject.Find(name).GetComponent<UIComponent>();
-
-                if (_component != null)
-                {
-                    _component.enabled = !disable;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableValidColorInfo, bool disableWarningColorInfo, bool disableErrorColorInfo)
-        {
-            try
-            {
-                ToolController toolController = ToolsModifierControl.toolController;
-
-                if (toolController != null)
-                {
-                    toolController.m_validColor.a = disableValidColor ? 0f : _defaultValidColor.a;
-                    toolController.m_warningColor.a = disableWarningColor ? 0f : _defaultWarningColor.a;
-                    toolController.m_errorColor.a = disableErrorColor ? 0f : _defaultErrorColor.a;
-                    toolController.m_validColorInfo.a = disableValidColorInfo ? 0f : _defaultValidColorInfo.a;
-                    toolController.m_warningColorInfo.a = disableWarningColorInfo ? 0f : _defaultWarningColorInfo.a;
-                    toolController.m_errorColorInfo.a = disableErrorColorInfo ? 0f : _defaultErrorColorInfo.a;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HiderTool:ToggleToolColor -> Exception: " + e.Message);
             }
         }
 

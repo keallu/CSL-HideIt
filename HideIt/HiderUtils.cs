@@ -8,14 +8,29 @@ namespace HideIt
 {
     public static class HiderUtils
     {
+        public static readonly string[] DELINEATORS = { "Delineator 01", "Delineator 02" };
         public static readonly string[] ROAD_ARROWS = { "Road Arrow F", "Road Arrow FR", "Road Arrow L", "Road Arrow LF", "Road Arrow LFR", "Road Arrow LR", "Road Arrow R" };
         public static readonly string TRAM_ARROWS = "Tram Arrow";
         public static readonly string BIKE_LANES = "Bike Lane";
         public static readonly string BUS_LANES = "Bus Lane";
-        public static readonly string[] BUS_STOP = { "Bus Stop Large", "Bus Stop Small" };
+        public static readonly string[] BUS_STOPS = { "Bus Stop Large", "Bus Stop Small" };
         public static readonly string[] SIGHTSEEING_BUS_STOP = { "Sightseeing Bus Stop Large", "Sightseeing Bus Stop Small" };
-        public static readonly string TRAM_STOP = "Tram Stop";
+        public static readonly string TRAM_STOPS = "Tram Stop";
+        public static readonly string[] RAILWAY_CROSSINGS = { "Railway Crossing Short", "Railway Crossing Medium", "Railway Crossing Long", "Railway Crossing Very Long" };
+        public static readonly string STREET_NAME_SIGNS = "Street Name Sign";
+        public static readonly string[] STOP_SIGNS = { "Stop Sign", "Tram Stop Sign" };
+        public static readonly string[] TURN_SIGNS = { "No Left Turn Sign", "No Right Turn Sign" };
+        public static readonly string[] SPEED_LIMIT_SIGNS = { "30 Speed Limit", "40 Speed Limit", "50 Speed Limit", "60 Speed Limit", "100 Speed Limit" };
+        public static readonly string NO_PARKING_SIGNS = "No Parking Sign";
+        public static readonly string[] HIGHWAY_SIGNS = { "Motorway Sign", "Motorway Overroad Signs" };
+        public static readonly string PEDESTRIAN_AND_BIKE_STREET_LIGHTS =  "StreetLamp02";
+        public static readonly string[] ROAD_STREET_LIGHTS = { "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Single Medium" };
+        public static readonly string[] AVENUE_STREET_LIGHTS = { "Avenue Light", "New Street Light Avenue", "Industry Road Light Double" };
+        public static readonly string HIGHWAY_STREET_LIGHTS = "New Street Light Highway";
+        public static readonly string[] RANDOM_STREET_DECORATIONS = { "Random Street Prop", "Random Street Prop NoParking", "Random Industrial Street Prop" };
         public static readonly string BUOYS = "Nautical Marker";
+
+        private static readonly List<string> PROBABILITY25 = new List<string>() { "Random Street Prop", "Random Street Prop NoParking", "Random Industrial Street Prop" };
 
         public static void UpdateLaneProps(List<string> enablePropNames, List<string> disablePropNames)
         {
@@ -76,6 +91,8 @@ namespace HideIt
                 {
                     if (netInfo.m_lanes != null)
                     {
+                        int probability;
+
                         foreach (NetInfo.Lane lane in netInfo.m_lanes)
                         {
                             if (lane?.m_laneProps?.m_props != null)
@@ -86,7 +103,14 @@ namespace HideIt
                                     {
                                         if (propNames.Contains(laneProp.m_finalProp?.name))
                                         {
-                                            laneProp.m_probability = disable ? 0 : 100;
+                                            probability = 100;
+
+                                            if (PROBABILITY25.Contains(laneProp.m_finalProp?.name))
+                                            {
+                                                probability = 25;
+                                            }
+
+                                            laneProp.m_probability = disable ? 0 : probability;
                                         }
                                     }
                                 }

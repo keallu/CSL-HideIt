@@ -118,79 +118,51 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Objects & props");
+            group = helper.AddGroup("Tools");
 
-            selected = ModConfig.Instance.Seagulls;
-            group.AddCheckbox("Seagulls", selected, sel =>
+            selected = ModConfig.Instance.ValidColor;
+            group.AddCheckbox("Valid Color", selected, sel =>
             {
-                ModConfig.Instance.Seagulls = sel;
+                ModConfig.Instance.ValidColor = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.Wildlife;
-            group.AddCheckbox("Wildlife", selected, sel =>
+            selected = ModConfig.Instance.WarningColor;
+            group.AddCheckbox("Warning Color", selected, sel =>
             {
-                ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.WarningColor = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.RoadArrows;
-            group.AddCheckbox("Road Arrows", selected, sel =>
+            selected = ModConfig.Instance.ErrorColor;
+            group.AddCheckbox("Error Color", selected, sel =>
             {
-                ModConfig.Instance.RoadArrows = sel;
+                ModConfig.Instance.ErrorColor = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.TramArrows;
-            group.AddCheckbox("Tram Arrows", selected, sel =>
+            selected = ModConfig.Instance.ValidColorInfo;
+            group.AddCheckbox("Valid Color Info", selected, sel =>
             {
-                ModConfig.Instance.TramArrows = sel;
+                ModConfig.Instance.ValidColorInfo = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.BikeLanes;
-            group.AddCheckbox("Bike Lanes", selected, sel =>
+            selected = ModConfig.Instance.WarningColorInfo;
+            group.AddCheckbox("Warning Color Info", selected, sel =>
             {
-                ModConfig.Instance.BikeLanes = sel;
+                ModConfig.Instance.WarningColorInfo = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.BusLanes;
-            group.AddCheckbox("Bus Lanes", selected, sel =>
+            selected = ModConfig.Instance.ErrorColorInfo;
+            group.AddCheckbox("Error Color Info", selected, sel =>
             {
-                ModConfig.Instance.BusLanes = sel;
+                ModConfig.Instance.ErrorColorInfo = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.BusStop;
-            group.AddCheckbox("Bus Stop", selected, sel =>
-            {
-                ModConfig.Instance.BusStop = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.SightseeingBusStop;
-            group.AddCheckbox("Sightseeing Bus Stop", selected, sel =>
-            {
-                ModConfig.Instance.SightseeingBusStop = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.TramStop;
-            group.AddCheckbox("Tram Stop", selected, sel =>
-            {
-                ModConfig.Instance.TramStop = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.Buoys;
-            group.AddCheckbox("Buoys", selected, sel =>
-            {
-                ModConfig.Instance.Buoys = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Graphical User Interface");
+            group = helper.AddGroup("Buttons");
 
             selected = ModConfig.Instance.InfoViewsButton;
             group.AddCheckbox("Info Views Button", selected, sel =>
@@ -269,51 +241,170 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Tools");
+            group = helper.AddGroup("Objects & props");
 
-            selected = ModConfig.Instance.ValidColor;
-            group.AddCheckbox("Valid Color", selected, sel =>
+            selected = ModConfig.Instance.Seagulls;
+            group.AddCheckbox("Seagulls", selected, sel =>
             {
-                ModConfig.Instance.ValidColor = sel;
+                ModConfig.Instance.Seagulls = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.WarningColor;
-            group.AddCheckbox("Warning Color", selected, sel =>
+            selected = ModConfig.Instance.Wildlife;
+            group.AddCheckbox("Wildlife", selected, sel =>
             {
-                ModConfig.Instance.WarningColor = sel;
+                ModConfig.Instance.Wildlife = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.ErrorColor;
-            group.AddCheckbox("Error Color", selected, sel =>
+            selected = ModConfig.Instance.Delineators;
+            group.AddCheckbox("Delineators", selected, sel =>
             {
-                ModConfig.Instance.ErrorColor = sel;
+                ModConfig.Instance.Delineators = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.ValidColorInfo;
-            group.AddCheckbox("Valid Color Info", selected, sel =>
+            selected = ModConfig.Instance.RoadArrows;
+            group.AddCheckbox("Road Arrows", selected, sel =>
             {
-                ModConfig.Instance.ValidColorInfo = sel;
+                ModConfig.Instance.RoadArrows = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.WarningColorInfo;
-            group.AddCheckbox("Warning Color Info", selected, sel =>
+            selected = ModConfig.Instance.TramArrows;
+            group.AddCheckbox("Tram Arrows", selected, sel =>
             {
-                ModConfig.Instance.WarningColorInfo = sel;
+                ModConfig.Instance.TramArrows = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.ErrorColorInfo;
-            group.AddCheckbox("Error Color Info", selected, sel =>
+            selected = ModConfig.Instance.BikeLanes;
+            group.AddCheckbox("Bike Lanes", selected, sel =>
             {
-                ModConfig.Instance.ErrorColorInfo = sel;
+                ModConfig.Instance.BikeLanes = sel;
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Decorations");
+            selected = ModConfig.Instance.BusLanes;
+            group.AddCheckbox("Bus Lanes", selected, sel =>
+            {
+                ModConfig.Instance.BusLanes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BusStops;
+            group.AddCheckbox("Bus Stops", selected, sel =>
+            {
+                ModConfig.Instance.BusStops = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SightseeingBusStops;
+            group.AddCheckbox("Sightseeing Bus Stops", selected, sel =>
+            {
+                ModConfig.Instance.SightseeingBusStops = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TramStops;
+            group.AddCheckbox("Tram Stops", selected, sel =>
+            {
+                ModConfig.Instance.TramStops = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.RailwayCrossings;
+            group.AddCheckbox("Railway Crossings", selected, sel =>
+            {
+                ModConfig.Instance.RailwayCrossings = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.StreetNameSigns;
+            group.AddCheckbox("Street Name Signs", selected, sel =>
+            {
+                ModConfig.Instance.StreetNameSigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.StopSigns;
+            group.AddCheckbox("Stop Signs", selected, sel =>
+            {
+                ModConfig.Instance.StopSigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TurnSigns;
+            group.AddCheckbox("Turn Signs", selected, sel =>
+            {
+                ModConfig.Instance.TurnSigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SpeedLimitSigns;
+            group.AddCheckbox("Speed Limit Signs", selected, sel =>
+            {
+                ModConfig.Instance.SpeedLimitSigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.NoParkingSigns;
+            group.AddCheckbox("No Parking Signs", selected, sel =>
+            {
+                ModConfig.Instance.NoParkingSigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.HighwaySigns;
+            group.AddCheckbox("Highway Signs", selected, sel =>
+            {
+                ModConfig.Instance.HighwaySigns = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PedestrianAndBikeStreetLights;
+            group.AddCheckbox("Pedestrian and Bike Street Lights", selected, sel =>
+            {
+                ModConfig.Instance.PedestrianAndBikeStreetLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.RoadStreetLights;
+            group.AddCheckbox("Road Street Lights", selected, sel =>
+            {
+                ModConfig.Instance.RoadStreetLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AvenueStreetLights;
+            group.AddCheckbox("Avenue Street Lights", selected, sel =>
+            {
+                ModConfig.Instance.AvenueStreetLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.HighwayStreetLights;
+            group.AddCheckbox("Highway Street Lights", selected, sel =>
+            {
+                ModConfig.Instance.HighwayStreetLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.RandomStreetDecorations;
+            group.AddCheckbox("Random Street Decorations", selected, sel =>
+            {
+                ModConfig.Instance.RandomStreetDecorations = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Buoys;
+            group.AddCheckbox("Buoys", selected, sel =>
+            {
+                ModConfig.Instance.Buoys = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Sprites");
 
             selected = ModConfig.Instance.CliffDecorations;
             group.AddCheckbox("Cliff Decorations", selected, sel =>
@@ -352,7 +443,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Colors");
+            group = helper.AddGroup("Ground and Water Colors");
 
             selected = ModConfig.Instance.GrassFertilityGroundColor;
             group.AddCheckbox("Grass Fertility Ground Color", selected, sel =>
