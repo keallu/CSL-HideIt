@@ -58,7 +58,10 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="ExportUtils.cs" />
-    <Compile Include="Helpers\InfoViewHelper.cs" />
+    <Compile Include="Helpers\BuildingPropsHelper.cs" />
+    <Compile Include="Helpers\NetPropsHelper.cs" />
+    <Compile Include="Helpers\RuiningHelper.cs" />
+    <Compile Include="Managers\InfoViewManager.cs" />
     <Compile Include="HiderTool.cs" />
     <Compile Include="HiderUtils.cs" />
     <Compile Include="Loading.cs" />

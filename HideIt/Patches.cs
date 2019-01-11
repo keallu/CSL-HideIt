@@ -292,7 +292,7 @@ namespace HideIt
                             if (i == 0 || j == 0 || i == 511 || j == 511)
                             {
                                 color = new Color(0.5f, 0.5f, 0.5f, 0f);
-                                InfoViewHelper.Instance.InfoViewResourceTexture.SetPixel(j, i, color);
+                                InfoViewManager.Instance.InfoViewResourceTexture.SetPixel(j, i, color);
                             }
                             else
                             {
@@ -314,7 +314,7 @@ namespace HideIt
                                 AddResource(j + 1, i + 1, 5, ref ore, ref oil, ref sand, ref fertility, ref forest, ref shore);
 
                                 color = CalculateColorComponents(ore, oil, sand, fertility, forest, shore);
-                                InfoViewHelper.Instance.InfoViewResourceTexture.SetPixel(j, i, color);
+                                InfoViewManager.Instance.InfoViewResourceTexture.SetPixel(j, i, color);
 
                                 ore = ModConfig.Instance.OreArea ? 0 : ore;
                                 oil = ModConfig.Instance.OilArea ? 0 : oil;
@@ -331,7 +331,7 @@ namespace HideIt
                 }
                 __instance.m_resourceTexture.Apply();
 
-                InfoViewHelper.Instance.InfoViewResourceTexture.Apply();
+                InfoViewManager.Instance.InfoViewResourceTexture.Apply();
 
                 return false;
             }
@@ -419,7 +419,7 @@ namespace HideIt
                             if (i == 0 || j == 0 || i == 511 || j == 511)
                             {
                                 color = new Color(0f, 0f, 0f, 1f);
-                                InfoViewHelper.Instance.InfoViewDestructionTexture.SetPixel(j, i, color);
+                                InfoViewManager.Instance.InfoViewDestructionTexture.SetPixel(j, i, color);
                             }
                             else
                             {
@@ -438,7 +438,7 @@ namespace HideIt
                                 AddResource(j + 1, i + 1, 5, ref pollution, ref burned, ref destroyed);
 
                                 color = CalculateColorComponents(pollution, burned, destroyed);
-                                InfoViewHelper.Instance.InfoViewDestructionTexture.SetPixel(j, i, color);
+                                InfoViewManager.Instance.InfoViewDestructionTexture.SetPixel(j, i, color);
 
                                 pollution = ModConfig.Instance.PollutedArea ? 0 : pollution;
                                 burned = ModConfig.Instance.BurnedArea ? 0 : burned;
@@ -452,7 +452,7 @@ namespace HideIt
                 }
                 __instance.m_destructionTexture.Apply();
 
-                InfoViewHelper.Instance.InfoViewDestructionTexture.Apply();
+                InfoViewManager.Instance.InfoViewDestructionTexture.Apply();
 
                 return false;
             }

@@ -257,6 +257,34 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.Ads;
+            group.AddCheckbox("Ads", selected, sel =>
+            {
+                ModConfig.Instance.Ads = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Billboards;
+            group.AddCheckbox("Billboards", selected, sel =>
+            {
+                ModConfig.Instance.Billboards = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Neons;
+            group.AddCheckbox("Neons", selected, sel =>
+            {
+                ModConfig.Instance.Neons = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Logos;
+            group.AddCheckbox("Logos", selected, sel =>
+            {
+                ModConfig.Instance.Logos = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.Delineators;
             group.AddCheckbox("Delineators", selected, sel =>
             {
@@ -390,6 +418,27 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.RunwayLights;
+            group.AddCheckbox("Runway Lights", selected, sel =>
+            {
+                ModConfig.Instance.RunwayLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TaxiwayLights;
+            group.AddCheckbox("Taxiway Lights", selected, sel =>
+            {
+                ModConfig.Instance.TaxiwayLights = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.WarningLights;
+            group.AddCheckbox("Warning Lights", selected, sel =>
+            {
+                ModConfig.Instance.WarningLights = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.RandomStreetDecorations;
             group.AddCheckbox("Random Street Decorations", selected, sel =>
             {
@@ -403,6 +452,11 @@ namespace HideIt
                 ModConfig.Instance.Buoys = sel;
                 ModConfig.Instance.Save();
             });
+
+            //group.AddButton("Update light effects on existing props", () =>
+            //{
+            //    NetPropsHelper.UpdateExistingSegmentsLightEffects();
+            //});
 
             group = helper.AddGroup("Sprites");
 
@@ -430,17 +484,23 @@ namespace HideIt
             group = helper.AddGroup("Ruining");
 
             selected = ModConfig.Instance.TreeRuining;
-            group.AddCheckbox("Trees (requires reload to update existing trees)", selected, sel =>
+            group.AddCheckbox("Trees", selected, sel =>
             {
                 ModConfig.Instance.TreeRuining = sel;
                 ModConfig.Instance.Save();
             });
 
             selected = ModConfig.Instance.PropRuining;
-            group.AddCheckbox("Props (requires reload to update existing props)", selected, sel =>
+            group.AddCheckbox("Props", selected, sel =>
             {
                 ModConfig.Instance.PropRuining = sel;
                 ModConfig.Instance.Save();
+            });
+
+            group.AddButton("Update ruining on existing trees and props", () =>
+            {
+                RuiningHelper.UpdateExistingTreesRuining(ModConfig.Instance.TreeRuining);
+                RuiningHelper.UpdateExistingPropsRuining(ModConfig.Instance.PropRuining);
             });
 
             group = helper.AddGroup("Ground and Water Colors");
@@ -571,6 +631,25 @@ namespace HideIt
             {
                 ModConfig.Instance.EdgeFog = sel;
                 ModConfig.Instance.Save();
+            });
+
+            group = helper.AddGroup("Export list of props");
+
+            selected = ModConfig.Instance.ExportIncludeOnlyPropsWithEffects;
+            group.AddCheckbox("Include only props with effects", selected, sel =>
+            {
+                ModConfig.Instance.ExportIncludeOnlyPropsWithEffects = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group.AddButton("Buildings", () =>
+            {
+                ExportUtils.ExportBuildingInfoWithPropsToFile("BuildingInfoWithProps", true, ModConfig.Instance.ExportIncludeOnlyPropsWithEffects);
+            });
+
+            group.AddButton("Networks", () =>
+            {
+                ExportUtils.ExportNetInfoWithLanePropsToFile("NetInfoWithLaneProps", true, ModConfig.Instance.ExportIncludeOnlyPropsWithEffects);
             });
         }
 

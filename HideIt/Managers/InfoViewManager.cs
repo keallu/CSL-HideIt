@@ -1,22 +1,23 @@
-﻿using System;
+﻿using ColossalFramework;
+using System;
 using UnityEngine;
 
 namespace HideIt
 {
-    public class InfoViewHelper
+    public class InfoViewManager
     {
         public Texture2D InfoViewResourceTexture { get; set; }
         public Texture2D InfoViewDestructionTexture { get; set; }
 
         private InfoManager.InfoMode _cachedInfoMode;
 
-        private static InfoViewHelper instance;
+        private static InfoViewManager instance;
 
-        public static InfoViewHelper Instance
+        public static InfoViewManager Instance
         {
             get
             {
-                return instance ?? (instance = new InfoViewHelper());
+                return instance ?? (instance = new InfoViewManager());
             }
         }
 
@@ -39,6 +40,8 @@ namespace HideIt
                                 Shader.SetGlobalTexture("_NaturalDestruction", NaturalResourceManager.instance.m_destructionTexture);
                             }
                         }
+
+                        Singleton<NotificationManager>.instance.NotificationsVisible = !ModConfig.Instance.NotificationIcons;
                     }
                     else
                     {
@@ -50,6 +53,8 @@ namespace HideIt
                         {
                             Shader.SetGlobalTexture("_NaturalDestruction", InfoViewDestructionTexture);
                         }
+
+                        Singleton<NotificationManager>.instance.NotificationsVisible = true;
                     }
 
                     _cachedInfoMode = InfoManager.instance.CurrentMode;
@@ -61,7 +66,7 @@ namespace HideIt
             }
 }
 
-        private InfoViewHelper()
+        private InfoViewManager()
         {
             InfoViewResourceTexture = new Texture2D(512, 512, TextureFormat.RGB24, false, true)
             {

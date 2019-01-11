@@ -10,7 +10,6 @@ namespace HideIt
     {
         private bool _initialized;
 
-        private UIComponent _component;
         private UITextureAtlas _defaultIngameTextureAtlas;
         private Color _defaultValidColor;
         private Color _defaultWarningColor;
@@ -124,7 +123,12 @@ namespace HideIt
                     ToggleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
-                    ToggleLaneProps(
+                    ToggleBuildingProps(
+                        ModConfig.Instance.Ads,
+                        ModConfig.Instance.Billboards,
+                        ModConfig.Instance.Neons,
+                        ModConfig.Instance.Logos);
+                    ToggleNetProps(
                         ModConfig.Instance.Delineators,
                         ModConfig.Instance.RoadArrows,
                         ModConfig.Instance.TramArrows,
@@ -144,6 +148,9 @@ namespace HideIt
                         ModConfig.Instance.RoadStreetLights,
                         ModConfig.Instance.AvenueStreetLights,
                         ModConfig.Instance.HighwayStreetLights,
+                        ModConfig.Instance.RunwayLights,
+                        ModConfig.Instance.TaxiwayLights,
+                        ModConfig.Instance.WarningLights,
                         ModConfig.Instance.RandomStreetDecorations,
                         ModConfig.Instance.Buoys);
                     ToggleDecorations(
@@ -181,7 +188,7 @@ namespace HideIt
                     ModConfig.Instance.ConfigUpdated = false;
                 }
 
-                InfoViewHelper.Instance.UpdateInfoView();
+                InfoViewManager.Instance.UpdateInfoView();
 
                 if (ModConfig.Instance.KeymappingsEnabled)
                 {
@@ -339,7 +346,12 @@ namespace HideIt
         {
             try
             {
-                Camera.main.GetComponent<CameraController>().m_unlimitedCamera = disableCameraBorders;
+                CameraController cameraController = Camera.main.GetComponent<CameraController>();
+
+                if (cameraController != null)
+                {
+                    cameraController.m_unlimitedCamera = disableCameraBorders;
+                }
             }
             catch (Exception e)
             {
@@ -373,11 +385,11 @@ namespace HideIt
         {
             try
             {
-                _component = GameObject.Find(name).GetComponent<UIComponent>();
+                UIComponent component = GameObject.Find(name).GetComponent<UIComponent>();
 
-                if (_component != null)
+                if (component != null)
                 {
-                    _component.enabled = !disable;
+                    component.enabled = !disable;
                 }
             }
             catch (Exception e)
@@ -386,44 +398,67 @@ namespace HideIt
             }
         }
 
-        private void ToggleLaneProps(bool disableDelineators, bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStops, bool disableSightseeingBusStops, bool disableTramStops, bool disableRailwayCrossings, bool disableStreetNameSigns, bool disableStopSigns, bool disableTurnSigns, bool disableSpeedLimitSigns, bool disableNoParkingSigns, bool disableHighwaySigns, bool disablePedestrianAndBikeStreetLights, bool disableRoadStreetLights, bool disableAvenueStreetLights, bool disableHighwayStreetLights, bool disableRandomStreetDecorations, bool disableBuoys)
+        private void ToggleBuildingProps(bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos)
         {
             try
             {
                 List<string> enablePropNames = new List<string>();
                 List<string> disablePropNames = new List<string>();
 
-                AddLaneProps(disableDelineators, HiderUtils.DELINEATORS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableRoadArrows, HiderUtils.ROAD_ARROWS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableTramArrows, HiderUtils.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBikeLanes, HiderUtils.BIKE_LANES, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBusLanes, HiderUtils.BUS_LANES, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBusStops, HiderUtils.BUS_STOPS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableSightseeingBusStops, HiderUtils.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableTramStops, HiderUtils.TRAM_STOPS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableRailwayCrossings, HiderUtils.RAILWAY_CROSSINGS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableStreetNameSigns, HiderUtils.STREET_NAME_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableStopSigns, HiderUtils.STOP_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableTurnSigns, HiderUtils.TURN_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableSpeedLimitSigns, HiderUtils.SPEED_LIMIT_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableNoParkingSigns, HiderUtils.NO_PARKING_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableHighwaySigns, HiderUtils.HIGHWAY_SIGNS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disablePedestrianAndBikeStreetLights, HiderUtils.PEDESTRIAN_AND_BIKE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableRoadStreetLights, HiderUtils.ROAD_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableAvenueStreetLights, HiderUtils.AVENUE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableHighwayStreetLights, HiderUtils.HIGHWAY_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableRandomStreetDecorations, HiderUtils.RANDOM_STREET_DECORATIONS, ref enablePropNames, ref disablePropNames);
-                AddLaneProps(disableBuoys, HiderUtils.BUOYS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableAds, BuildingPropsHelper.ADS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBillboards, BuildingPropsHelper.BILLBOARDS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableNeons, BuildingPropsHelper.NEONS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableLogos, BuildingPropsHelper.LOGOS, ref enablePropNames, ref disablePropNames);
 
-                HiderUtils.UpdateLaneProps(enablePropNames, disablePropNames);
+                BuildingPropsHelper.UpdateProps(enablePropNames, disablePropNames);
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleLaneProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HiderTool:ToggleBuildingProps -> Exception: " + e.Message);
             }
         }
 
-        private void AddLaneProps(bool disable, string propName, ref List<string> enablePropNames, ref List<string> disablePropNames)
+        private void ToggleNetProps(bool disableDelineators, bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStops, bool disableSightseeingBusStops, bool disableTramStops, bool disableRailwayCrossings, bool disableStreetNameSigns, bool disableStopSigns, bool disableTurnSigns, bool disableSpeedLimitSigns, bool disableNoParkingSigns, bool disableHighwaySigns, bool disablePedestrianAndBikeStreetLights, bool disableRoadStreetLights, bool disableAvenueStreetLights, bool disableHighwayStreetLights, bool disableRunwayLights, bool disableTaxiwayLights, bool disableWarningLights, bool disableRandomStreetDecorations, bool disableBuoys)
+        {
+            try
+            {
+                List<string> enablePropNames = new List<string>();
+                List<string> disablePropNames = new List<string>();
+
+                AddProps(disableDelineators, NetPropsHelper.DELINEATORS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableRoadArrows, NetPropsHelper.ROAD_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTramArrows, NetPropsHelper.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBikeLanes, NetPropsHelper.BIKE_LANES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBusLanes, NetPropsHelper.BUS_LANES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBusStops, NetPropsHelper.BUS_STOPS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSightseeingBusStops, NetPropsHelper.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTramStops, NetPropsHelper.TRAM_STOPS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableRailwayCrossings, NetPropsHelper.RAILWAY_CROSSINGS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableStreetNameSigns, NetPropsHelper.STREET_NAME_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableStopSigns, NetPropsHelper.STOP_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTurnSigns, NetPropsHelper.TURN_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSpeedLimitSigns, NetPropsHelper.SPEED_LIMIT_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableNoParkingSigns, NetPropsHelper.NO_PARKING_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableHighwaySigns, NetPropsHelper.HIGHWAY_SIGNS, ref enablePropNames, ref disablePropNames);
+                AddProps(disablePedestrianAndBikeStreetLights, NetPropsHelper.PEDESTRIAN_AND_BIKE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableRoadStreetLights, NetPropsHelper.ROAD_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableAvenueStreetLights, NetPropsHelper.AVENUE_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableHighwayStreetLights, NetPropsHelper.HIGHWAY_STREET_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableRunwayLights, NetPropsHelper.RUNWAY_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTaxiwayLights, NetPropsHelper.TAXIWAY_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableWarningLights, NetPropsHelper.WARNING_LIGHTS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableRandomStreetDecorations, NetPropsHelper.RANDOM_STREET_DECORATIONS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBuoys, NetPropsHelper.BUOYS, ref enablePropNames, ref disablePropNames);
+
+                NetPropsHelper.UpdateLaneProps(enablePropNames, disablePropNames);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleNetProps -> Exception: " + e.Message);
+            }
+        }
+
+        private void AddProps(bool disable, string propName, ref List<string> enablePropNames, ref List<string> disablePropNames)
         {
             if (disable)
             {
@@ -435,7 +470,7 @@ namespace HideIt
             }
         }
 
-        private void AddLaneProps(bool disable, string[] propNames, ref List<string> enablePropNames, ref List<string> disablePropNames)
+        private void AddProps(bool disable, string[] propNames, ref List<string> enablePropNames, ref List<string> disablePropNames)
         {
             if (disable)
             {

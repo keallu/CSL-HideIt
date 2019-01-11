@@ -32,6 +32,10 @@
         public bool FreeCameraButton { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
+        public bool Ads { get; set; }
+        public bool Billboards { get; set; }
+        public bool Neons { get; set; }
+        public bool Logos { get; set; }
         public bool Delineators { get; set; }
         public bool RoadArrows { get; set; }
         public bool TramArrows { get; set; }
@@ -51,6 +55,9 @@
         public bool RoadStreetLights { get; set; }
         public bool AvenueStreetLights { get; set; }
         public bool HighwayStreetLights { get; set; }
+        public bool RunwayLights { get; set; }
+        public bool TaxiwayLights { get; set; }
+        public bool WarningLights { get; set; }
         public bool RandomStreetDecorations { get; set; }
         public bool Buoys { get; set; }
         public bool CliffDecorations { get; set; }
@@ -76,6 +83,7 @@
         public bool VolumeFog { get; set; }
         public bool DistanceFog { get; set; }
         public bool EdgeFog { get; set; }
+        public bool ExportIncludeOnlyPropsWithEffects { get; set; }
 
         private static ModConfig instance;
 
