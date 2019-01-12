@@ -4,9 +4,9 @@
     public class ModConfig
     {
         public bool ConfigUpdated { get; set; }
-        public string Keymapping1 { get; set; } = "Notification Icons";
-        public string Keymapping2 { get; set; } = "District Names";
-        public string Keymapping3 { get; set; } = "District Icons";
+        public string Keymapping1 { get; set; } = "District Names";
+        public string Keymapping2 { get; set; } = "Tool Colors";
+        public string Keymapping3 { get; set; } = "Move It! Tool Colors";
         public bool KeymappingsEnabled { get; set; } = true;
         public bool NotificationIcons { get; set; }
         public bool DistrictNames { get; set; }
@@ -16,9 +16,12 @@
         public bool ValidColor { get; set; }
         public bool WarningColor { get; set; }
         public bool ErrorColor { get; set; }
-        public bool ValidColorInfo { get; set; }
-        public bool WarningColorInfo { get; set; }
-        public bool ErrorColorInfo { get; set; }
+        public bool MoveItHoverColor { get; set; }
+        public bool MoveItSelectedColor { get; set; }
+        public bool MoveItMoveColor { get; set; }
+        public bool MoveItRemoveColor { get; set; }
+        public bool MoveItDespawnColor { get; set; }
+        public bool MoveItAlignColor { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -32,10 +35,15 @@
         public bool FreeCameraButton { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
+        public bool Flags { get; set; }
         public bool Ads { get; set; }
         public bool Billboards { get; set; }
         public bool Neons { get; set; }
         public bool Logos { get; set; }
+        public bool Smoke { get; set; }
+        public bool Steam { get; set; }
+        public bool SolarPanels { get; set; }
+        public bool HvacSystems { get; set; }
         public bool Delineators { get; set; }
         public bool RoadArrows { get; set; }
         public bool TramArrows { get; set; }

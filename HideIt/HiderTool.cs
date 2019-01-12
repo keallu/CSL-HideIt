@@ -2,6 +2,7 @@
 using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace HideIt
@@ -14,9 +15,12 @@ namespace HideIt
         private Color _defaultValidColor;
         private Color _defaultWarningColor;
         private Color _defaultErrorColor;
-        private Color _defaultValidColorInfo;
-        private Color _defaultWarningColorInfo;
-        private Color _defaultErrorColorInfo;
+        private Color _defaultMoveItHoverColor;        
+        private Color _defaultMoveItSelectedColor;
+        private Color _defaultMoveItMoveColor;
+        private Color _defaultMoveItRemoveColor;
+        private Color _defaultMoveItDespawnColor;
+        private Color _defaultMoveItAlignColor;
         private TerrainProperties _terrainProperties;
         private Vector3 _noColorOffset;
         private Vector3 _defaultGrassFertilityColorOffset;
@@ -65,9 +69,6 @@ namespace HideIt
                 _defaultValidColor = toolController.m_validColor;
                 _defaultWarningColor = toolController.m_warningColor;
                 _defaultErrorColor = toolController.m_errorColor;
-                _defaultValidColorInfo = toolController.m_validColorInfo;
-                _defaultWarningColorInfo = toolController.m_warningColorInfo;
-                _defaultErrorColorInfo = toolController.m_errorColorInfo;
 
                 _terrainProperties = FindObjectOfType<TerrainProperties>();
 
@@ -109,9 +110,12 @@ namespace HideIt
                         ModConfig.Instance.ValidColor,
                         ModConfig.Instance.WarningColor,
                         ModConfig.Instance.ErrorColor,
-                        ModConfig.Instance.ValidColorInfo,
-                        ModConfig.Instance.WarningColorInfo,
-                        ModConfig.Instance.ErrorColorInfo);
+                        ModConfig.Instance.MoveItHoverColor,
+                        ModConfig.Instance.MoveItSelectedColor,
+                        ModConfig.Instance.MoveItMoveColor,
+                        ModConfig.Instance.MoveItRemoveColor,
+                        ModConfig.Instance.MoveItDespawnColor,
+                        ModConfig.Instance.MoveItAlignColor);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
@@ -124,10 +128,15 @@ namespace HideIt
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
                     ToggleBuildingProps(
+                        ModConfig.Instance.Flags,
                         ModConfig.Instance.Ads,
                         ModConfig.Instance.Billboards,
                         ModConfig.Instance.Neons,
-                        ModConfig.Instance.Logos);
+                        ModConfig.Instance.Logos,
+                        ModConfig.Instance.Smoke,
+                        ModConfig.Instance.Steam,
+                        ModConfig.Instance.SolarPanels,
+                        ModConfig.Instance.HvacSystems);
                     ToggleNetProps(
                         ModConfig.Instance.Delineators,
                         ModConfig.Instance.RoadArrows,
@@ -154,22 +163,22 @@ namespace HideIt
                         ModConfig.Instance.RandomStreetDecorations,
                         ModConfig.Instance.Buoys);
                     ToggleDecorations(
-                        ModConfig.Instance.CliffDecorations, 
-                        ModConfig.Instance.FertileDecorations, 
+                        ModConfig.Instance.CliffDecorations,
+                        ModConfig.Instance.FertileDecorations,
                         ModConfig.Instance.GrassDecorations);
                     ToggleRuining(
-                        ModConfig.Instance.TreeRuining, 
+                        ModConfig.Instance.TreeRuining,
                         ModConfig.Instance.PropRuining);
                     ToggleGroundColor(
-                        ModConfig.Instance.GrassFertilityGroundColor, 
-                        ModConfig.Instance.GrassFieldGroundColor, 
-                        ModConfig.Instance.GrassForestGroundColor, 
+                        ModConfig.Instance.GrassFertilityGroundColor,
+                        ModConfig.Instance.GrassFieldGroundColor,
+                        ModConfig.Instance.GrassForestGroundColor,
                         ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
                     ToggleFogEffects(
-                        ModConfig.Instance.PollutionFog, 
-                        ModConfig.Instance.VolumeFog, 
-                        ModConfig.Instance.DistanceFog, 
+                        ModConfig.Instance.PollutionFog,
+                        ModConfig.Instance.VolumeFog,
+                        ModConfig.Instance.DistanceFog,
                         ModConfig.Instance.EdgeFog);
 
                     if (ModConfig.Instance.Seagulls)
@@ -267,10 +276,16 @@ namespace HideIt
                         ModConfig.Instance.ValidColor = !ModConfig.Instance.ValidColor;
                         ModConfig.Instance.WarningColor = !ModConfig.Instance.WarningColor;
                         ModConfig.Instance.ErrorColor = !ModConfig.Instance.ErrorColor;
-                        ModConfig.Instance.ValidColorInfo = !ModConfig.Instance.ValidColorInfo;
-                        ModConfig.Instance.WarningColorInfo = !ModConfig.Instance.WarningColorInfo;
-                        ModConfig.Instance.ErrorColorInfo = !ModConfig.Instance.ErrorColorInfo;
-                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.ValidColorInfo, ModConfig.Instance.WarningColorInfo, ModConfig.Instance.ErrorColorInfo);
+                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor);
+                        break;
+                    case "Move It! Tool Colors":
+                        ModConfig.Instance.MoveItHoverColor = !ModConfig.Instance.MoveItHoverColor;
+                        ModConfig.Instance.MoveItSelectedColor = !ModConfig.Instance.MoveItSelectedColor;
+                        ModConfig.Instance.MoveItMoveColor = !ModConfig.Instance.MoveItMoveColor;
+                        ModConfig.Instance.MoveItRemoveColor = !ModConfig.Instance.MoveItRemoveColor;
+                        ModConfig.Instance.MoveItDespawnColor = !ModConfig.Instance.MoveItDespawnColor;
+                        ModConfig.Instance.MoveItAlignColor = !ModConfig.Instance.MoveItAlignColor;
+                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor);
                         break;
                     default:
                         break;
@@ -359,7 +374,7 @@ namespace HideIt
             }
         }
 
-        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableValidColorInfo, bool disableWarningColorInfo, bool disableErrorColorInfo)
+        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableMoveItHoverColor, bool disableMoveItSelectedColor, bool disableMoveItMoveColor, bool disableMoveItRemoveColor, bool disableMoveItDespawnColor, bool disableMoveItAlignColor)
         {
             try
             {
@@ -370,14 +385,53 @@ namespace HideIt
                     toolController.m_validColor.a = disableValidColor ? 0f : _defaultValidColor.a;
                     toolController.m_warningColor.a = disableWarningColor ? 0f : _defaultWarningColor.a;
                     toolController.m_errorColor.a = disableErrorColor ? 0f : _defaultErrorColor.a;
-                    toolController.m_validColorInfo.a = disableValidColorInfo ? 0f : _defaultValidColorInfo.a;
-                    toolController.m_warningColorInfo.a = disableWarningColorInfo ? 0f : _defaultWarningColorInfo.a;
-                    toolController.m_errorColorInfo.a = disableErrorColorInfo ? 0f : _defaultErrorColorInfo.a;
+                }
+
+                if (ModUtils.IsModEnabled("moveit"))
+                {
+                    ToggleMoveItColor(disableMoveItHoverColor, "m_hoverColor", ref _defaultMoveItHoverColor);
+                    ToggleMoveItColor(disableMoveItSelectedColor, "m_selectedColor", ref _defaultMoveItSelectedColor);
+                    ToggleMoveItColor(disableMoveItMoveColor, "m_moveColor", ref _defaultMoveItMoveColor);
+                    ToggleMoveItColor(disableMoveItRemoveColor, "m_removeColor", ref _defaultMoveItRemoveColor);
+                    ToggleMoveItColor(disableMoveItDespawnColor, "m_despawnColor", ref _defaultMoveItDespawnColor);
+                    ToggleMoveItColor(disableMoveItAlignColor, "m_alignColor", ref _defaultMoveItAlignColor);
                 }
             }
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] HiderTool:ToggleToolColor -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleMoveItColor(bool disable, string colorName, ref Color defaultColor)
+        {
+            try
+            {
+                FieldInfo fieldInfo;
+                Color color;
+
+                fieldInfo = Type.GetType("MoveIt.MoveItTool, MoveIt").GetField(colorName, BindingFlags.NonPublic | BindingFlags.Static);
+
+                if (fieldInfo != null)
+                {
+                    if (defaultColor.r == 0f && defaultColor.g == 0f && defaultColor.b == 0f && defaultColor.a == 0f)
+                    {
+                        defaultColor = (Color)fieldInfo.GetValue(null);
+                    }
+
+                    color = new Color()
+                    {
+                        r = defaultColor.r,
+                        g = defaultColor.g,
+                        b = defaultColor.b,
+                        a = disable ? 0f : defaultColor.a
+                    };
+                    fieldInfo.SetValue(null, color);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HiderTool:ToggleMoveItColor -> Exception: " + e.Message);
             }
         }
 
@@ -398,17 +452,22 @@ namespace HideIt
             }
         }
 
-        private void ToggleBuildingProps(bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos)
+        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems)
         {
             try
             {
                 List<string> enablePropNames = new List<string>();
                 List<string> disablePropNames = new List<string>();
 
+                AddProps(disableFlags, BuildingPropsHelper.FLAGS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableAds, BuildingPropsHelper.ADS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableBillboards, BuildingPropsHelper.BILLBOARDS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableNeons, BuildingPropsHelper.NEONS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableLogos, BuildingPropsHelper.LOGOS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSmoke, BuildingPropsHelper.SMOKE, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSteam, BuildingPropsHelper.STEAM, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSolarPanels, BuildingPropsHelper.SOLAR_PANELS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableHvacSystems, BuildingPropsHelper.HVAC_SYSTEMS, ref enablePropNames, ref disablePropNames);
 
                 BuildingPropsHelper.UpdateProps(enablePropNames, disablePropNames);
             }

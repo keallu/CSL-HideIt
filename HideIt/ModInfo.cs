@@ -29,7 +29,8 @@ namespace HideIt
             "District Icons",
             "Line Borders",
             "Camera Borders",
-            "Tool Colors"
+            "Tool Colors",
+            "Move It! Tool Colors"
         };
 
         private static readonly string[] KeymappingValues =
@@ -39,7 +40,8 @@ namespace HideIt
             "District Icons",
             "Line Borders",
             "Camera Borders",
-            "Tool Colors"
+            "Tool Colors",
+            "Move It! Tool Colors"
         };
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -118,7 +120,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Tools");
+            group = helper.AddGroup("Tool Colors");
 
             selected = ModConfig.Instance.ValidColor;
             group.AddCheckbox("Valid Color", selected, sel =>
@@ -141,24 +143,45 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.ValidColorInfo;
-            group.AddCheckbox("Valid Color Info", selected, sel =>
+            selected = ModConfig.Instance.MoveItHoverColor;
+            group.AddCheckbox("Move It! Hover Color", selected, sel =>
             {
-                ModConfig.Instance.ValidColorInfo = sel;
+                ModConfig.Instance.MoveItHoverColor = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.WarningColorInfo;
-            group.AddCheckbox("Warning Color Info", selected, sel =>
+            selected = ModConfig.Instance.MoveItSelectedColor;
+            group.AddCheckbox("Move It! Selected Color", selected, sel =>
             {
-                ModConfig.Instance.WarningColorInfo = sel;
+                ModConfig.Instance.MoveItSelectedColor = sel;
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.ErrorColorInfo;
-            group.AddCheckbox("Error Color Info", selected, sel =>
+            selected = ModConfig.Instance.MoveItMoveColor;
+            group.AddCheckbox("Move It! Move Color", selected, sel =>
             {
-                ModConfig.Instance.ErrorColorInfo = sel;
+                ModConfig.Instance.MoveItMoveColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.MoveItRemoveColor;
+            group.AddCheckbox("Move It! Remove Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItRemoveColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.MoveItDespawnColor;
+            group.AddCheckbox("Move It! Despawn Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItDespawnColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.MoveItAlignColor;
+            group.AddCheckbox("Move It! Align Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItAlignColor = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -241,7 +264,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Objects & props");
+            group = helper.AddGroup("Objects & Props");
 
             selected = ModConfig.Instance.Seagulls;
             group.AddCheckbox("Seagulls", selected, sel =>
@@ -254,6 +277,13 @@ namespace HideIt
             group.AddCheckbox("Wildlife", selected, sel =>
             {
                 ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Flags;
+            group.AddCheckbox("Flags", selected, sel =>
+            {
+                ModConfig.Instance.Flags = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -282,6 +312,34 @@ namespace HideIt
             group.AddCheckbox("Logos", selected, sel =>
             {
                 ModConfig.Instance.Logos = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Smoke;
+            group.AddCheckbox("Smoke", selected, sel =>
+            {
+                ModConfig.Instance.Smoke = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Steam;
+            group.AddCheckbox("Steam", selected, sel =>
+            {
+                ModConfig.Instance.Steam = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SolarPanels;
+            group.AddCheckbox("Solar Panels", selected, sel =>
+            {
+                ModConfig.Instance.SolarPanels = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.HvacSystems;
+            group.AddCheckbox("HVAC Systems", selected, sel =>
+            {
+                ModConfig.Instance.HvacSystems = sel;
                 ModConfig.Instance.Save();
             });
 

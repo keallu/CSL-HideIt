@@ -6,6 +6,8 @@ namespace HideIt
 {
     public static class BuildingPropsHelper
     {
+        public static readonly string[] FLAGS = { "flag_pole", "flag_pole_wall" };
+
         public static readonly string[] ADS = {
             "cityad01",
             "roofad01",
@@ -37,6 +39,11 @@ namespace HideIt
             "wall_ad06" };
 
         public static readonly string[] BILLBOARDS = {
+            "Hologram Ad Game Arcade",
+            "Clown",
+            "Octopus",
+            "Rotating_morelloscone",
+            "Rotating_squirrel",
             "billboard02",
             "Billboard_3D_variation",
             "Billboard_big_bigbite",
@@ -119,6 +126,11 @@ namespace HideIt
             "Hightech Industrial Logo 05",
             "Hightech Industrial Logo 06",
             "Hightech Industrial Logo Random",
+            "beergarden_sign",
+            "Bigbite sign",
+            "Organic Shop 3d Sign 02",
+            "Organic Shop 3d Sign 03",
+            "Organic Shop 3d Sign 04",
             "Logo_aukio",
             "Logo_banhammer",
             "Logo_barber",
@@ -153,7 +165,13 @@ namespace HideIt
             "logo_tyrell",
             "Logo_williams" };
 
-        private static readonly List<string> PROBABILITY88 = new List<string>() { };
+        public static readonly string[] SMOKE = { "Factory Smoke", "Factory Smoke Small" };
+        public static readonly string STEAM = "Factory Steam";
+        public static readonly string[] SOLAR_PANELS = { "Horizontal Solar Panel 01", "Horizontal Solar Panel 02", "Solar panel 01", "Solar panel 02", "Solar panel 03" };
+        public static readonly string[] HVAC_SYSTEMS = { "Ac box 01", "Ac box 02", "Ac box 03", "Ac box random", "Air Source Heat Pump 01", "Air Source Heat Pump 02", "Rotating ac", "Ventilation Pipe 01", "Ventilation Pipe 02" };
+
+        private static readonly List<string> PROBABILITY77 = new List<string>() { "flag_pole", "flag_pole_wall", "Solar panel 01", "Solar panel 02", "Solar panel 03", "Ac box random" };
+        private static readonly List<string> PROBABILITY88 = new List<string>() { "Rotating ac" };
 
         private static readonly List<string> HAS_LIGHT_EFFECTS = new List<string>() { "Billboard_pop_soda_anim" };
 
@@ -238,7 +256,11 @@ namespace HideIt
 
                                 probability = 100;
 
-                                if (PROBABILITY88.Contains(prop.m_finalProp.name))
+                                if (PROBABILITY77.Contains(prop.m_finalProp.name))
+                                {
+                                    probability = 77;
+                                }
+                                else if (PROBABILITY88.Contains(prop.m_finalProp.name))
                                 {
                                     probability = 88;
                                 }
