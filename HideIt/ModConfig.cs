@@ -44,6 +44,20 @@
         public bool Steam { get; set; }
         public bool SolarPanels { get; set; }
         public bool HvacSystems { get; set; }
+        public bool ParkingSpaces { get; set; }
+        public bool CargoContainers { get; set; }
+        public bool GarbageContainers { get; set; }
+        public bool GarbageBinsAndCans { get; set; }
+        public bool GarbagePiles { get; set; }
+        public bool Tanks { get; set; }
+        public bool Barrels { get; set; }
+        public bool Pallets { get; set; }
+        public bool Crates { get; set; }
+        public bool Planks { get; set; }
+        public bool CableReels { get; set; }
+        public bool Hedges { get; set; }
+        public bool Fences { get; set; }
+        public bool Gates { get; set; }
         public bool Delineators { get; set; }
         public bool RoadArrows { get; set; }
         public bool TramArrows { get; set; }

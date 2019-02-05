@@ -343,6 +343,104 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.ParkingSpaces;
+            group.AddCheckbox("Parking Spaces", selected, sel =>
+            {
+                ModConfig.Instance.ParkingSpaces = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.CargoContainers;
+            group.AddCheckbox("Cargo Containers", selected, sel =>
+            {
+                ModConfig.Instance.CargoContainers = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.GarbageContainers;
+            group.AddCheckbox("Garbage Containers", selected, sel =>
+            {
+                ModConfig.Instance.GarbageContainers = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.GarbageBinsAndCans;
+            group.AddCheckbox("Garbage Bins and Cans", selected, sel =>
+            {
+                ModConfig.Instance.GarbageBinsAndCans = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.GarbagePiles;
+            group.AddCheckbox("Garbage Piles", selected, sel =>
+            {
+                ModConfig.Instance.GarbagePiles = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Tanks;
+            group.AddCheckbox("Tanks", selected, sel =>
+            {
+                ModConfig.Instance.Tanks = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Barrels;
+            group.AddCheckbox("Barrels", selected, sel =>
+            {
+                ModConfig.Instance.Barrels = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Pallets;
+            group.AddCheckbox("Pallets", selected, sel =>
+            {
+                ModConfig.Instance.Pallets = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Crates;
+            group.AddCheckbox("Crates", selected, sel =>
+            {
+                ModConfig.Instance.Crates = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Planks;
+            group.AddCheckbox("Planks", selected, sel =>
+            {
+                ModConfig.Instance.Planks = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.CableReels;
+            group.AddCheckbox("Cable Reels", selected, sel =>
+            {
+                ModConfig.Instance.CableReels = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Hedges;
+            group.AddCheckbox("Hedges", selected, sel =>
+            {
+                ModConfig.Instance.Hedges = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Fences;
+            group.AddCheckbox("Fences", selected, sel =>
+            {
+                ModConfig.Instance.Fences = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Gates;
+            group.AddCheckbox("Gates", selected, sel =>
+            {
+                ModConfig.Instance.Gates = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.Delineators;
             group.AddCheckbox("Delineators", selected, sel =>
             {

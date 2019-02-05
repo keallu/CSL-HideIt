@@ -136,7 +136,21 @@ namespace HideIt
                         ModConfig.Instance.Smoke,
                         ModConfig.Instance.Steam,
                         ModConfig.Instance.SolarPanels,
-                        ModConfig.Instance.HvacSystems);
+                        ModConfig.Instance.HvacSystems,
+                        ModConfig.Instance.ParkingSpaces,
+                        ModConfig.Instance.CargoContainers,
+                        ModConfig.Instance.GarbageContainers,
+                        ModConfig.Instance.GarbageBinsAndCans,
+                        ModConfig.Instance.GarbagePiles,
+                        ModConfig.Instance.Tanks,
+                        ModConfig.Instance.Barrels,
+                        ModConfig.Instance.Pallets,
+                        ModConfig.Instance.Crates,
+                        ModConfig.Instance.Planks,
+                        ModConfig.Instance.CableReels,
+                        ModConfig.Instance.Hedges,
+                        ModConfig.Instance.Fences,
+                        ModConfig.Instance.Gates);
                     ToggleNetProps(
                         ModConfig.Instance.Delineators,
                         ModConfig.Instance.RoadArrows,
@@ -452,7 +466,7 @@ namespace HideIt
             }
         }
 
-        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems)
+        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems, bool disableParkingSpaces, bool disableCargoContainers, bool disableGarbageContainers, bool disableGarbageBinsAndCans, bool disableGarbagePiles, bool disableTanks, bool disableBarrels, bool disablePallets, bool disableCrates, bool disablePlanks, bool disableCableReels, bool disableHedges, bool disableFences, bool disableGates)
         {
             try
             {
@@ -468,6 +482,20 @@ namespace HideIt
                 AddProps(disableSteam, BuildingPropsHelper.STEAM, ref enablePropNames, ref disablePropNames);
                 AddProps(disableSolarPanels, BuildingPropsHelper.SOLAR_PANELS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableHvacSystems, BuildingPropsHelper.HVAC_SYSTEMS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableParkingSpaces, BuildingPropsHelper.PARKING_SPACES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableCargoContainers, BuildingPropsHelper.CARGO_CONTAINERS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableGarbageContainers, BuildingPropsHelper.GARBAGE_CONTAINERS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableGarbageBinsAndCans, BuildingPropsHelper.GARBAGE_BINS_AND_CANS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableGarbagePiles, BuildingPropsHelper.GARBAGE_PILES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTanks, BuildingPropsHelper.TANKS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableBarrels, BuildingPropsHelper.BARRELS, ref enablePropNames, ref disablePropNames);
+                AddProps(disablePallets, BuildingPropsHelper.PALLETS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableCrates, BuildingPropsHelper.CRATES, ref enablePropNames, ref disablePropNames);
+                AddProps(disablePlanks, BuildingPropsHelper.PLANKS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableCableReels, BuildingPropsHelper.CABLE_REELS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableHedges, BuildingPropsHelper.HEDGES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableFences, BuildingPropsHelper.FENCES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableGates, BuildingPropsHelper.GATES, ref enablePropNames, ref disablePropNames);
 
                 BuildingPropsHelper.UpdateProps(enablePropNames, disablePropNames);
             }
