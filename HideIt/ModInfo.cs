@@ -185,6 +185,27 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.MoveItPOHoverColor;
+            group.AddCheckbox("Move It! PO Hover Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItPOHoverColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.MoveItPOSelectedColor;
+            group.AddCheckbox("Move It! PO Selected Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItPOSelectedColor = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.MoveItPODisabledColor;
+            group.AddCheckbox("Move It! PO Disabled Color", selected, sel =>
+            {
+                ModConfig.Instance.MoveItPODisabledColor = sel;
+                ModConfig.Instance.Save();
+            });
+
             group = helper.AddGroup("Buttons");
 
             selected = ModConfig.Instance.InfoViewsButton;
@@ -609,11 +630,6 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            //group.AddButton("Update light effects on existing props", () =>
-            //{
-            //    NetPropsHelper.UpdateExistingSegmentsLightEffects();
-            //});
-
             group = helper.AddGroup("Sprites");
 
             selected = ModConfig.Instance.CliffDecorations;
@@ -653,7 +669,23 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group.AddButton("Update ruining on existing trees and props", () =>
+            selected = ModConfig.Instance.AutoUpdateTreeRuiningAtLoad;
+            group.AddCheckbox("Automatic update existing trees at load", selected, sel =>
+            {
+                ModConfig.Instance.AutoUpdateTreeRuiningAtLoad = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AutoUpdatePropRuiningAtLoad;
+            group.AddCheckbox("Automatic update existing props at load", selected, sel =>
+            {
+                ModConfig.Instance.AutoUpdatePropRuiningAtLoad = sel;
+                ModConfig.Instance.Save();
+            });
+
+            group.AddSpace(10);
+
+            group.AddButton("Update ruining on existing trees and props now!", () =>
             {
                 RuiningHelper.UpdateExistingTreesRuining(ModConfig.Instance.TreeRuining);
                 RuiningHelper.UpdateExistingPropsRuining(ModConfig.Instance.PropRuining);

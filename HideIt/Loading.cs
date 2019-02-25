@@ -22,12 +22,22 @@ namespace HideIt
                     return;
                 }
 
+                if (ModConfig.Instance.AutoUpdateTreeRuiningAtLoad)
+                {
+                    RuiningHelper.UpdateExistingTreesRuining(ModConfig.Instance.TreeRuining);
+                }
+
+                if (ModConfig.Instance.AutoUpdatePropRuiningAtLoad)
+                {
+                    RuiningHelper.UpdateExistingPropsRuining(ModConfig.Instance.PropRuining);
+                }
+
                 UIView objectOfType = UnityEngine.Object.FindObjectOfType<UIView>();
                 if (objectOfType != null)
                 {
-                    _gameObject = new GameObject("HideItHiderTool");
+                    _gameObject = new GameObject("HideItHider");
                     _gameObject.transform.parent = objectOfType.transform;
-                    _gameObject.AddComponent<HiderTool>();
+                    _gameObject.AddComponent<Hider>();
                 }
             }
             catch (Exception e)

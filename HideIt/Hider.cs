@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HideIt
 {
-    class HiderTool : MonoBehaviour
+    class Hider : MonoBehaviour
     {
         private bool _initialized;
 
@@ -21,6 +21,9 @@ namespace HideIt
         private Color _defaultMoveItRemoveColor;
         private Color _defaultMoveItDespawnColor;
         private Color _defaultMoveItAlignColor;
+        private Color _defaultMoveItPOHoverColor;
+        private Color _defaultMoveItPOSelectedColor;
+        private Color _defaultMoveItPODisabledColor;
         private TerrainProperties _terrainProperties;
         private Vector3 _noColorOffset;
         private Vector3 _defaultGrassFertilityColorOffset;
@@ -42,7 +45,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:Awake -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:Awake -> Exception: " + e.Message);
             }
         }
 
@@ -54,7 +57,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:OnEnable -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:OnEnable -> Exception: " + e.Message);
             }
         }
 
@@ -91,7 +94,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:Start -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:Start -> Exception: " + e.Message);
             }
         }
 
@@ -115,7 +118,10 @@ namespace HideIt
                         ModConfig.Instance.MoveItMoveColor,
                         ModConfig.Instance.MoveItRemoveColor,
                         ModConfig.Instance.MoveItDespawnColor,
-                        ModConfig.Instance.MoveItAlignColor);
+                        ModConfig.Instance.MoveItAlignColor,
+                        ModConfig.Instance.MoveItPOHoverColor,
+                        ModConfig.Instance.MoveItPOSelectedColor,
+                        ModConfig.Instance.MoveItPODisabledColor);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
@@ -232,7 +238,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:Update -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:Update -> Exception: " + e.Message);
             }
         }
 
@@ -244,7 +250,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:OnDisable -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:OnDisable -> Exception: " + e.Message);
             }
         }
 
@@ -256,7 +262,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:OnDestroy -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:OnDestroy -> Exception: " + e.Message);
             }
         }
 
@@ -290,7 +296,7 @@ namespace HideIt
                         ModConfig.Instance.ValidColor = !ModConfig.Instance.ValidColor;
                         ModConfig.Instance.WarningColor = !ModConfig.Instance.WarningColor;
                         ModConfig.Instance.ErrorColor = !ModConfig.Instance.ErrorColor;
-                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor);
+                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor, ModConfig.Instance.MoveItPOHoverColor, ModConfig.Instance.MoveItPOSelectedColor, ModConfig.Instance.MoveItPODisabledColor);
                         break;
                     case "Move It! Tool Colors":
                         ModConfig.Instance.MoveItHoverColor = !ModConfig.Instance.MoveItHoverColor;
@@ -299,7 +305,10 @@ namespace HideIt
                         ModConfig.Instance.MoveItRemoveColor = !ModConfig.Instance.MoveItRemoveColor;
                         ModConfig.Instance.MoveItDespawnColor = !ModConfig.Instance.MoveItDespawnColor;
                         ModConfig.Instance.MoveItAlignColor = !ModConfig.Instance.MoveItAlignColor;
-                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor);
+                        ModConfig.Instance.MoveItPOHoverColor = !ModConfig.Instance.MoveItPOHoverColor;
+                        ModConfig.Instance.MoveItPOSelectedColor = !ModConfig.Instance.MoveItPOSelectedColor;
+                        ModConfig.Instance.MoveItPODisabledColor = !ModConfig.Instance.MoveItPODisabledColor;
+                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor, ModConfig.Instance.MoveItPOHoverColor, ModConfig.Instance.MoveItPOSelectedColor, ModConfig.Instance.MoveItPODisabledColor);
                         break;
                     default:
                         break;
@@ -307,7 +316,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:SelectToggle -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:SelectToggle -> Exception: " + e.Message);
             }
         }
 
@@ -319,7 +328,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleNotificationIcons -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleNotificationIcons -> Exception: " + e.Message);
             }
         }
 
@@ -331,7 +340,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleDistrictNames -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleDistrictNames -> Exception: " + e.Message);
             }
         }
 
@@ -355,7 +364,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleDistrictIcons -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleDistrictIcons -> Exception: " + e.Message);
             }
         }
 
@@ -367,7 +376,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleLineBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleLineBorders -> Exception: " + e.Message);
             }
         }
 
@@ -384,11 +393,11 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleCameraBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleCameraBorders -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableMoveItHoverColor, bool disableMoveItSelectedColor, bool disableMoveItMoveColor, bool disableMoveItRemoveColor, bool disableMoveItDespawnColor, bool disableMoveItAlignColor)
+        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableMoveItHoverColor, bool disableMoveItSelectedColor, bool disableMoveItMoveColor, bool disableMoveItRemoveColor, bool disableMoveItDespawnColor, bool disableMoveItAlignColor, bool disableMoveItPOHoverColor, bool disableMoveItPOSelectedColor, bool disableMoveItPODisabledColor)
         {
             try
             {
@@ -409,11 +418,14 @@ namespace HideIt
                     ToggleMoveItColor(disableMoveItRemoveColor, "m_removeColor", ref _defaultMoveItRemoveColor);
                     ToggleMoveItColor(disableMoveItDespawnColor, "m_despawnColor", ref _defaultMoveItDespawnColor);
                     ToggleMoveItColor(disableMoveItAlignColor, "m_alignColor", ref _defaultMoveItAlignColor);
+                    ToggleMoveItColor(disableMoveItPOHoverColor, "m_POhoverColor", ref _defaultMoveItPOHoverColor);
+                    ToggleMoveItColor(disableMoveItPOSelectedColor, "m_POselectedColor", ref _defaultMoveItPOSelectedColor);
+                    ToggleMoveItColor(disableMoveItPODisabledColor, "m_POdisabledColor", ref _defaultMoveItPODisabledColor);
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleToolColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleToolColor -> Exception: " + e.Message);
             }
         }
 
@@ -445,7 +457,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleMoveItColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleMoveItColor -> Exception: " + e.Message);
             }
         }
 
@@ -457,12 +469,12 @@ namespace HideIt
 
                 if (component != null)
                 {
-                    component.enabled = !disable;
+                    component.isVisible = !disable;
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -501,7 +513,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleBuildingProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleBuildingProps -> Exception: " + e.Message);
             }
         }
 
@@ -541,7 +553,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleNetProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleNetProps -> Exception: " + e.Message);
             }
         }
 
@@ -582,7 +594,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleDecorations -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleDecorations -> Exception: " + e.Message);
             }
         }
 
@@ -616,7 +628,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
             }
         }
 
@@ -634,7 +646,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleGroundColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleGroundColor -> Exception: " + e.Message);
             }
         }
 
@@ -646,7 +658,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleWaterColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleWaterColor -> Exception: " + e.Message);
             }
         }
 
@@ -664,7 +676,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HiderTool:ToggleFogEffects -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] Hider:ToggleFogEffects -> Exception: " + e.Message);
             }
         }
     }

@@ -22,6 +22,9 @@
         public bool MoveItRemoveColor { get; set; }
         public bool MoveItDespawnColor { get; set; }
         public bool MoveItAlignColor { get; set; }
+        public bool MoveItPOHoverColor { get; set; }
+        public bool MoveItPOSelectedColor { get; set; }
+        public bool MoveItPODisabledColor { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -87,6 +90,8 @@
         public bool GrassDecorations { get; set; }
         public bool TreeRuining { get; set; }
         public bool PropRuining { get; set; }
+        public bool AutoUpdateTreeRuiningAtLoad { get; set; }
+        public bool AutoUpdatePropRuiningAtLoad { get; set; }
         public bool GrassFertilityGroundColor { get; set; }
         public bool GrassFieldGroundColor { get; set; }
         public bool GrassForestGroundColor { get; set; }
