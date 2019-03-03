@@ -123,7 +123,10 @@ namespace HideIt
                         ModConfig.Instance.MoveItPOSelectedColor,
                         ModConfig.Instance.MoveItPODisabledColor);
                     ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
-                    ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
+                    if (SteamHelper.IsDLCOwned(SteamHelper.DLC.NaturalDisastersDLC))
+                    {
+                        ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
+                    }
                     ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
                     ToggleUIComponent("RadioPanel", ModConfig.Instance.RadioButton);
                     ToggleUIComponent("Esc", ModConfig.Instance.GearButton);

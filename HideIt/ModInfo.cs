@@ -215,12 +215,15 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.DisastersButton;
-            group.AddCheckbox("Disasters Button", selected, sel =>
+            if (SteamHelper.IsDLCOwned(SteamHelper.DLC.NaturalDisastersDLC))
             {
-                ModConfig.Instance.DisastersButton = sel;
-                ModConfig.Instance.Save();
-            });
+                selected = ModConfig.Instance.DisastersButton;
+                group.AddCheckbox("Disasters Button", selected, sel =>
+                {
+                    ModConfig.Instance.DisastersButton = sel;
+                    ModConfig.Instance.Save();
+                });
+            }
 
             selected = ModConfig.Instance.ChirperButton;
             group.AddCheckbox("Chirper Button", selected, sel =>
