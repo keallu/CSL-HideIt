@@ -136,6 +136,8 @@ namespace HideIt
                     ToggleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
                     ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
                     ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
+                    ToggleUIComponent("PanelTime", ModConfig.Instance.TimePanel);
+                    ToggleAmbiguousUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
                     ToggleBuildingProps(
                         ModConfig.Instance.Flags,
                         ModConfig.Instance.Ads,
@@ -478,6 +480,25 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] Hider:ToggleUIComponent -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleAmbiguousUIComponent(string name, string parentName, bool disable)
+        {
+            try
+            {
+                UIComponent parent = GameObject.Find(parentName).GetComponent<UIComponent>();
+
+                UIComponent component = parent.Find(name).GetComponent<UIComponent>();
+
+                if (component != null)
+                {
+                    component.isVisible = !disable;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] Hider:ToggleAmbiguousUIComponent -> Exception: " + e.Message);
             }
         }
 

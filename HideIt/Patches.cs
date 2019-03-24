@@ -31,9 +31,9 @@ namespace HideIt
                 if (__instance.m_freeCamera != m_cachedFreeCamera)
                 {
                     m_cachedFreeCamera = __instance.m_freeCamera;
-                    Singleton<NotificationManager>.instance.NotificationsVisible = !ModConfig.Instance.NotificationIcons;
-                    Singleton<GameAreaManager>.instance.BordersVisible = !ModConfig.Instance.LineBorders;
-                    Singleton<DistrictManager>.instance.NamesVisible = !ModConfig.Instance.DistrictNames;
+                    Singleton<NotificationManager>.instance.NotificationsVisible = __instance.m_freeCamera ? false : !ModConfig.Instance.NotificationIcons;
+                    Singleton<GameAreaManager>.instance.BordersVisible = __instance.m_freeCamera ? false : !ModConfig.Instance.LineBorders;
+                    Singleton<DistrictManager>.instance.NamesVisible = __instance.m_freeCamera ? false : !ModConfig.Instance.DistrictNames;
                 }
             }
             catch (Exception e)

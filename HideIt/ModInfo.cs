@@ -206,7 +206,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            group = helper.AddGroup("Buttons");
+            group = helper.AddGroup("Buttons, Panels and Backgrounds");
 
             selected = ModConfig.Instance.InfoViewsButton;
             group.AddCheckbox("Info Views Button", selected, sel =>
@@ -285,6 +285,20 @@ namespace HideIt
             group.AddCheckbox("Free Camera Button", selected, sel =>
             {
                 ModConfig.Instance.FreeCameraButton = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TimePanel;
+            group.AddCheckbox("Time Panel", selected, sel =>
+            {
+                ModConfig.Instance.TimePanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.ZoomAndUnlockBackground;
+            group.AddCheckbox("Zoom and Unlock Background", selected, sel =>
+            {
+                ModConfig.Instance.ZoomAndUnlockBackground = sel;
                 ModConfig.Instance.Save();
             });
 

@@ -36,6 +36,8 @@
         public bool BulldozerButton { get; set; }
         public bool CinematicCameraButton { get; set; }
         public bool FreeCameraButton { get; set; }
+        public bool TimePanel { get; set; }
+        public bool ZoomAndUnlockBackground { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
         public bool Flags { get; set; }

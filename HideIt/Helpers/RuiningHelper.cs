@@ -17,17 +17,20 @@ namespace HideIt
                 float maxX;
                 float maxZ;
 
-                foreach (TreeInstance treeInstance in treeInstances)
+                if (treeInstances != null)
                 {
-                    if ((treeInstance.m_flags & 1) == 1 && (treeInstance.m_flags & 4) == 0 && treeInstance.Info != null)
+                    foreach (TreeInstance treeInstance in treeInstances)
                     {
-                        treeInstance.Info.m_createRuining = !disableRuining;
+                        if ((treeInstance.m_flags & 1) == 1 && (treeInstance.m_flags & 4) == 0 && treeInstance.Info != null && treeInstance.Position != null)
+                        {
+                            treeInstance.Info.m_createRuining = !disableRuining;
 
-                        minX = treeInstance.Position.x - 4f;
-                        minZ = treeInstance.Position.z - 4f;
-                        maxX = treeInstance.Position.x + 4f;
-                        maxZ = treeInstance.Position.z + 4f;
-                        TerrainModify.UpdateArea(minX, minZ, maxX, maxZ, heights: false, surface: true, zones: false);
+                            minX = treeInstance.Position.x - 4f;
+                            minZ = treeInstance.Position.z - 4f;
+                            maxX = treeInstance.Position.x + 4f;
+                            maxZ = treeInstance.Position.z + 4f;
+                            TerrainModify.UpdateArea(minX, minZ, maxX, maxZ, heights: false, surface: true, zones: false);
+                        }
                     }
                 }
             }
@@ -48,17 +51,20 @@ namespace HideIt
                 float maxX;
                 float maxZ;
 
-                foreach (PropInstance propInstance in propInstances)
+                if (propInstances != null)
                 {
-                    if ((propInstance.m_flags & 1) == 1 && (propInstance.m_flags & 4) == 0 && propInstance.Info != null)
+                    foreach (PropInstance propInstance in propInstances)
                     {
-                        propInstance.Info.m_createRuining = !disableRuining;
+                        if ((propInstance.m_flags & 1) == 1 && (propInstance.m_flags & 4) == 0 && propInstance.Info != null && propInstance.Position != null)
+                        {
+                            propInstance.Info.m_createRuining = !disableRuining;
 
-                        minX = propInstance.Position.x - 4.5f;
-                        minZ = propInstance.Position.z - 4.5f;
-                        maxX = propInstance.Position.x + 4.5f;
-                        maxZ = propInstance.Position.z + 4.5f;
-                        TerrainModify.UpdateArea(minX, minZ, maxX, maxZ, heights: false, surface: true, zones: false);
+                            minX = propInstance.Position.x - 4.5f;
+                            minZ = propInstance.Position.z - 4.5f;
+                            maxX = propInstance.Position.x + 4.5f;
+                            maxZ = propInstance.Position.z + 4.5f;
+                            TerrainModify.UpdateArea(minX, minZ, maxX, maxZ, heights: false, surface: true, zones: false);
+                        }
                     }
                 }
             }
