@@ -246,7 +246,7 @@ namespace HideIt
             {
                 int probability;
 
-                if (buildingInfo != null)
+                if (buildingInfo != null && buildingInfo.m_props != null)
                 {
                     foreach (BuildingInfo.Prop prop in buildingInfo.m_props)
                     {

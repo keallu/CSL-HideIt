@@ -64,6 +64,54 @@ namespace HideIt
         }
     }
 
+    [HarmonyPatch(typeof(TutorialAdvisorPanel), "Show", new Type[] { typeof(string), typeof(string), typeof(string), typeof(float), typeof(bool), typeof(bool) })]
+    public static class TutorialAdvisorPanelShowPatch
+    {
+        static bool Prefix()
+        {
+            try
+            {
+                if (ModConfig.Instance.AdvisorButton)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] TutorialAdvisorPanelShowPatch:Prefix -> Exception: " + e.Message);
+                return true;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(UnlockingPanel), "ShowModal")]
+    public static class UnlockingPanelShowModalPatch
+    {
+        static bool Prefix()
+        {
+            try
+            {
+                if (ModConfig.Instance.CongratulationPanel)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] UnlockingPanelShowModalPatch:Prefix -> Exception: " + e.Message);
+                return true;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(CargoHarborAI), "CountAnimals")]
     public static class CargoHarborAICountAnimalsPatch
     {

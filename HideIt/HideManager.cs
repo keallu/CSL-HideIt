@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HideIt
 {
-    class Hider : MonoBehaviour
+    public class HideManager : MonoBehaviour
     {
         private bool _initialized;
 
@@ -37,31 +37,7 @@ namespace HideIt
         private float _defaultFogDensity;
         private float _defaultColorDecay;
 
-        private void Awake()
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:Awake -> Exception: " + e.Message);
-            }
-        }
-
-        private void OnEnable()
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:OnEnable -> Exception: " + e.Message);
-            }
-        }
-
-        private void Start()
+        public void Start()
         {
             try
             {
@@ -94,11 +70,11 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:Start -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:Start -> Exception: " + e.Message);
             }
         }
 
-        private void Update()
+        public void Update()
         {
             try
             {
@@ -108,7 +84,6 @@ namespace HideIt
                     ToggleDistrictNames(ModConfig.Instance.DistrictNames);
                     ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
                     ToggleLineBorders(ModConfig.Instance.LineBorders);
-                    ToggleCameraBorders(ModConfig.Instance.CameraBorders);
                     ToggleToolColor(
                         ModConfig.Instance.ValidColor,
                         ModConfig.Instance.WarningColor,
@@ -208,15 +183,15 @@ namespace HideIt
 
                     if (ModConfig.Instance.Seagulls)
                     {
-                        HiderUtils.RefreshSeagulls();
+                        HideUtils.RefreshSeagulls();
                     }
 
                     if (ModConfig.Instance.Wildlife)
                     {
-                        HiderUtils.RefreshWildlife();
+                        HideUtils.RefreshWildlife();
                     }
 
-                    HiderUtils.RefreshTexture();
+                    HideUtils.RefreshTexture();
 
                     _initialized = true;
                     ModConfig.Instance.ConfigUpdated = false;
@@ -243,31 +218,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:Update -> Exception: " + e.Message);
-            }
-        }
-
-        private void OnDisable()
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:OnDisable -> Exception: " + e.Message);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:OnDestroy -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:Update -> Exception: " + e.Message);
             }
         }
 
@@ -293,10 +244,6 @@ namespace HideIt
                         ModConfig.Instance.LineBorders = !ModConfig.Instance.LineBorders;
                         ToggleLineBorders(ModConfig.Instance.LineBorders);
                         break;
-                    case "Camera Borders":
-                        ModConfig.Instance.CameraBorders = !ModConfig.Instance.CameraBorders;
-                        ToggleCameraBorders(ModConfig.Instance.CameraBorders);
-                        break;
                     case "Tool Colors":
                         ModConfig.Instance.ValidColor = !ModConfig.Instance.ValidColor;
                         ModConfig.Instance.WarningColor = !ModConfig.Instance.WarningColor;
@@ -321,7 +268,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:SelectToggle -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:SelectToggle -> Exception: " + e.Message);
             }
         }
 
@@ -333,7 +280,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleNotificationIcons -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleNotificationIcons -> Exception: " + e.Message);
             }
         }
 
@@ -345,7 +292,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleDistrictNames -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleDistrictNames -> Exception: " + e.Message);
             }
         }
 
@@ -369,7 +316,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleDistrictIcons -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleDistrictIcons -> Exception: " + e.Message);
             }
         }
 
@@ -381,24 +328,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleLineBorders -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleCameraBorders(bool disableCameraBorders)
-        {
-            try
-            {
-                CameraController cameraController = Camera.main.GetComponent<CameraController>();
-
-                if (cameraController != null)
-                {
-                    cameraController.m_unlimitedCamera = disableCameraBorders;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] Hider:ToggleCameraBorders -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleLineBorders -> Exception: " + e.Message);
             }
         }
 
@@ -430,7 +360,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleToolColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleToolColor -> Exception: " + e.Message);
             }
         }
 
@@ -462,7 +392,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleMoveItColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleMoveItColor -> Exception: " + e.Message);
             }
         }
 
@@ -479,7 +409,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -498,7 +428,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleAmbiguousUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleAmbiguousUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -537,7 +467,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleBuildingProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleBuildingProps -> Exception: " + e.Message);
             }
         }
 
@@ -577,7 +507,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleNetProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleNetProps -> Exception: " + e.Message);
             }
         }
 
@@ -618,7 +548,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleDecorations -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleDecorations -> Exception: " + e.Message);
             }
         }
 
@@ -652,7 +582,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleRuining -> Exception: " + e.Message);
             }
         }
 
@@ -670,7 +600,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleGroundColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleGroundColor -> Exception: " + e.Message);
             }
         }
 
@@ -682,7 +612,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleWaterColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleWaterColor -> Exception: " + e.Message);
             }
         }
 
@@ -700,7 +630,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] Hider:ToggleFogEffects -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleFogEffects -> Exception: " + e.Message);
             }
         }
     }

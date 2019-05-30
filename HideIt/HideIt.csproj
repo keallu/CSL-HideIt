@@ -62,8 +62,8 @@
     <Compile Include="Helpers\NetPropsHelper.cs" />
     <Compile Include="Helpers\RuiningHelper.cs" />
     <Compile Include="Managers\InfoViewManager.cs" />
-    <Compile Include="Hider.cs" />
-    <Compile Include="HiderUtils.cs" />
+    <Compile Include="HideManager.cs" />
+    <Compile Include="HideUtils.cs" />
     <Compile Include="Loading.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="ModInfo.cs" />

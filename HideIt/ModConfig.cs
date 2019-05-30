@@ -12,7 +12,6 @@
         public bool DistrictNames { get; set; }
         public bool DistrictIcons { get; set; }
         public bool LineBorders { get; set; }
-        public bool CameraBorders { get; set; }
         public bool ValidColor { get; set; }
         public bool WarningColor { get; set; }
         public bool ErrorColor { get; set; }
@@ -36,6 +35,8 @@
         public bool BulldozerButton { get; set; }
         public bool CinematicCameraButton { get; set; }
         public bool FreeCameraButton { get; set; }
+        public bool CongratulationPanel { get; set; }
+        public bool AdvisorPanel { get; set; }
         public bool TimePanel { get; set; }
         public bool ZoomAndUnlockBackground { get; set; }
         public bool Seagulls { get; set; }

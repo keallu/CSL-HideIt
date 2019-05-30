@@ -28,7 +28,6 @@ namespace HideIt
             "District Names",
             "District Icons",
             "Line Borders",
-            "Camera Borders",
             "Tool Colors",
             "Move It! Tool Colors"
         };
@@ -39,7 +38,6 @@ namespace HideIt
             "District Names",
             "District Icons",
             "Line Borders",
-            "Camera Borders",
             "Tool Colors",
             "Move It! Tool Colors"
         };
@@ -110,13 +108,6 @@ namespace HideIt
             group.AddCheckbox("Line Borders", selected, sel =>
             {
                 ModConfig.Instance.LineBorders = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.CameraBorders;
-            group.AddCheckbox("Camera Borders", selected, sel =>
-            {
-                ModConfig.Instance.CameraBorders = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -285,6 +276,20 @@ namespace HideIt
             group.AddCheckbox("Free Camera Button", selected, sel =>
             {
                 ModConfig.Instance.FreeCameraButton = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.CongratulationPanel;
+            group.AddCheckbox("Congratulation Panel", selected, sel =>
+            {
+                ModConfig.Instance.CongratulationPanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AdvisorPanel;
+            group.AddCheckbox("Advisor Panel", selected, sel =>
+            {
+                ModConfig.Instance.AdvisorPanel = sel;
                 ModConfig.Instance.Save();
             });
 

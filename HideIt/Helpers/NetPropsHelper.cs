@@ -110,11 +110,11 @@ namespace HideIt
             {
                 int probability;
 
-                if (netInfo != null)
+                if (netInfo != null && netInfo.m_lanes != null)
                 {
                     foreach (NetInfo.Lane lane in netInfo.m_lanes)
                     {
-                        if (lane?.m_laneProps != null)
+                        if (lane?.m_laneProps != null && lane.m_laneProps.m_props != null)
                         {
                             foreach (NetLaneProps.Prop laneProp in lane.m_laneProps.m_props)
                             {
