@@ -44,7 +44,8 @@ namespace HideIt
             "Octopus",
             "Rotating_morelloscone",
             "Rotating_squirrel",
-            "billboard02",
+            "Billboard Large Variation 01",
+            "Billboard Medium Variation 01",
             "Billboard_3D_variation",
             "Billboard_big_bigbite",
             "billboard_big_Fallout",
@@ -93,6 +94,7 @@ namespace HideIt
             "Billboard_small_variation_01",
             "Billboard_small_variation_02",
             "Billboard_small_variation_03",
+            "billboard02",
             "Hightech Industrial Medium Billboard Random",
             "Hightech Industrial Small Billboard 01",
             "Hightech Industrial Small Billboard 02",
@@ -163,17 +165,23 @@ namespace HideIt
             "Logo_sunnygrain",
             "logo_thelawaccounting",
             "logo_tyrell",
-            "Logo_williams" };
+            "Logo_williams",
+            "Random Commercial 1 Sign Long",
+            "Random Commercial 2 Logo",
+            "Random Commercial 2 Logo Cramburgers",
+            "Random Commercial 2 Logo State City Insurance",
+            "Random Commercial 3 Logo Other" };
 
         public static readonly string[] SMOKE = { "Factory Smoke", "Factory Smoke Small" };
         public static readonly string STEAM = "Factory Steam";
         public static readonly string[] SOLAR_PANELS = { "Horizontal Solar Panel 01", "Horizontal Solar Panel 02", "Solar panel 01", "Solar panel 02", "Solar panel 03" };
         public static readonly string[] HVAC_SYSTEMS = { "Ac box 01", "Ac box 02", "Ac box 03", "Ac box random", "Air Source Heat Pump 01", "Air Source Heat Pump 02", "Rotating ac", "Ventilation Pipe 01", "Ventilation Pipe 02" };
         public static readonly string[] PARKING_SPACES = { "Invisible Parking Space", "Parking Space", "Parking Space Electric", "Parking Spaces 01", "Parking Spaces 02" };
+        public static readonly string[] ABANDONED_CARS = { "Abandoned Car 01", "Abandoned Car 02" };
         public static readonly string[] CARGO_CONTAINERS = { "Cargo container", "Cargo container - disaster response unit" };
         public static readonly string[] GARBAGE_CONTAINERS = { "Large Recycling Container 01", "Large Recycling Container 02", "Small Recycling Container 01", "Small Recycling Container 02", "Small Recycling Container 03", "Trash container 01" };
         public static readonly string[] GARBAGE_BINS_AND_CANS = { "Garbage Bin", "Park Trashbin 01", "Park Trashbin 02", "TrashCan01", "TrashCan02" };
-        public static readonly string GARBAGE_PILES =  "Trashpile";
+        public static readonly string GARBAGE_PILES = "Trashpile";
         public static readonly string[] TANKS = { "Tank 01", "Tank 02", "Tank 03", "Tank 04" };
         public static readonly string[] BARRELS = { "Barrel 01", "Barrel 02", "Barrel 03", "Barrel 04", "Barrels" };
         public static readonly string[] PALLETS = { "Barrel Pallet 01", "Barrel Pallet 02", "Barrel Pallet 03", "Pallet 01", "Pallet 02", "Pallet 03", "Pallet 04" };
@@ -181,7 +189,7 @@ namespace HideIt
         public static readonly string[] PLANKS = { "Plank pile", "Plank stack" };
         public static readonly string[] CABLE_REELS = { "Cable reel 01", "Cable reel 02" };
         public static readonly string[] HEDGES = { "hedge", "hedge2", "Hedge 01", "Hedge 02" };
-        public static readonly string[] FENCES = { "Amusement Park Fence Queue", "Amusement Park Fence Small 8m", "Amusement Park Fence Small 16m", "Antelope Enclosure Fence 8m", "Antelope Enclosure Fence 16m", "Antelope Enclosure Fence Corner", "Bison Enclosure Fence 8m", "Chainlink Fence 8m", "Chainlink Fence 16m", "industrial_fence", "Modern Fence 01", "Modern Fence 02", "Prison fence", "Prison fence long", "Riding Stable Fence Long", "Riding Stable Fence Short" };
+        public static readonly string[] FENCES = { "Amusement Park Fence Queue", "Amusement Park Fence Small 8m", "Amusement Park Fence Small 16m", "Antelope Enclosure Fence 8m", "Antelope Enclosure Fence 16m", "Antelope Enclosure Fence Corner", "Bison Enclosure Fence 8m", "Chainlink Fence 8m", "Chainlink Fence 16m", "industrial_fence", "Modern Fence 01", "Modern Fence 02", "Prison fence", "Prison fence long", "Riding Stable Fence Long", "Riding Stable Fence Short", "Arena Fence 01" };
         public static readonly string[] GATES = { "Antelope Enclosure Gate", "Chainlink Fence Gate", "industrial_gate" };
 
         private static readonly List<string> PROBABILITY77 = new List<string>() { "flag_pole", "flag_pole_wall", "Solar panel 01", "Solar panel 02", "Solar panel 03", "Ac box random" };

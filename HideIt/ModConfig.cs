@@ -51,6 +51,7 @@
         public bool SolarPanels { get; set; }
         public bool HvacSystems { get; set; }
         public bool ParkingSpaces { get; set; }
+        public bool AbandonedCars { get; set; }
         public bool CargoContainers { get; set; }
         public bool GarbageContainers { get; set; }
         public bool GarbageBinsAndCans { get; set; }

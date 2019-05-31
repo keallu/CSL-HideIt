@@ -124,6 +124,7 @@ namespace HideIt
                         ModConfig.Instance.SolarPanels,
                         ModConfig.Instance.HvacSystems,
                         ModConfig.Instance.ParkingSpaces,
+                        ModConfig.Instance.AbandonedCars,
                         ModConfig.Instance.CargoContainers,
                         ModConfig.Instance.GarbageContainers,
                         ModConfig.Instance.GarbageBinsAndCans,
@@ -432,7 +433,7 @@ namespace HideIt
             }
         }
 
-        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems, bool disableParkingSpaces, bool disableCargoContainers, bool disableGarbageContainers, bool disableGarbageBinsAndCans, bool disableGarbagePiles, bool disableTanks, bool disableBarrels, bool disablePallets, bool disableCrates, bool disablePlanks, bool disableCableReels, bool disableHedges, bool disableFences, bool disableGates)
+        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems, bool disableParkingSpaces, bool disableAbandonedCars, bool disableCargoContainers, bool disableGarbageContainers, bool disableGarbageBinsAndCans, bool disableGarbagePiles, bool disableTanks, bool disableBarrels, bool disablePallets, bool disableCrates, bool disablePlanks, bool disableCableReels, bool disableHedges, bool disableFences, bool disableGates)
         {
             try
             {
@@ -449,6 +450,7 @@ namespace HideIt
                 AddProps(disableSolarPanels, BuildingPropsHelper.SOLAR_PANELS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableHvacSystems, BuildingPropsHelper.HVAC_SYSTEMS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableParkingSpaces, BuildingPropsHelper.PARKING_SPACES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableAbandonedCars, BuildingPropsHelper.ABANDONED_CARS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableCargoContainers, BuildingPropsHelper.CARGO_CONTAINERS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableGarbageContainers, BuildingPropsHelper.GARBAGE_CONTAINERS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableGarbageBinsAndCans, BuildingPropsHelper.GARBAGE_BINS_AND_CANS, ref enablePropNames, ref disablePropNames);

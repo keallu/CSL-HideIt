@@ -393,6 +393,13 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.AbandonedCars;
+            group.AddCheckbox("Abandoned Cars", selected, sel =>
+            {
+                ModConfig.Instance.AbandonedCars = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.CargoContainers;
             group.AddCheckbox("Cargo Containers", selected, sel =>
             {
@@ -841,25 +848,6 @@ namespace HideIt
             {
                 ModConfig.Instance.EdgeFog = sel;
                 ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Export list of props");
-
-            selected = ModConfig.Instance.ExportIncludeOnlyPropsWithEffects;
-            group.AddCheckbox("Include only props with effects", selected, sel =>
-            {
-                ModConfig.Instance.ExportIncludeOnlyPropsWithEffects = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group.AddButton("Buildings", () =>
-            {
-                ExportUtils.ExportBuildingInfoWithPropsToFile("BuildingInfoWithProps", true, ModConfig.Instance.ExportIncludeOnlyPropsWithEffects);
-            });
-
-            group.AddButton("Networks", () =>
-            {
-                ExportUtils.ExportNetInfoWithLanePropsToFile("NetInfoWithLaneProps", true, ModConfig.Instance.ExportIncludeOnlyPropsWithEffects);
             });
         }
 
