@@ -1,5 +1,4 @@
-﻿using ColossalFramework;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace HideIt
@@ -40,8 +39,6 @@ namespace HideIt
                                 Shader.SetGlobalTexture("_NaturalDestruction", NaturalResourceManager.instance.m_destructionTexture);
                             }
                         }
-
-                        Singleton<NotificationManager>.instance.NotificationsVisible = !ModConfig.Instance.NotificationIcons;
                     }
                     else
                     {
@@ -53,8 +50,6 @@ namespace HideIt
                         {
                             Shader.SetGlobalTexture("_NaturalDestruction", InfoViewDestructionTexture);
                         }
-
-                        Singleton<NotificationManager>.instance.NotificationsVisible = true;
                     }
 
                     _cachedInfoMode = InfoManager.instance.CurrentMode;

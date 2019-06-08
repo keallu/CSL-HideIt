@@ -1,8 +1,6 @@
-﻿using ColossalFramework;
-using ColossalFramework.UI;
+﻿using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace HideIt
@@ -11,19 +9,6 @@ namespace HideIt
     {
         private bool _initialized;
 
-        private UITextureAtlas _defaultIngameTextureAtlas;
-        private Color _defaultValidColor;
-        private Color _defaultWarningColor;
-        private Color _defaultErrorColor;
-        private Color _defaultMoveItHoverColor;        
-        private Color _defaultMoveItSelectedColor;
-        private Color _defaultMoveItMoveColor;
-        private Color _defaultMoveItRemoveColor;
-        private Color _defaultMoveItDespawnColor;
-        private Color _defaultMoveItAlignColor;
-        private Color _defaultMoveItPOHoverColor;
-        private Color _defaultMoveItPOSelectedColor;
-        private Color _defaultMoveItPODisabledColor;
         private TerrainProperties _terrainProperties;
         private Vector3 _noColorOffset;
         private Vector3 _defaultGrassFertilityColorOffset;
@@ -41,14 +26,6 @@ namespace HideIt
         {
             try
             {
-                _defaultIngameTextureAtlas = Singleton<DistrictManager>.instance.m_properties.m_areaIconAtlas;
-
-                ToolController toolController = ToolsModifierControl.toolController;
-
-                _defaultValidColor = toolController.m_validColor;
-                _defaultWarningColor = toolController.m_warningColor;
-                _defaultErrorColor = toolController.m_errorColor;
-
                 _terrainProperties = FindObjectOfType<TerrainProperties>();
 
                 _noColorOffset = new Vector3(0f, 0f, 0f);
@@ -80,39 +57,24 @@ namespace HideIt
             {
                 if (!_initialized || ModConfig.Instance.ConfigUpdated)
                 {
-                    ToggleNotificationIcons(ModConfig.Instance.NotificationIcons);
-                    ToggleDistrictNames(ModConfig.Instance.DistrictNames);
-                    ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
-                    ToggleLineBorders(ModConfig.Instance.LineBorders);
-                    ToggleToolColor(
-                        ModConfig.Instance.ValidColor,
-                        ModConfig.Instance.WarningColor,
-                        ModConfig.Instance.ErrorColor,
-                        ModConfig.Instance.MoveItHoverColor,
-                        ModConfig.Instance.MoveItSelectedColor,
-                        ModConfig.Instance.MoveItMoveColor,
-                        ModConfig.Instance.MoveItRemoveColor,
-                        ModConfig.Instance.MoveItDespawnColor,
-                        ModConfig.Instance.MoveItAlignColor,
-                        ModConfig.Instance.MoveItPOHoverColor,
-                        ModConfig.Instance.MoveItPOSelectedColor,
-                        ModConfig.Instance.MoveItPODisabledColor);
-                    ToggleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
+                    ToggleSingleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     if (SteamHelper.IsDLCOwned(SteamHelper.DLC.NaturalDisastersDLC))
                     {
-                        ToggleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
+                        ToggleSingleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     }
-                    ToggleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
-                    ToggleUIComponent("RadioPanel", ModConfig.Instance.RadioButton);
-                    ToggleUIComponent("Esc", ModConfig.Instance.GearButton);
-                    ToggleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
-                    ToggleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
-                    ToggleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
-                    ToggleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
-                    ToggleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
-                    ToggleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
-                    ToggleUIComponent("PanelTime", ModConfig.Instance.TimePanel);
-                    ToggleAmbiguousUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
+                    ToggleSingleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
+                    ToggleSingleUIComponent("RadioPanel", ModConfig.Instance.RadioButton);
+                    ToggleSingleUIComponent("Esc", ModConfig.Instance.GearButton);
+                    ToggleSingleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
+                    ToggleSingleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
+                    ToggleSingleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
+                    ToggleSingleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
+                    ToggleSingleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
+                    ToggleSingleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
+                    ToggleSingleUIComponent("PanelTime", ModConfig.Instance.TimePanel);
+                    ToggleSingleUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
+                    ToggleMultipleUIComponents("Separator", "MainToolstrip", ModConfig.Instance.Separators);
+                    ToggleMultipleUIComponents("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
                     ToggleBuildingProps(
                         ModConfig.Instance.Flags,
                         ModConfig.Instance.Ads,
@@ -200,22 +162,6 @@ namespace HideIt
 
                 InfoViewManager.Instance.UpdateInfoView();
 
-                if (ModConfig.Instance.KeymappingsEnabled)
-                {
-                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.H))
-                    {
-                        SelectToggle(ModConfig.Instance.Keymapping1);
-                    }
-                    else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.I))
-                    {
-                        SelectToggle(ModConfig.Instance.Keymapping2);
-                    }
-                    else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.J))
-                    {
-                        SelectToggle(ModConfig.Instance.Keymapping3);
-                    }
-                }
-
             }
             catch (Exception e)
             {
@@ -223,181 +169,7 @@ namespace HideIt
             }
         }
 
-        private void SelectToggle(string keymapping)
-        {
-            try
-            {
-                switch (keymapping)
-                {
-                    case "Notification Icons":
-                        ModConfig.Instance.NotificationIcons = !ModConfig.Instance.NotificationIcons;
-                        ToggleNotificationIcons(ModConfig.Instance.NotificationIcons);
-                        break;
-                    case "District Names":
-                        ModConfig.Instance.DistrictNames = !ModConfig.Instance.DistrictNames;
-                        ToggleDistrictNames(ModConfig.Instance.DistrictNames);
-                        break;
-                    case "District Icons":
-                        ModConfig.Instance.DistrictIcons = !ModConfig.Instance.DistrictIcons;
-                        ToggleDistrictIcons(ModConfig.Instance.DistrictIcons);
-                        break;
-                    case "Line Borders":
-                        ModConfig.Instance.LineBorders = !ModConfig.Instance.LineBorders;
-                        ToggleLineBorders(ModConfig.Instance.LineBorders);
-                        break;
-                    case "Tool Colors":
-                        ModConfig.Instance.ValidColor = !ModConfig.Instance.ValidColor;
-                        ModConfig.Instance.WarningColor = !ModConfig.Instance.WarningColor;
-                        ModConfig.Instance.ErrorColor = !ModConfig.Instance.ErrorColor;
-                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor, ModConfig.Instance.MoveItPOHoverColor, ModConfig.Instance.MoveItPOSelectedColor, ModConfig.Instance.MoveItPODisabledColor);
-                        break;
-                    case "Move It! Tool Colors":
-                        ModConfig.Instance.MoveItHoverColor = !ModConfig.Instance.MoveItHoverColor;
-                        ModConfig.Instance.MoveItSelectedColor = !ModConfig.Instance.MoveItSelectedColor;
-                        ModConfig.Instance.MoveItMoveColor = !ModConfig.Instance.MoveItMoveColor;
-                        ModConfig.Instance.MoveItRemoveColor = !ModConfig.Instance.MoveItRemoveColor;
-                        ModConfig.Instance.MoveItDespawnColor = !ModConfig.Instance.MoveItDespawnColor;
-                        ModConfig.Instance.MoveItAlignColor = !ModConfig.Instance.MoveItAlignColor;
-                        ModConfig.Instance.MoveItPOHoverColor = !ModConfig.Instance.MoveItPOHoverColor;
-                        ModConfig.Instance.MoveItPOSelectedColor = !ModConfig.Instance.MoveItPOSelectedColor;
-                        ModConfig.Instance.MoveItPODisabledColor = !ModConfig.Instance.MoveItPODisabledColor;
-                        ToggleToolColor(ModConfig.Instance.ValidColor, ModConfig.Instance.WarningColor, ModConfig.Instance.ErrorColor, ModConfig.Instance.MoveItHoverColor, ModConfig.Instance.MoveItSelectedColor, ModConfig.Instance.MoveItMoveColor, ModConfig.Instance.MoveItRemoveColor, ModConfig.Instance.MoveItDespawnColor, ModConfig.Instance.MoveItAlignColor, ModConfig.Instance.MoveItPOHoverColor, ModConfig.Instance.MoveItPOSelectedColor, ModConfig.Instance.MoveItPODisabledColor);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:SelectToggle -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleNotificationIcons(bool disableNotificationIcons)
-        {
-            try
-            {
-                Singleton<NotificationManager>.instance.NotificationsVisible = !disableNotificationIcons;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleNotificationIcons -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleDistrictNames(bool disableDistrictNames)
-        {
-            try
-            {
-                Singleton<DistrictManager>.instance.NamesVisible = !disableDistrictNames;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleDistrictNames -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleDistrictIcons(bool disableDistrictIcons)
-        {
-            try
-            {
-                DistrictManager districtManager = Singleton<DistrictManager>.instance;
-
-                if (disableDistrictIcons)
-                {
-                    districtManager.m_properties.m_areaIconAtlas = null;
-                }
-                else
-                {
-                    districtManager.m_properties.m_areaIconAtlas = _defaultIngameTextureAtlas;
-                }
-
-                districtManager.NamesModified();
-                districtManager.ParkNamesModified();
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleDistrictIcons -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleLineBorders(bool disableLineBorders)
-        {
-            try
-            {
-                Singleton<GameAreaManager>.instance.BordersVisible = !disableLineBorders;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleLineBorders -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleToolColor(bool disableValidColor, bool disableWarningColor, bool disableErrorColor, bool disableMoveItHoverColor, bool disableMoveItSelectedColor, bool disableMoveItMoveColor, bool disableMoveItRemoveColor, bool disableMoveItDespawnColor, bool disableMoveItAlignColor, bool disableMoveItPOHoverColor, bool disableMoveItPOSelectedColor, bool disableMoveItPODisabledColor)
-        {
-            try
-            {
-                ToolController toolController = ToolsModifierControl.toolController;
-
-                if (toolController != null)
-                {
-                    toolController.m_validColor.a = disableValidColor ? 0f : _defaultValidColor.a;
-                    toolController.m_warningColor.a = disableWarningColor ? 0f : _defaultWarningColor.a;
-                    toolController.m_errorColor.a = disableErrorColor ? 0f : _defaultErrorColor.a;
-                }
-
-                if (ModUtils.IsModEnabled("moveit"))
-                {
-                    ToggleMoveItColor(disableMoveItHoverColor, "m_hoverColor", ref _defaultMoveItHoverColor);
-                    ToggleMoveItColor(disableMoveItSelectedColor, "m_selectedColor", ref _defaultMoveItSelectedColor);
-                    ToggleMoveItColor(disableMoveItMoveColor, "m_moveColor", ref _defaultMoveItMoveColor);
-                    ToggleMoveItColor(disableMoveItRemoveColor, "m_removeColor", ref _defaultMoveItRemoveColor);
-                    ToggleMoveItColor(disableMoveItDespawnColor, "m_despawnColor", ref _defaultMoveItDespawnColor);
-                    ToggleMoveItColor(disableMoveItAlignColor, "m_alignColor", ref _defaultMoveItAlignColor);
-                    ToggleMoveItColor(disableMoveItPOHoverColor, "m_POhoverColor", ref _defaultMoveItPOHoverColor);
-                    ToggleMoveItColor(disableMoveItPOSelectedColor, "m_POselectedColor", ref _defaultMoveItPOSelectedColor);
-                    ToggleMoveItColor(disableMoveItPODisabledColor, "m_POdisabledColor", ref _defaultMoveItPODisabledColor);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleToolColor -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleMoveItColor(bool disable, string colorName, ref Color defaultColor)
-        {
-            try
-            {
-                FieldInfo fieldInfo;
-                Color color;
-
-                fieldInfo = Type.GetType("MoveIt.MoveItTool, MoveIt").GetField(colorName, BindingFlags.NonPublic | BindingFlags.Static);
-
-                if (fieldInfo != null)
-                {
-                    if (defaultColor.r == 0f && defaultColor.g == 0f && defaultColor.b == 0f && defaultColor.a == 0f)
-                    {
-                        defaultColor = (Color)fieldInfo.GetValue(null);
-                    }
-
-                    color = new Color()
-                    {
-                        r = defaultColor.r,
-                        g = defaultColor.g,
-                        b = defaultColor.b,
-                        a = disable ? 0f : defaultColor.a
-                    };
-                    fieldInfo.SetValue(null, color);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] HideManager:ToggleMoveItColor -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleUIComponent(string name, bool disable)
+        private void ToggleSingleUIComponent(string name, bool disable)
         {
             try
             {
@@ -410,26 +182,52 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleSingleUIComponent -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleAmbiguousUIComponent(string name, string parentName, bool disable)
+        private void ToggleSingleUIComponent(string name, string parentName, bool disable)
         {
             try
             {
                 UIComponent parent = GameObject.Find(parentName).GetComponent<UIComponent>();
 
-                UIComponent component = parent.Find(name).GetComponent<UIComponent>();
-
-                if (component != null)
+                if (parent != null)
                 {
-                    component.isVisible = !disable;
+                    UIComponent component = parent.Find(name).GetComponent<UIComponent>();
+
+                    if (component != null)
+                    {
+                        component.isVisible = !disable;
+                    }
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleAmbiguousUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] HideManager:ToggleSingleUIComponent -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleMultipleUIComponents(string name, string parentName, bool disable)
+        {
+            try
+            {
+                UIComponent parent = GameObject.Find(parentName).GetComponent<UIComponent>();
+
+                if (parent != null)
+                {
+                    foreach (UIComponent component in parent.components)
+                    {
+                        if (component.name.Equals(name))
+                        {
+                            component.isVisible = !disable;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] HideManager:ToggleMultipleUIComponents -> Exception: " + e.Message);
             }
         }
 

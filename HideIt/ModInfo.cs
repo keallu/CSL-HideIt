@@ -1,6 +1,5 @@
 ﻿using Harmony;
 using ICities;
-using System;
 using System.Reflection;
 
 namespace HideIt
@@ -22,182 +21,12 @@ namespace HideIt
             harmony.UnpatchAll();
         }
 
-        private static readonly string[] KeymappingLabels =
-        {
-            "Notification Icons",
-            "District Names",
-            "District Icons",
-            "Line Borders",
-            "Tool Colors",
-            "Move It! Tool Colors"
-        };
-
-        private static readonly string[] KeymappingValues =
-        {
-            "Notification Icons",
-            "District Names",
-            "District Icons",
-            "Line Borders",
-            "Tool Colors",
-            "Move It! Tool Colors"
-        };
-
         public void OnSettingsUI(UIHelperBase helper)
         {
             UIHelperBase group;
             bool selected;
-            int selectedIndex;
 
             group = helper.AddGroup(Name);
-
-            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping1);
-
-            group.AddDropdown("LEFT CTRL + H", KeymappingLabels, selectedIndex, sel =>
-            {
-                ModConfig.Instance.Keymapping1 = KeymappingValues[sel];
-                ModConfig.Instance.Save();
-            });
-
-            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping2);
-
-            group.AddDropdown("LEFT CTRL + I", KeymappingLabels, selectedIndex, sel =>
-            {
-                ModConfig.Instance.Keymapping2 = KeymappingValues[sel];
-                ModConfig.Instance.Save();
-            });
-
-            selectedIndex = GetSelectedOptionIndex(KeymappingValues, ModConfig.Instance.Keymapping3);
-
-            group.AddDropdown("LEFT CTRL + J", KeymappingLabels, selectedIndex, sel =>
-            {
-                ModConfig.Instance.Keymapping3 = KeymappingValues[sel];
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.KeymappingsEnabled;
-            group.AddCheckbox("Keymappings enabled", selected, sel =>
-            {
-                ModConfig.Instance.KeymappingsEnabled = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Gameplay");
-
-            selected = ModConfig.Instance.NotificationIcons;
-            group.AddCheckbox("Notification Icons", selected, sel =>
-            {
-                ModConfig.Instance.NotificationIcons = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.DistrictNames;
-            group.AddCheckbox("District Names", selected, sel =>
-            {
-                ModConfig.Instance.DistrictNames = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.DistrictIcons;
-            group.AddCheckbox("District Icons", selected, sel =>
-            {
-                ModConfig.Instance.DistrictIcons = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.LineBorders;
-            group.AddCheckbox("Line Borders", selected, sel =>
-            {
-                ModConfig.Instance.LineBorders = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Tool Colors");
-
-            selected = ModConfig.Instance.ValidColor;
-            group.AddCheckbox("Valid Color", selected, sel =>
-            {
-                ModConfig.Instance.ValidColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.WarningColor;
-            group.AddCheckbox("Warning Color", selected, sel =>
-            {
-                ModConfig.Instance.WarningColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.ErrorColor;
-            group.AddCheckbox("Error Color", selected, sel =>
-            {
-                ModConfig.Instance.ErrorColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItHoverColor;
-            group.AddCheckbox("Move It! Hover Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItHoverColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItSelectedColor;
-            group.AddCheckbox("Move It! Selected Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItSelectedColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItMoveColor;
-            group.AddCheckbox("Move It! Move Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItMoveColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItRemoveColor;
-            group.AddCheckbox("Move It! Remove Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItRemoveColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItDespawnColor;
-            group.AddCheckbox("Move It! Despawn Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItDespawnColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItAlignColor;
-            group.AddCheckbox("Move It! Align Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItAlignColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItPOHoverColor;
-            group.AddCheckbox("Move It! PO Hover Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItPOHoverColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItPOSelectedColor;
-            group.AddCheckbox("Move It! PO Selected Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItPOSelectedColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.MoveItPODisabledColor;
-            group.AddCheckbox("Move It! PO Disabled Color", selected, sel =>
-            {
-                ModConfig.Instance.MoveItPODisabledColor = sel;
-                ModConfig.Instance.Save();
-            });
-
-            group = helper.AddGroup("Buttons, Panels and Backgrounds");
 
             selected = ModConfig.Instance.InfoViewsButton;
             group.AddCheckbox("Info Views Button", selected, sel =>
@@ -304,6 +133,13 @@ namespace HideIt
             group.AddCheckbox("Zoom and Unlock Background", selected, sel =>
             {
                 ModConfig.Instance.ZoomAndUnlockBackground = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Separators;
+            group.AddCheckbox("Separators in Toolbar", selected, sel =>
+            {
+                ModConfig.Instance.Separators = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -849,14 +685,6 @@ namespace HideIt
                 ModConfig.Instance.EdgeFog = sel;
                 ModConfig.Instance.Save();
             });
-        }
-
-        private int GetSelectedOptionIndex(string[] option, string value)
-        {
-            int index = Array.IndexOf(option, value);
-            if (index < 0) index = 0;
-
-            return index;
         }
     }
 }

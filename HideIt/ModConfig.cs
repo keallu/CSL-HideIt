@@ -4,26 +4,6 @@
     public class ModConfig
     {
         public bool ConfigUpdated { get; set; }
-        public string Keymapping1 { get; set; } = "District Names";
-        public string Keymapping2 { get; set; } = "Tool Colors";
-        public string Keymapping3 { get; set; } = "Move It! Tool Colors";
-        public bool KeymappingsEnabled { get; set; } = true;
-        public bool NotificationIcons { get; set; }
-        public bool DistrictNames { get; set; }
-        public bool DistrictIcons { get; set; }
-        public bool LineBorders { get; set; }
-        public bool ValidColor { get; set; }
-        public bool WarningColor { get; set; }
-        public bool ErrorColor { get; set; }
-        public bool MoveItHoverColor { get; set; }
-        public bool MoveItSelectedColor { get; set; }
-        public bool MoveItMoveColor { get; set; }
-        public bool MoveItRemoveColor { get; set; }
-        public bool MoveItDespawnColor { get; set; }
-        public bool MoveItAlignColor { get; set; }
-        public bool MoveItPOHoverColor { get; set; }
-        public bool MoveItPOSelectedColor { get; set; }
-        public bool MoveItPODisabledColor { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -39,6 +19,7 @@
         public bool AdvisorPanel { get; set; }
         public bool TimePanel { get; set; }
         public bool ZoomAndUnlockBackground { get; set; }
+        public bool Separators { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
         public bool Flags { get; set; }
@@ -114,7 +95,6 @@
         public bool VolumeFog { get; set; }
         public bool DistanceFog { get; set; }
         public bool EdgeFog { get; set; }
-        public bool ExportIncludeOnlyPropsWithEffects { get; set; }
 
         private static ModConfig instance;
 

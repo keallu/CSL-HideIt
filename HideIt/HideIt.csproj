@@ -66,7 +66,6 @@
     <Compile Include="Loading.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="ModInfo.cs" />
-    <Compile Include="ModUtils.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
