@@ -9,16 +9,24 @@ namespace HideIt
         public string Name => "Hide It!";
         public string Description => "Allows to hide unwanted things in the game.";
 
+        public HarmonyInstance Harmony;
+
         public void OnEnabled()
         {
-            var harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            Harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
+            
+            if (Harmony != null)
+            {
+                Harmony.PatchAll(Assembly.GetExecutingAssembly());
+            }
         }
 
         public void OnDisabled()
         {
-            var harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
-            harmony.UnpatchAll();
+            if (Harmony != null)
+            {
+                Harmony.UnpatchAll();
+            }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -229,10 +237,10 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.AbandonedCars;
-            group.AddCheckbox("Abandoned Cars", selected, sel =>
+            selected = ModConfig.Instance.AbandonedAndDestroyedCars;
+            group.AddCheckbox("Abandoned and Destroyed Cars", selected, sel =>
             {
-                ModConfig.Instance.AbandonedCars = sel;
+                ModConfig.Instance.AbandonedAndDestroyedCars = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -327,6 +335,69 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.Mailboxes;
+            group.AddCheckbox("Mailboxes", selected, sel =>
+            {
+                ModConfig.Instance.Mailboxes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Chairs;
+            group.AddCheckbox("Chairs", selected, sel =>
+            {
+                ModConfig.Instance.Chairs = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Tables;
+            group.AddCheckbox("Tables", selected, sel =>
+            {
+                ModConfig.Instance.Tables = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Parasols;
+            group.AddCheckbox("Parasols", selected, sel =>
+            {
+                ModConfig.Instance.Parasols = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Grills;
+            group.AddCheckbox("Grills", selected, sel =>
+            {
+                ModConfig.Instance.Grills = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Sandboxes;
+            group.AddCheckbox("Sandboxes", selected, sel =>
+            {
+                ModConfig.Instance.Sandboxes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Swings;
+            group.AddCheckbox("Swings", selected, sel =>
+            {
+                ModConfig.Instance.Swings = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.SwimmingPools;
+            group.AddCheckbox("Swimming Pools", selected, sel =>
+            {
+                ModConfig.Instance.SwimmingPools = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PotsAndBeds;
+            group.AddCheckbox("Pots and Beds", selected, sel =>
+            {
+                ModConfig.Instance.PotsAndBeds = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.Delineators;
             group.AddCheckbox("Delineators", selected, sel =>
             {
@@ -359,6 +430,13 @@ namespace HideIt
             group.AddCheckbox("Bus Lanes", selected, sel =>
             {
                 ModConfig.Instance.BusLanes = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Manholes;
+            group.AddCheckbox("Manholes", selected, sel =>
+            {
+                ModConfig.Instance.Manholes = sel;
                 ModConfig.Instance.Save();
             });
 

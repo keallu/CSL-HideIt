@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HideIt
 {
-    public class HideManager : MonoBehaviour
+    public class ModManager : MonoBehaviour
     {
         private bool _initialized;
 
@@ -47,7 +47,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:Start -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:Start -> Exception: " + e.Message);
             }
         }
 
@@ -86,7 +86,7 @@ namespace HideIt
                         ModConfig.Instance.SolarPanels,
                         ModConfig.Instance.HvacSystems,
                         ModConfig.Instance.ParkingSpaces,
-                        ModConfig.Instance.AbandonedCars,
+                        ModConfig.Instance.AbandonedAndDestroyedCars,
                         ModConfig.Instance.CargoContainers,
                         ModConfig.Instance.GarbageContainers,
                         ModConfig.Instance.GarbageBinsAndCans,
@@ -99,13 +99,24 @@ namespace HideIt
                         ModConfig.Instance.CableReels,
                         ModConfig.Instance.Hedges,
                         ModConfig.Instance.Fences,
-                        ModConfig.Instance.Gates);
+                        ModConfig.Instance.Gates,
+                        ModConfig.Instance.Mailboxes,
+                        ModConfig.Instance.Chairs,
+                        ModConfig.Instance.Tables,
+                        ModConfig.Instance.Parasols,
+                        ModConfig.Instance.Grills,
+                        ModConfig.Instance.Sandboxes,
+                        ModConfig.Instance.Swings,
+                        ModConfig.Instance.SwimmingPools,
+                        ModConfig.Instance.PotsAndBeds
+                        );
                     ToggleNetProps(
                         ModConfig.Instance.Delineators,
                         ModConfig.Instance.RoadArrows,
                         ModConfig.Instance.TramArrows,
                         ModConfig.Instance.BikeLanes,
                         ModConfig.Instance.BusLanes,
+                        ModConfig.Instance.Manholes,
                         ModConfig.Instance.BusStops,
                         ModConfig.Instance.SightseeingBusStops,
                         ModConfig.Instance.TramStops,
@@ -146,15 +157,15 @@ namespace HideIt
 
                     if (ModConfig.Instance.Seagulls)
                     {
-                        HideUtils.RefreshSeagulls();
+                        ModUtils.RefreshSeagulls();
                     }
 
                     if (ModConfig.Instance.Wildlife)
                     {
-                        HideUtils.RefreshWildlife();
+                        ModUtils.RefreshWildlife();
                     }
 
-                    HideUtils.RefreshTexture();
+                    ModUtils.RefreshTexture();
 
                     _initialized = true;
                     ModConfig.Instance.ConfigUpdated = false;
@@ -165,7 +176,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:Update -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:Update -> Exception: " + e.Message);
             }
         }
 
@@ -182,7 +193,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleSingleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -204,7 +215,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleSingleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponent -> Exception: " + e.Message);
             }
         }
 
@@ -227,11 +238,11 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleMultipleUIComponents -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleMultipleUIComponents -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems, bool disableParkingSpaces, bool disableAbandonedCars, bool disableCargoContainers, bool disableGarbageContainers, bool disableGarbageBinsAndCans, bool disableGarbagePiles, bool disableTanks, bool disableBarrels, bool disablePallets, bool disableCrates, bool disablePlanks, bool disableCableReels, bool disableHedges, bool disableFences, bool disableGates)
+        private void ToggleBuildingProps(bool disableFlags, bool disableAds, bool disableBillboards, bool disableNeons, bool disableLogos, bool disableSmoke, bool disableSteam, bool disableSolarPanels, bool disableHvacSystems, bool disableParkingSpaces, bool disableAbandonedAndDestroyedCars, bool disableCargoContainers, bool disableGarbageContainers, bool disableGarbageBinsAndCans, bool disableGarbagePiles, bool disableTanks, bool disableBarrels, bool disablePallets, bool disableCrates, bool disablePlanks, bool disableCableReels, bool disableHedges, bool disableFences, bool disableGates, bool disableMailboxes, bool disableChairs, bool disableTables, bool disableParasols, bool disableGrills, bool disableSandboxes, bool disableSwings, bool disableSwimmingPools, bool disablePotsAndBeds)
         {
             try
             {
@@ -248,7 +259,7 @@ namespace HideIt
                 AddProps(disableSolarPanels, BuildingPropsHelper.SOLAR_PANELS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableHvacSystems, BuildingPropsHelper.HVAC_SYSTEMS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableParkingSpaces, BuildingPropsHelper.PARKING_SPACES, ref enablePropNames, ref disablePropNames);
-                AddProps(disableAbandonedCars, BuildingPropsHelper.ABANDONED_CARS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableAbandonedAndDestroyedCars, BuildingPropsHelper.ABANDONED_AND_DESTROYED_CARS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableCargoContainers, BuildingPropsHelper.CARGO_CONTAINERS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableGarbageContainers, BuildingPropsHelper.GARBAGE_CONTAINERS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableGarbageBinsAndCans, BuildingPropsHelper.GARBAGE_BINS_AND_CANS, ref enablePropNames, ref disablePropNames);
@@ -262,16 +273,25 @@ namespace HideIt
                 AddProps(disableHedges, BuildingPropsHelper.HEDGES, ref enablePropNames, ref disablePropNames);
                 AddProps(disableFences, BuildingPropsHelper.FENCES, ref enablePropNames, ref disablePropNames);
                 AddProps(disableGates, BuildingPropsHelper.GATES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableMailboxes, BuildingPropsHelper.MAILBOXES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableChairs, BuildingPropsHelper.CHAIRS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableTables, BuildingPropsHelper.TABLES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableParasols, BuildingPropsHelper.PARASOLS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableGrills, BuildingPropsHelper.GRILLS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSandboxes, BuildingPropsHelper.SANDBOXES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSwings, BuildingPropsHelper.SWINGS, ref enablePropNames, ref disablePropNames);
+                AddProps(disableSwimmingPools, BuildingPropsHelper.SWIMMING_POOLS, ref enablePropNames, ref disablePropNames);
+                AddProps(disablePotsAndBeds, BuildingPropsHelper.POTS_AND_BEDS, ref enablePropNames, ref disablePropNames);
 
                 BuildingPropsHelper.UpdateProps(enablePropNames, disablePropNames);
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleBuildingProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleBuildingProps -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleNetProps(bool disableDelineators, bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableBusStops, bool disableSightseeingBusStops, bool disableTramStops, bool disableRailwayCrossings, bool disableStreetNameSigns, bool disableStopSigns, bool disableTurnSigns, bool disableSpeedLimitSigns, bool disableNoParkingSigns, bool disableHighwaySigns, bool disablePedestrianAndBikeStreetLights, bool disableRoadStreetLights, bool disableAvenueStreetLights, bool disableHighwayStreetLights, bool disableRunwayLights, bool disableTaxiwayLights, bool disableWarningLights, bool disableRandomStreetDecorations, bool disableBuoys)
+        private void ToggleNetProps(bool disableDelineators, bool disableRoadArrows, bool disableTramArrows, bool disableBikeLanes, bool disableBusLanes, bool disableManholes, bool disableBusStops, bool disableSightseeingBusStops, bool disableTramStops, bool disableRailwayCrossings, bool disableStreetNameSigns, bool disableStopSigns, bool disableTurnSigns, bool disableSpeedLimitSigns, bool disableNoParkingSigns, bool disableHighwaySigns, bool disablePedestrianAndBikeStreetLights, bool disableRoadStreetLights, bool disableAvenueStreetLights, bool disableHighwayStreetLights, bool disableRunwayLights, bool disableTaxiwayLights, bool disableWarningLights, bool disableRandomStreetDecorations, bool disableBuoys)
         {
             try
             {
@@ -283,6 +303,7 @@ namespace HideIt
                 AddProps(disableTramArrows, NetPropsHelper.TRAM_ARROWS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableBikeLanes, NetPropsHelper.BIKE_LANES, ref enablePropNames, ref disablePropNames);
                 AddProps(disableBusLanes, NetPropsHelper.BUS_LANES, ref enablePropNames, ref disablePropNames);
+                AddProps(disableManholes, NetPropsHelper.MANHOLES, ref enablePropNames, ref disablePropNames);
                 AddProps(disableBusStops, NetPropsHelper.BUS_STOPS, ref enablePropNames, ref disablePropNames);
                 AddProps(disableSightseeingBusStops, NetPropsHelper.SIGHTSEEING_BUS_STOP, ref enablePropNames, ref disablePropNames);
                 AddProps(disableTramStops, NetPropsHelper.TRAM_STOPS, ref enablePropNames, ref disablePropNames);
@@ -307,7 +328,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleNetProps -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleNetProps -> Exception: " + e.Message);
             }
         }
 
@@ -348,7 +369,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleDecorations -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleDecorations -> Exception: " + e.Message);
             }
         }
 
@@ -382,7 +403,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleRuining -> Exception: " + e.Message);
             }
         }
 
@@ -400,7 +421,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleGroundColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleGroundColor -> Exception: " + e.Message);
             }
         }
 
@@ -412,7 +433,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleWaterColor -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleWaterColor -> Exception: " + e.Message);
             }
         }
 
@@ -430,7 +451,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideManager:ToggleFogEffects -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleFogEffects -> Exception: " + e.Message);
             }
         }
     }

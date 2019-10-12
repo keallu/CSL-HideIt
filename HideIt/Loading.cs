@@ -22,8 +22,8 @@ namespace HideIt
                     RuiningHelper.UpdateExistingPropsRuining(ModConfig.Instance.PropRuining);
                 }
 
-                _hideManagerGameObject = new GameObject("HideItHideManager");
-                _hideManagerGameObject.AddComponent<HideManager>();
+                _hideManagerGameObject = new GameObject("HideItModManager");
+                _hideManagerGameObject.AddComponent<ModManager>();
             }
             catch (Exception e)
             {

@@ -32,7 +32,7 @@
         public bool SolarPanels { get; set; }
         public bool HvacSystems { get; set; }
         public bool ParkingSpaces { get; set; }
-        public bool AbandonedCars { get; set; }
+        public bool AbandonedAndDestroyedCars { get; set; }
         public bool CargoContainers { get; set; }
         public bool GarbageContainers { get; set; }
         public bool GarbageBinsAndCans { get; set; }
@@ -46,11 +46,21 @@
         public bool Hedges { get; set; }
         public bool Fences { get; set; }
         public bool Gates { get; set; }
+        public bool Mailboxes { get; set; }
+        public bool Chairs { get; set; }
+        public bool Tables { get; set; }
+        public bool Parasols { get; set; }
+        public bool Grills { get; set; }
+        public bool Sandboxes { get; set; }
+        public bool Swings { get; set; }
+        public bool SwimmingPools { get; set; }
+        public bool PotsAndBeds { get; set; }
         public bool Delineators { get; set; }
         public bool RoadArrows { get; set; }
         public bool TramArrows { get; set; }
         public bool BikeLanes { get; set; }
         public bool BusLanes { get; set; }
+        public bool Manholes { get; set; }
         public bool BusStops { get; set; }
         public bool SightseeingBusStops { get; set; }
         public bool TramStops { get; set; }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HideIt
 {
-    public static class HideUtils
+    public static class ModUtils
     {
         public static void RefreshSeagulls()
         {
@@ -18,7 +18,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshSeagulls -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshSeagulls -> Exception: " + e.Message);
             }
         }
 
@@ -33,7 +33,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshWildlife -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshWildlife -> Exception: " + e.Message);
             }
         }
 
@@ -56,7 +56,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshSeagullsAction -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshSeagullsAction -> Exception: " + e.Message);
             }
 
             yield return null;
@@ -81,7 +81,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshWildlifeAction -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshWildlifeAction -> Exception: " + e.Message);
             }
 
             yield return null;
@@ -98,7 +98,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshTexture -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshTexture -> Exception: " + e.Message);
             }
         }
 
@@ -113,7 +113,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] HideUtils:RefreshTextureAction -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModUtils:RefreshTextureAction -> Exception: " + e.Message);
             }
 
             yield return null;
