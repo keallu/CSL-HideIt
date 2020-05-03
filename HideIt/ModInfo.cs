@@ -6,26 +6,28 @@ namespace HideIt
 {
     public class ModInfo : IUserMod
     {
+        private readonly string _harmonyId = "com.github.keallu.csl.hideit";
+        private HarmonyInstance _harmony;
+
         public string Name => "Hide It!";
         public string Description => "Allows to hide unwanted things in the game.";
 
-        public HarmonyInstance Harmony;
-
         public void OnEnabled()
         {
-            Harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
+            _harmony = HarmonyInstance.Create(_harmonyId);
             
-            if (Harmony != null)
+            if (_harmony != null)
             {
-                Harmony.PatchAll(Assembly.GetExecutingAssembly());
+                _harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
         }
 
         public void OnDisabled()
         {
-            if (Harmony != null)
+            if (_harmony != null)
             {
-                Harmony.UnpatchAll();
+                _harmony.UnpatchAll(_harmonyId);
+                _harmony = null;
             }
         }
 
