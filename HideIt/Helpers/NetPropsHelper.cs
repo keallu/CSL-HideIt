@@ -13,7 +13,7 @@ namespace HideIt
         public static readonly string BIKE_LANES = "Bike Lane";
         public static readonly string BUS_LANES = "Bus Lane";
         public static readonly string MANHOLES = "Manhole";
-        public static readonly string[] BUS_STOPS = { "Bus Stop Large", "Bus Stop Small" };
+        public static readonly string[] BUS_STOPS = { "Bus Stop Large", "Bus Stop Small", "Trolleybus Stop", "Trolleybus Stop Large 01" };
         public static readonly string[] SIGHTSEEING_BUS_STOP = { "Sightseeing Bus Stop Large", "Sightseeing Bus Stop Small" };
         public static readonly string TRAM_STOPS = "Tram Stop";
         public static readonly string[] RAILWAY_CROSSINGS = { "Railway Crossing Short", "Railway Crossing Medium", "Railway Crossing Long", "Railway Crossing Very Long" };
@@ -23,10 +23,10 @@ namespace HideIt
         public static readonly string[] SPEED_LIMIT_SIGNS = { "30 Speed Limit", "40 Speed Limit", "50 Speed Limit", "60 Speed Limit", "100 Speed Limit" };
         public static readonly string NO_PARKING_SIGNS = "No Parking Sign";
         public static readonly string[] HIGHWAY_SIGNS = { "Motorway Sign", "Motorway Overroad Signs" };
-        public static readonly string[] PEDESTRIAN_AND_BIKE_STREET_LIGHTS = { "StreetLamp02", "Park Streetlight 01", "Amusement Park Streetlight 01", "Zoo Streetlight 01", "Nature Reserve Streetlight 01", "University Street Light 01", "Liberal Arts Street Light 01", "Trade School Street Light 01" };
-        public static readonly string[] ROAD_STREET_LIGHTS = { "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Single Medium" };
-        public static readonly string[] AVENUE_STREET_LIGHTS = { "Avenue Light", "New Street Light Avenue", "Industry Road Light Double" };
-        public static readonly string HIGHWAY_STREET_LIGHTS = "New Street Light Highway";
+        public static readonly string[] PEDESTRIAN_AND_BIKE_STREET_LIGHTS = { "StreetLamp02", "Park Streetlight 01", "Amusement Park Streetlight 01", "Zoo Streetlight 01", "Nature Reserve Streetlight 01", "University Street Light 01", "Liberal Arts Street Light 01", "Trade School Street Light 01", "Tunnel Light Industry Road Medium", "Tunnel Light Industry Road Small", "Tunnel Light Large Road", "Tunnel Light Medium Road", "Tunnel Light Small Road" };
+        public static readonly string[] ROAD_STREET_LIGHTS = { "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Double", "Industry Road Light Single Medium", "Toll Road Light Double", "Toll Road Light Single" };
+        public static readonly string[] AVENUE_STREET_LIGHTS = { "Avenue Light", "New Street Light Avenue" };
+        public static readonly string[] HIGHWAY_STREET_LIGHTS = { "New Street Light Highway", "Tunnel Light Highway" };
         public static readonly string RUNWAY_LIGHTS = "Runway Light";
         public static readonly string TAXIWAY_LIGHTS = "Taxiway Light";
         public static readonly string WARNING_LIGHTS = "Warning Light Orange";
@@ -36,7 +36,7 @@ namespace HideIt
         private static readonly List<string> PROBABILITY15 = new List<string>() { "Manhole" };
         private static readonly List<string> PROBABILITY25 = new List<string>() { "Random Street Prop", "Random Street Prop NoParking", "Random Industrial Street Prop" };
 
-        private static readonly List<string> HAS_LIGHT_EFFECTS = new List<string>() { "Bus Stop Large", "Tram Stop", "StreetLamp02", "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Single Medium", "Park Streetlight 01", "Amusement Park Streetlight 01", "Zoo Streetlight 01", "Nature Reserve Streetlight 01", "University Street Light 01", "Liberal Arts Street Light 01", "Trade School Street Light 01", "Avenue Light", "New Street Light Avenue", "Industry Road Light Double", "New Street Light Highway", "Runway Light", "Taxiway Light", "Warning Light Orange" };
+        private static readonly List<string> HAS_LIGHT_EFFECTS = new List<string>() { "Bus Stop Large", "Tram Stop", "StreetLamp02", "Park Streetlight 01", "Amusement Park Streetlight 01", "Zoo Streetlight 01", "Nature Reserve Streetlight 01", "University Street Light 01", "Liberal Arts Street Light 01", "Trade School Street Light 01", "Tunnel Light Industry Road Medium", "Tunnel Light Industry Road Small", "Tunnel Light Large Road", "Tunnel Light Medium Road", "Tunnel Light Small Road", "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Double", "Industry Road Light Single Medium", "Toll Road Light Double", "Toll Road Light Single", "Avenue Light", "New Street Light Avenue", "New Street Light Highway", "Tunnel Light Highway", "Runway Light", "Taxiway Light", "Warning Light Orange" };
 
         public static void UpdateExistingSegmentsLightEffects()
         {

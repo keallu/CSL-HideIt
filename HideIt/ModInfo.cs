@@ -1,6 +1,5 @@
-﻿using Harmony;
+﻿using CitiesHarmony.API;
 using ICities;
-using System.Reflection;
 
 namespace HideIt
 {
@@ -9,23 +8,16 @@ namespace HideIt
         public string Name => "Hide It!";
         public string Description => "Allows to hide unwanted things in the game.";
 
-        public HarmonyInstance Harmony;
-
         public void OnEnabled()
         {
-            Harmony = HarmonyInstance.Create("com.github.keallu.csl.hideit");
-            
-            if (Harmony != null)
-            {
-                Harmony.PatchAll(Assembly.GetExecutingAssembly());
-            }
+            HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
         }
 
         public void OnDisabled()
         {
-            if (Harmony != null)
+            if (HarmonyHelper.IsHarmonyInstalled)
             {
-                Harmony.UnpatchAll();
+                Patcher.UnpatchAll();
             }
         }
 
