@@ -62,7 +62,10 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Helpers\BuildingPropsHelper.cs" />
     <Compile Include="Helpers\NetPropsHelper.cs" />
+    <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Helpers\RuiningHelper.cs" />
+    <Compile Include="Helpers\TextureHelper.cs" />
+    <Compile Include="Helpers\CompatibilityHelper.cs" />
     <Compile Include="Managers\InfoViewManager.cs" />
     <Compile Include="ModManager.cs" />
     <Compile Include="ModUtils.cs" />

@@ -1,4 +1,5 @@
 ﻿using ColossalFramework.UI;
+using HideIt.Helpers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -75,7 +76,9 @@ namespace HideIt
                     ToggleSingleUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
                     ToggleMultipleUIComponents("Separator", "MainToolstrip", ModConfig.Instance.Separators);
                     ToggleMultipleUIComponents("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
-                    ToggleBuildingProps(
+                    if (!CompatibilityHelper.IsAnyPropAndTreeManipulatingModsEnabled())
+                    {
+                        ToggleBuildingProps(
                         ModConfig.Instance.Flags,
                         ModConfig.Instance.Ads,
                         ModConfig.Instance.Billboards,
@@ -110,39 +113,46 @@ namespace HideIt
                         ModConfig.Instance.SwimmingPools,
                         ModConfig.Instance.PotsAndBeds
                         );
-                    ToggleNetProps(
-                        ModConfig.Instance.Delineators,
-                        ModConfig.Instance.RoadArrows,
-                        ModConfig.Instance.TramArrows,
-                        ModConfig.Instance.BikeLanes,
-                        ModConfig.Instance.BusLanes,
-                        ModConfig.Instance.Manholes,
-                        ModConfig.Instance.BusStops,
-                        ModConfig.Instance.SightseeingBusStops,
-                        ModConfig.Instance.TramStops,
-                        ModConfig.Instance.RailwayCrossings,
-                        ModConfig.Instance.StreetNameSigns,
-                        ModConfig.Instance.StopSigns,
-                        ModConfig.Instance.TurnSigns,
-                        ModConfig.Instance.SpeedLimitSigns,
-                        ModConfig.Instance.NoParkingSigns,
-                        ModConfig.Instance.HighwaySigns,
-                        ModConfig.Instance.PedestrianAndBikeStreetLights,
-                        ModConfig.Instance.RoadStreetLights,
-                        ModConfig.Instance.AvenueStreetLights,
-                        ModConfig.Instance.HighwayStreetLights,
-                        ModConfig.Instance.RunwayLights,
-                        ModConfig.Instance.TaxiwayLights,
-                        ModConfig.Instance.WarningLights,
-                        ModConfig.Instance.RandomStreetDecorations,
-                        ModConfig.Instance.Buoys);
-                    ToggleDecorations(
+                        ToggleNetProps(
+                            ModConfig.Instance.Delineators,
+                            ModConfig.Instance.RoadArrows,
+                            ModConfig.Instance.TramArrows,
+                            ModConfig.Instance.BikeLanes,
+                            ModConfig.Instance.BusLanes,
+                            ModConfig.Instance.Manholes,
+                            ModConfig.Instance.BusStops,
+                            ModConfig.Instance.SightseeingBusStops,
+                            ModConfig.Instance.TramStops,
+                            ModConfig.Instance.RailwayCrossings,
+                            ModConfig.Instance.StreetNameSigns,
+                            ModConfig.Instance.StopSigns,
+                            ModConfig.Instance.TurnSigns,
+                            ModConfig.Instance.SpeedLimitSigns,
+                            ModConfig.Instance.NoParkingSigns,
+                            ModConfig.Instance.HighwaySigns,
+                            ModConfig.Instance.PedestrianAndBikeStreetLights,
+                            ModConfig.Instance.RoadStreetLights,
+                            ModConfig.Instance.AvenueStreetLights,
+                            ModConfig.Instance.HighwayStreetLights,
+                            ModConfig.Instance.RunwayLights,
+                            ModConfig.Instance.TaxiwayLights,
+                            ModConfig.Instance.WarningLights,
+                            ModConfig.Instance.RandomStreetDecorations,
+                            ModConfig.Instance.Buoys);
+                    }
+                    if (!CompatibilityHelper.IsAnySpriteManipulatingModsEnabled())
+                    {
+                        ToggleDecorations(
                         ModConfig.Instance.CliffDecorations,
                         ModConfig.Instance.FertileDecorations,
                         ModConfig.Instance.GrassDecorations);
-                    ToggleRuining(
+                    }
+                    if (!CompatibilityHelper.IsAnyPropAndTreeManipulatingModsEnabled())
+                    {
+                        ToggleRuining(
                         ModConfig.Instance.TreeRuining,
                         ModConfig.Instance.PropRuining);
+                    }
                     ToggleGroundColor(
                         ModConfig.Instance.GrassFertilityGroundColor,
                         ModConfig.Instance.GrassFieldGroundColor,
@@ -157,15 +167,15 @@ namespace HideIt
 
                     if (ModConfig.Instance.Seagulls)
                     {
-                        ModUtils.RefreshSeagulls();
+                        ObjectHelper.RefreshSeagulls();
                     }
 
                     if (ModConfig.Instance.Wildlife)
                     {
-                        ModUtils.RefreshWildlife();
+                        ObjectHelper.RefreshWildlife();
                     }
 
-                    ModUtils.RefreshTexture();
+                    TextureHelper.RefreshTexture();
 
                     _initialized = true;
                     ModConfig.Instance.ConfigUpdated = false;

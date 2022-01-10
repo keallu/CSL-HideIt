@@ -1,122 +1,37 @@
-﻿using ColossalFramework;
-using System;
-using System.Collections;
-using UnityEngine;
+﻿using ColossalFramework.Plugins;
+using System.Reflection;
 
 namespace HideIt
 {
     public static class ModUtils
     {
-        public static void RefreshSeagulls()
+        public static bool IsAnyModsEnabled(string[] names)
         {
-            try
+            foreach (string name in names)
             {
-                if (SimulationManager.exists)
+                if (IsModEnabled(name))
                 {
-                    SimulationManager.instance.AddAction(RefreshSeagullsAction());
+                    return true;
                 }
             }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshSeagulls -> Exception: " + e.Message);
-            }
+
+            return false;
         }
 
-        public static void RefreshWildlife()
+        public static bool IsModEnabled(string name)
         {
-            try
+            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
-                if (SimulationManager.exists)
+                foreach (Assembly assembly in plugin.GetAssemblies())
                 {
-                    SimulationManager.instance.AddAction(RefreshWildlifeAction());
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshWildlife -> Exception: " + e.Message);
-            }
-        }
-
-        private static IEnumerator RefreshSeagullsAction()
-        {
-            try
-            {
-                CitizenManager citizenManager = Singleton<CitizenManager>.instance;
-
-                for (int i = 1; i < citizenManager.m_instances.m_buffer.Length; i++)
-                {
-                    if ((citizenManager.m_instances.m_buffer[i].m_flags & CitizenInstance.Flags.Created) != CitizenInstance.Flags.None)
+                    if (assembly.GetName().Name.ToLower() == name)
                     {
-                        if (citizenManager.m_instances.m_buffer[i].Info.m_citizenAI != null && citizenManager.m_instances.m_buffer[i].Info.m_citizenAI is BirdAI)
-                        {
-                            citizenManager.ReleaseCitizenInstance((ushort)i);
-                        }
+                        return plugin.isEnabled;
                     }
                 }
             }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshSeagullsAction -> Exception: " + e.Message);
-            }
 
-            yield return null;
-        }
-
-        private static IEnumerator RefreshWildlifeAction()
-        {
-            try
-            {
-                CitizenManager citizenManager = Singleton<CitizenManager>.instance;
-
-                for (int i = 1; i < citizenManager.m_instances.m_buffer.Length; i++)
-                {
-                    if ((citizenManager.m_instances.m_buffer[i].m_flags & CitizenInstance.Flags.Created) != CitizenInstance.Flags.None)
-                    {
-                        if (citizenManager.m_instances.m_buffer[i].Info.m_citizenAI != null && citizenManager.m_instances.m_buffer[i].Info.m_citizenAI is WildlifeAI)
-                        {
-                            citizenManager.ReleaseCitizenInstance((ushort)i);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshWildlifeAction -> Exception: " + e.Message);
-            }
-
-            yield return null;
-        }
-
-        public static void RefreshTexture()
-        {
-            try
-            {
-                if (SimulationManager.exists)
-                {
-                    SimulationManager.instance.AddAction(RefreshTextureAction());
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshTexture -> Exception: " + e.Message);
-            }
-        }
-
-        private static IEnumerator RefreshTextureAction()
-        {
-            try
-            {
-                if (NaturalResourceManager.exists)
-                {
-                    NaturalResourceManager.instance.AreaModified(0, 0, 511, 511);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModUtils:RefreshTextureAction -> Exception: " + e.Message);
-            }
-
-            yield return null;
+            return false;
         }
     }
 }

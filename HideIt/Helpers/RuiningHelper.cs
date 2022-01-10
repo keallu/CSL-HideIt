@@ -1,5 +1,6 @@
 ﻿using ColossalFramework;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace HideIt
@@ -7,6 +8,36 @@ namespace HideIt
     public static class RuiningHelper
     {
         public static void UpdateExistingTreesRuining(bool disableRuining)
+        {
+            try
+            {
+                if (Singleton<SimulationManager>.exists)
+                {
+                    Singleton<SimulationManager>.instance.AddAction(UpdateExistingTreesRuiningAction(disableRuining));
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingTreesRuining -> Exception: " + e.Message);
+            }
+        }
+
+        public static void UpdateExistingPropsRuining(bool disableRuining)
+        {
+            try
+            {
+                if (Singleton<SimulationManager>.exists)
+                {
+                    Singleton<SimulationManager>.instance.AddAction(UpdateExistingPropsRuiningAction(disableRuining));
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingPropsRuining -> Exception: " + e.Message);
+            }
+        }
+
+        public static IEnumerator UpdateExistingTreesRuiningAction(bool disableRuining)
         {
             try
             {
@@ -36,11 +67,13 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingTreesRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingTreesRuiningAction -> Exception: " + e.Message);
             }
+
+            yield return null;
         }
 
-        public static void UpdateExistingPropsRuining(bool disableRuining)
+        public static IEnumerator UpdateExistingPropsRuiningAction(bool disableRuining)
         {
             try
             {
@@ -70,8 +103,10 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingPropsRuining -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] RuiningHelper:UpdateExistingPropsRuiningAction -> Exception: " + e.Message);
             }
+
+            yield return null;
         }
     }
 }
