@@ -76,7 +76,7 @@ namespace HideIt
                     ToggleSingleUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
                     ToggleMultipleUIComponents("Separator", "MainToolstrip", ModConfig.Instance.Separators);
                     ToggleMultipleUIComponents("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
-                    if (!CompatibilityHelper.IsAnyPropAndTreeManipulatingModsEnabled())
+                    if (!CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() || ModConfig.Instance.EnforcePropsHiding)
                     {
                         ToggleBuildingProps(
                         ModConfig.Instance.Flags,
@@ -140,14 +140,14 @@ namespace HideIt
                             ModConfig.Instance.RandomStreetDecorations,
                             ModConfig.Instance.Buoys);
                     }
-                    if (!CompatibilityHelper.IsAnySpriteManipulatingModsEnabled())
+                    if (!CompatibilityHelper.IsAnySpriteDecorationsManipulatingModsEnabled() || ModConfig.Instance.EnforceSpriteDecorationsHiding)
                     {
                         ToggleDecorations(
-                        ModConfig.Instance.CliffDecorations,
-                        ModConfig.Instance.FertileDecorations,
-                        ModConfig.Instance.GrassDecorations);
+                        ModConfig.Instance.CliffDecoration,
+                        ModConfig.Instance.FertileDecoration,
+                        ModConfig.Instance.GrassDecoration);
                     }
-                    if (!CompatibilityHelper.IsAnyPropAndTreeManipulatingModsEnabled())
+                    if (!CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() || ModConfig.Instance.EnforceRuiningsHiding)
                     {
                         ToggleRuining(
                         ModConfig.Instance.TreeRuining,

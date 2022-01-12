@@ -4,6 +4,9 @@
     public class ModConfig
     {
         public bool ConfigUpdated { get; set; }
+        public bool EnforcePropsHiding { get; set; }
+        public bool EnforceRuiningsHiding { get; set; }
+        public bool EnforceSpriteDecorationsHiding { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -80,9 +83,9 @@
         public bool WarningLights { get; set; }
         public bool RandomStreetDecorations { get; set; }
         public bool Buoys { get; set; }
-        public bool CliffDecorations { get; set; }
-        public bool FertileDecorations { get; set; }
-        public bool GrassDecorations { get; set; }
+        public bool CliffDecoration { get; set; }
+        public bool FertileDecoration { get; set; }
+        public bool GrassDecoration { get; set; }
         public bool TreeRuining { get; set; }
         public bool PropRuining { get; set; }
         public bool AutoUpdateTreeRuiningAtLoad { get; set; }
