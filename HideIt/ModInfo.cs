@@ -1,6 +1,7 @@
 ﻿using CitiesHarmony.API;
 using ICities;
 using HideIt.Helpers;
+using System.Reflection;
 
 namespace HideIt
 {
@@ -25,9 +26,12 @@ namespace HideIt
         public void OnSettingsUI(UIHelperBase helper)
         {
             UIHelperBase group;
-            bool selected;
 
-            group = helper.AddGroup(Name);
+            AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
+
+            group = helper.AddGroup(Name + " - " + assemblyName.Version.Major + "." + assemblyName.Version.Minor);
+
+            bool selected;
 
             selected = ModConfig.Instance.EnforcePropsHiding;
             group.AddCheckbox("Enforce hiding of Props (not recommended for normal users)", selected, sel =>
@@ -183,7 +187,7 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-                group = helper.AddGroup($"Props{(CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() ? " (Disabled unless enforcement is selected)" : "")}");
+            group = helper.AddGroup($"Props{(CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() ? " (Disabled unless enforcement is selected)" : "")}");
 
             selected = ModConfig.Instance.Flags;
             group.AddCheckbox("Flags", selected, sel =>
