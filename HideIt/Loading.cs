@@ -12,12 +12,12 @@ namespace HideIt
         {
             try
             {
-                if (ModConfig.Instance.AutoUpdateTreeRuiningAtLoad)
+                if (ModConfig.Instance.EnforceRuiningsHiding && ModConfig.Instance.AutoUpdateTreeRuiningAtLoad)
                 {
                     RuiningHelper.UpdateExistingTreesRuining(ModConfig.Instance.TreeRuining);
                 }
 
-                if (ModConfig.Instance.AutoUpdatePropRuiningAtLoad)
+                if (ModConfig.Instance.EnforceRuiningsHiding && ModConfig.Instance.AutoUpdatePropRuiningAtLoad)
                 {
                     RuiningHelper.UpdateExistingPropsRuining(ModConfig.Instance.PropRuining);
                 }

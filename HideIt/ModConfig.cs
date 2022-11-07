@@ -7,6 +7,7 @@
         public bool EnforcePropsHiding { get; set; }
         public bool EnforceRuiningsHiding { get; set; }
         public bool EnforceSpriteDecorationsHiding { get; set; }
+        public bool PauseOutline { get; set; }
         public bool InfoViewsButton { get; set; }
         public bool DisastersButton { get; set; }
         public bool ChirperButton { get; set; }
@@ -21,6 +22,12 @@
         public bool CongratulationPanel { get; set; }
         public bool AdvisorPanel { get; set; }
         public bool TimePanel { get; set; }
+        public bool NamePanel { get; set; }
+        public bool DemandPanel { get; set; }
+        public bool HeatPanel { get; set; }
+        public bool IncomePanel { get; set; }
+        public bool PopulationPanel { get; set; }
+        public bool HappinessPanel { get; set; }        
         public bool ZoomAndUnlockBackground { get; set; }
         public bool Separators { get; set; }
         public bool Seagulls { get; set; }

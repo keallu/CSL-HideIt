@@ -56,6 +56,13 @@ namespace HideIt
 
             group = helper.AddGroup("User Interface");
 
+            selected = ModConfig.Instance.PauseOutline;
+            group.AddCheckbox("Pause Outline", selected, sel =>
+            {
+                ModConfig.Instance.PauseOutline = sel;
+                ModConfig.Instance.Save();
+            });
+
             selected = ModConfig.Instance.InfoViewsButton;
             group.AddCheckbox("Info Views Button", selected, sel =>
             {
@@ -154,6 +161,48 @@ namespace HideIt
             group.AddCheckbox("Time Panel", selected, sel =>
             {
                 ModConfig.Instance.TimePanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.NamePanel;
+            group.AddCheckbox("Name Panel", selected, sel =>
+            {
+                ModConfig.Instance.NamePanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.DemandPanel;
+            group.AddCheckbox("Demand Panel", selected, sel =>
+            {
+                ModConfig.Instance.DemandPanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.HeatPanel;
+            group.AddCheckbox("Heat Panel", selected, sel =>
+            {
+                ModConfig.Instance.HeatPanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.IncomePanel;
+            group.AddCheckbox("Income Panel", selected, sel =>
+            {
+                ModConfig.Instance.IncomePanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PopulationPanel;
+            group.AddCheckbox("Population Panel", selected, sel =>
+            {
+                ModConfig.Instance.PopulationPanel = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.HappinessPanel;
+            group.AddCheckbox("Happiness Panel", selected, sel =>
+            {
+                ModConfig.Instance.HappinessPanel = sel;
                 ModConfig.Instance.Save();
             });
 

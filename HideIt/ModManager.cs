@@ -58,24 +58,31 @@ namespace HideIt
             {
                 if (!_initialized || ModConfig.Instance.ConfigUpdated)
                 {
-                    ToggleSingleUIComponent("InfoMenu", ModConfig.Instance.InfoViewsButton);
+                    ToggleSingleUIComponentByFillAmount("PauseOutline", ModConfig.Instance.PauseOutline);
+                    ToggleSingleUIComponentByVisibility("InfoMenu", ModConfig.Instance.InfoViewsButton);
                     if (SteamHelper.IsDLCOwned(SteamHelper.DLC.NaturalDisastersDLC))
                     {
-                        ToggleSingleUIComponent("WarningPhasePanel", ModConfig.Instance.DisastersButton);
+                        ToggleSingleUIComponentByVisibility("WarningPhasePanel", ModConfig.Instance.DisastersButton);
                     }
-                    ToggleSingleUIComponent("ChirperPanel", ModConfig.Instance.ChirperButton);
-                    ToggleSingleUIComponent("RadioPanel", ModConfig.Instance.RadioButton);
-                    ToggleSingleUIComponent("Esc", ModConfig.Instance.GearButton);
-                    ToggleSingleUIComponent("ZoomComposite", ModConfig.Instance.ZoomButton);
-                    ToggleSingleUIComponent("UnlockButton", ModConfig.Instance.UnlockButton);
-                    ToggleSingleUIComponent("AdvisorButton", ModConfig.Instance.AdvisorButton);
-                    ToggleSingleUIComponent("BulldozerButton", ModConfig.Instance.BulldozerButton);
-                    ToggleSingleUIComponent("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
-                    ToggleSingleUIComponent("Freecamera", ModConfig.Instance.FreeCameraButton);
-                    ToggleSingleUIComponent("PanelTime", ModConfig.Instance.TimePanel);
-                    ToggleSingleUIComponent("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
-                    ToggleMultipleUIComponents("Separator", "MainToolstrip", ModConfig.Instance.Separators);
-                    ToggleMultipleUIComponents("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
+                    ToggleSingleUIComponentByVisibility("ChirperPanel", ModConfig.Instance.ChirperButton);
+                    ToggleSingleUIComponentByVisibility("RadioPanel", ModConfig.Instance.RadioButton);
+                    ToggleSingleUIComponentByVisibility("Esc", ModConfig.Instance.GearButton);
+                    ToggleSingleUIComponentByVisibility("ZoomComposite", ModConfig.Instance.ZoomButton);
+                    ToggleSingleUIComponentByVisibility("UnlockButton", ModConfig.Instance.UnlockButton);
+                    ToggleSingleUIComponentByVisibility("AdvisorButton", ModConfig.Instance.AdvisorButton);
+                    ToggleSingleUIComponentByVisibility("BulldozerButton", ModConfig.Instance.BulldozerButton);
+                    ToggleSingleUIComponentByVisibility("CinematicCameraPanel", ModConfig.Instance.CinematicCameraButton);
+                    ToggleSingleUIComponentByVisibility("Freecamera", ModConfig.Instance.FreeCameraButton);
+                    ToggleSingleUIComponentByVisibility("PanelTime", ModConfig.Instance.TimePanel);
+                    ToggleSingleUIComponentByVisibility("Name", "InfoPanel", ModConfig.Instance.NamePanel);
+                    ToggleSingleUIComponentByVisibility("DemandBack", "InfoPanel", ModConfig.Instance.DemandPanel);
+                    ToggleSingleUIComponentByVisibility("Heat'o'meter", "InfoPanel", ModConfig.Instance.HeatPanel);
+                    ToggleSingleUIComponentByVisibility("IncomePanel", "InfoPanel", ModConfig.Instance.IncomePanel);
+                    ToggleSingleUIComponentByVisibility("PopulationPanel", "InfoPanel", ModConfig.Instance.PopulationPanel);
+                    ToggleSingleUIComponentByVisibility("Happiness", "InfoPanel", ModConfig.Instance.HappinessPanel);
+                    ToggleSingleUIComponentByVisibility("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
+                    ToggleMultipleUIComponentsByVisibility("Separator", "MainToolstrip", ModConfig.Instance.Separators);
+                    ToggleMultipleUIComponentsByVisibility("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
                     if (!CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() || ModConfig.Instance.EnforcePropsHiding)
                     {
                         ToggleBuildingProps(
@@ -190,7 +197,24 @@ namespace HideIt
             }
         }
 
-        private void ToggleSingleUIComponent(string name, bool disable)
+        private void ToggleSingleUIComponentByFillAmount(string name, bool disable)
+        {
+            try
+            {
+                UISlicedSprite component = GameObject.Find(name).GetComponent<UISlicedSprite>();
+
+                if (component != null)
+                {
+                    component.fillAmount = disable ? 0 : 1;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponentByFillAmount -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleSingleUIComponentByVisibility(string name, bool disable)
         {
             try
             {
@@ -203,11 +227,11 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponentByVisibility -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleSingleUIComponent(string name, string parentName, bool disable)
+        private void ToggleSingleUIComponentByVisibility(string name, string parentName, bool disable)
         {
             try
             {
@@ -225,11 +249,11 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponent -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleSingleUIComponentByVisibility -> Exception: " + e.Message);
             }
         }
 
-        private void ToggleMultipleUIComponents(string name, string parentName, bool disable)
+        private void ToggleMultipleUIComponentsByVisibility(string name, string parentName, bool disable)
         {
             try
             {
@@ -248,7 +272,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ModManager:ToggleMultipleUIComponents -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ModManager:ToggleMultipleUIComponentsByVisibility -> Exception: " + e.Message);
             }
         }
 
