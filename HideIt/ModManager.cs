@@ -76,7 +76,10 @@ namespace HideIt
                     ToggleSingleUIComponentByVisibility("PanelTime", ModConfig.Instance.TimePanel);
                     ToggleSingleUIComponentByVisibility("Name", "InfoPanel", ModConfig.Instance.NamePanel);
                     ToggleSingleUIComponentByVisibility("DemandBack", "InfoPanel", ModConfig.Instance.DemandPanel);
-                    ToggleSingleUIComponentByVisibility("Heat'o'meter", "InfoPanel", ModConfig.Instance.HeatPanel);
+                    if (SteamHelper.IsDLCOwned(SteamHelper.DLC.SnowFallDLC))
+                    {
+                        ToggleSingleUIComponentByVisibility("Heat'o'meter", "InfoPanel", ModConfig.Instance.HeatPanel);
+                    }
                     ToggleSingleUIComponentByVisibility("IncomePanel", "InfoPanel", ModConfig.Instance.IncomePanel);
                     ToggleSingleUIComponentByVisibility("PopulationPanel", "InfoPanel", ModConfig.Instance.PopulationPanel);
                     ToggleSingleUIComponentByVisibility("Happiness", "InfoPanel", ModConfig.Instance.HappinessPanel);

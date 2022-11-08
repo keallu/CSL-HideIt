@@ -178,12 +178,15 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
-            selected = ModConfig.Instance.HeatPanel;
-            group.AddCheckbox("Heat Panel", selected, sel =>
+            if (SteamHelper.IsDLCOwned(SteamHelper.DLC.SnowFallDLC))
             {
-                ModConfig.Instance.HeatPanel = sel;
-                ModConfig.Instance.Save();
-            });
+                selected = ModConfig.Instance.HeatPanel;
+                group.AddCheckbox("Heat Panel", selected, sel =>
+                {
+                    ModConfig.Instance.HeatPanel = sel;
+                    ModConfig.Instance.Save();
+                });
+            }
 
             selected = ModConfig.Instance.IncomePanel;
             group.AddCheckbox("Income Panel", selected, sel =>
