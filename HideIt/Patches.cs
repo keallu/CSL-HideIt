@@ -55,6 +55,30 @@ namespace HideIt
         }
     }
 
+    [HarmonyPatch(typeof(AnimalMonumentAI), "CountAnimals")]
+    public static class AnimalMonumentAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Livestock)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] AnimalMonumentAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(CargoHarborAI), "CountAnimals")]
     public static class CargoHarborAICountAnimalsPatch
     {
@@ -146,6 +170,30 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] LandfillSiteAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
+                return __result;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(LivestockExtractorAI), "CountAnimals")]
+    public static class LivestockExtractorAICountAnimalsPatch
+    {
+        static int Postfix(int __result)
+        {
+            try
+            {
+                if (ModConfig.Instance.Livestock)
+                {
+                    return int.MaxValue;
+                }
+                else
+                {
+                    return __result;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] LivestockExtractorAICountAnimalsPatch:Postfix -> Exception: " + e.Message);
                 return __result;
             }
         }

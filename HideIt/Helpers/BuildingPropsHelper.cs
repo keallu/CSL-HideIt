@@ -37,7 +37,7 @@ namespace HideIt
             "wall_ad03",
             "wall_ad04",
             "wall_ad05",
-            "wall_ad06" 
+            "wall_ad06"
         };
 
         public static readonly string[] BILLBOARDS = {
@@ -63,7 +63,7 @@ namespace HideIt
             "billboard_big_Furniture_03",
             "Billboard_big_go_nuts",
             "Billboard_big_go_nuts_01",
-            "Billboard_big_go_nuts_02",            
+            "Billboard_big_go_nuts_02",
             "Billboard_big_go_nuts_03",
             "Billboard_big_jubilee",
             "Billboard_big_jubilee_01",
@@ -138,7 +138,7 @@ namespace HideIt
             "Hightech Industrial Small Billboard 02",
             "Hightech Industrial Small Billboard 03",
             "Hightech Industrial Small Billboard 04",
-            "Hightech Industrial Small Billboard Random",            
+            "Hightech Industrial Small Billboard Random",
             "Organic Shop Medium Billboard 01",
             "Organic Shop Medium Billboard 02",
             "Organic Shop Medium Billboard 03",
@@ -280,7 +280,7 @@ namespace HideIt
         };
 
         public static readonly string[] SMOKE = { "Factory Smoke", "Factory Smoke Small" };
-        public static readonly string STEAM = "Factory Steam";
+        public static readonly string[] STEAM = { "Factory Steam", "Pool Steam", "Large Pool Steam" };
         public static readonly string[] SOLAR_PANELS = { "Horizontal Solar Panel 01", "Horizontal Solar Panel 02", "Solar panel 01", "Solar panel 02", "Solar panel 03" };
         public static readonly string[] HVAC_SYSTEMS = { "Ac box 01", "Ac box 02", "Ac box 03", "Ac box random", "Air Source Heat Pump 01", "Air Source Heat Pump 02", "Rotating ac", "Ventilation Pipe 01", "Ventilation Pipe 02" };
         public static readonly string[] PARKING_SPACES = { "Invisible Parking Space", "Parking Space", "Parking Space Electric", "Parking Spaces 01", "Parking Spaces 02" };

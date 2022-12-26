@@ -18,7 +18,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ModUtils:RefreshTexture -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] TextureHelper:RefreshTexture -> Exception: " + e.Message);
             }
         }
 
@@ -33,7 +33,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ModUtils:RefreshTextureAction -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] TextureHelper:RefreshTextureAction -> Exception: " + e.Message);
             }
 
             yield return null;

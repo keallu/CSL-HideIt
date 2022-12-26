@@ -239,6 +239,20 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            selected = ModConfig.Instance.Livestock;
+            group.AddCheckbox("Livestock", selected, sel =>
+            {
+                ModConfig.Instance.Livestock = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.Pets;
+            group.AddCheckbox("Pets", selected, sel =>
+            {
+                ModConfig.Instance.Pets = sel;
+                ModConfig.Instance.Save();
+            });
+
             group = helper.AddGroup($"Props{(CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() ? " (Disabled unless enforcement is selected)" : "")}");
 
             selected = ModConfig.Instance.Flags;

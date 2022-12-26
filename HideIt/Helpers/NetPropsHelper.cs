@@ -10,8 +10,8 @@ namespace HideIt
         public static readonly string[] DELINEATORS = { "Delineator 01", "Delineator 02" };
         public static readonly string[] ROAD_ARROWS = { "Road Arrow F", "Road Arrow FR", "Road Arrow L", "Road Arrow LF", "Road Arrow LFR", "Road Arrow LR", "Road Arrow R" };
         public static readonly string TRAM_ARROWS = "Tram Arrow";
-        public static readonly string BIKE_LANES = "Bike Lane";
-        public static readonly string BUS_LANES = "Bus Lane";
+        public static readonly string[] BIKE_LANES = { "Bike Lane", "Bike Middle", "Bike Lane Narrow" };
+        public static readonly string[] BUS_LANES = { "Bus Lane", "Bus Only Lane" };
         public static readonly string MANHOLES = "Manhole";
         public static readonly string[] BUS_STOPS = { "Bus Stop Large", "Bus Stop Small", "Trolleybus Stop", "Trolleybus Stop Large 01" };
         public static readonly string[] SIGHTSEEING_BUS_STOP = { "Sightseeing Bus Stop Large", "Sightseeing Bus Stop Small" };
@@ -27,9 +27,9 @@ namespace HideIt
         public static readonly string[] ROAD_STREET_LIGHTS = { "New Street Light", "New Street Light Small Road", "Industry Road Light Single", "Industry Road Light Double", "Industry Road Light Single Medium", "Toll Road Light Double", "Toll Road Light Single", "Tunnel Light Industry Road Medium", "Tunnel Light Industry Road Small", "Tunnel Light Large Road", "Tunnel Light Medium Road", "Tunnel Light Small Road" };
         public static readonly string[] AVENUE_STREET_LIGHTS = { "Avenue Light", "New Street Light Avenue" };
         public static readonly string[] HIGHWAY_STREET_LIGHTS = { "New Street Light Highway", "Tunnel Light Highway" };
-        public static readonly string RUNWAY_LIGHTS = "Runway Light";
+        public static readonly string[] RUNWAY_LIGHTS = { "Runway Light", "Runway Landing Lights", "Runway Start Light", "Runway Approach Lights 01", "Runway Approach Lights 02", "Runway End Light" };
         public static readonly string TAXIWAY_LIGHTS = "Taxiway Light";
-        public static readonly string WARNING_LIGHTS = "Warning Light Orange";
+        public static readonly string[] WARNING_LIGHTS = { "Warning Light Red", "Warning Light Orange" };
         public static readonly string[] RANDOM_STREET_DECORATIONS = { "Random Street Prop", "Random Street Prop NoParking", "Random Industrial Street Prop" };
         public static readonly string BUOYS = "Nautical Marker";
 

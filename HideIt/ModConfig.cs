@@ -27,11 +27,13 @@
         public bool HeatPanel { get; set; }
         public bool IncomePanel { get; set; }
         public bool PopulationPanel { get; set; }
-        public bool HappinessPanel { get; set; }        
+        public bool HappinessPanel { get; set; }
         public bool ZoomAndUnlockBackground { get; set; }
         public bool Separators { get; set; }
         public bool Seagulls { get; set; }
         public bool Wildlife { get; set; }
+        public bool Livestock { get; set; }
+        public bool Pets { get; set; }
         public bool Flags { get; set; }
         public bool Ads { get; set; }
         public bool Billboards { get; set; }

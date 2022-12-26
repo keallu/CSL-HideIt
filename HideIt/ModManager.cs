@@ -185,6 +185,16 @@ namespace HideIt
                         ObjectHelper.RefreshWildlife();
                     }
 
+                    if (ModConfig.Instance.Livestock)
+                    {
+                        ObjectHelper.RefreshLivestock();
+                    }
+
+                    if (ModConfig.Instance.Pets)
+                    {
+                        ObjectHelper.RefreshPets();
+                    }
+
                     TextureHelper.RefreshTexture();
 
                     _initialized = true;
