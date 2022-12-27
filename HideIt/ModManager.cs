@@ -175,14 +175,19 @@ namespace HideIt
                         ModConfig.Instance.DistanceFog,
                         ModConfig.Instance.EdgeFog);
 
-                    if (ModConfig.Instance.Seagulls)
+                    if (ModConfig.Instance.Birds)
                     {
-                        ObjectHelper.RefreshSeagulls();
+                        ObjectHelper.RefreshBirds();
                     }
 
                     if (ModConfig.Instance.Wildlife)
                     {
                         ObjectHelper.RefreshWildlife();
+                    }
+
+                    if (ModConfig.Instance.RescueAnimals)
+                    {
+                        ObjectHelper.RefreshRescueAnimals();
                     }
 
                     if (ModConfig.Instance.Livestock)

@@ -225,10 +225,10 @@ namespace HideIt
 
             group = helper.AddGroup("Objects");
 
-            selected = ModConfig.Instance.Seagulls;
-            group.AddCheckbox("Seagulls", selected, sel =>
+            selected = ModConfig.Instance.Birds;
+            group.AddCheckbox("Birds", selected, sel =>
             {
-                ModConfig.Instance.Seagulls = sel;
+                ModConfig.Instance.Birds = sel;
                 ModConfig.Instance.Save();
             });
 
@@ -236,6 +236,13 @@ namespace HideIt
             group.AddCheckbox("Wildlife", selected, sel =>
             {
                 ModConfig.Instance.Wildlife = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.RescueAnimals;
+            group.AddCheckbox("Rescue Animals", selected, sel =>
+            {
+                ModConfig.Instance.RescueAnimals = sel;
                 ModConfig.Instance.Save();
             });
 

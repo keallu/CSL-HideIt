@@ -30,8 +30,9 @@
         public bool HappinessPanel { get; set; }
         public bool ZoomAndUnlockBackground { get; set; }
         public bool Separators { get; set; }
-        public bool Seagulls { get; set; }
+        public bool Birds { get; set; }
         public bool Wildlife { get; set; }
+        public bool RescueAnimals { get; set; }
         public bool Livestock { get; set; }
         public bool Pets { get; set; }
         public bool Flags { get; set; }

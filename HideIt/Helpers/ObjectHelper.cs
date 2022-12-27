@@ -7,18 +7,18 @@ namespace HideIt
 {
     public static class ObjectHelper
     {
-        public static void RefreshSeagulls()
+        public static void RefreshBirds()
         {
             try
             {
                 if (Singleton<SimulationManager>.exists)
                 {
-                    Singleton<SimulationManager>.instance.AddAction(RefreshSeagullsAction());
+                    Singleton<SimulationManager>.instance.AddAction(RefreshBirdsAction());
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ObjectHelper:RefreshSeagulls -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ObjectHelper:RefreshBirds -> Exception: " + e.Message);
             }
         }
 
@@ -34,6 +34,21 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] ObjectHelper:RefreshWildlife -> Exception: " + e.Message);
+            }
+        }
+
+        public static void RefreshRescueAnimals()
+        {
+            try
+            {
+                if (Singleton<SimulationManager>.exists)
+                {
+                    Singleton<SimulationManager>.instance.AddAction(RefreshRescueAnimalsAction());
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ObjectHelper:RefreshRescueAnimals -> Exception: " + e.Message);
             }
         }
 
@@ -67,7 +82,7 @@ namespace HideIt
             }
         }
 
-        private static IEnumerator RefreshSeagullsAction()
+        private static IEnumerator RefreshBirdsAction()
         {
             try
             {
@@ -86,7 +101,7 @@ namespace HideIt
             }
             catch (Exception e)
             {
-                Debug.Log("[Hide It!] ObjectHelper:RefreshSeagullsAction -> Exception: " + e.Message);
+                Debug.Log("[Hide It!] ObjectHelper:RefreshBirdsAction -> Exception: " + e.Message);
             }
 
             yield return null;
@@ -112,6 +127,31 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] ObjectHelper:RefreshWildlifeAction -> Exception: " + e.Message);
+            }
+
+            yield return null;
+        }
+
+        private static IEnumerator RefreshRescueAnimalsAction()
+        {
+            try
+            {
+                CitizenManager citizenManager = Singleton<CitizenManager>.instance;
+
+                for (int i = 1; i < citizenManager.m_instances.m_buffer.Length; i++)
+                {
+                    if ((citizenManager.m_instances.m_buffer[i].m_flags & CitizenInstance.Flags.Created) != CitizenInstance.Flags.None)
+                    {
+                        if (citizenManager.m_instances.m_buffer[i].Info.m_citizenAI != null && citizenManager.m_instances.m_buffer[i].Info.m_citizenAI is RescueAnimalAI)
+                        {
+                            citizenManager.ReleaseCitizenInstance((ushort)i);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ObjectHelper:RefreshRescueAnimalsAction -> Exception: " + e.Message);
             }
 
             yield return null;
