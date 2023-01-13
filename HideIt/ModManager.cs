@@ -18,10 +18,6 @@ namespace HideIt
         private Vector3 _defaultGrassPollutionColorOffset;
         private Color _defaultWaterColorClean;
         private Color _defaultWaterColorDirty;
-        private FogProperties _fogProperties;
-        private float _defaultPollutionAmount;
-        private float _defaultFogDensity;
-        private float _defaultColorDecay;
 
         public void Start()
         {
@@ -36,15 +32,6 @@ namespace HideIt
                 _defaultGrassPollutionColorOffset = Shader.GetGlobalVector("_GrassPollutionColorOffset");
                 _defaultWaterColorClean = Shader.GetGlobalColor("_WaterColorClean");
                 _defaultWaterColorDirty = Shader.GetGlobalColor("_WaterColorDirty");
-
-                _fogProperties = FindObjectOfType<FogProperties>();
-
-                if (_fogProperties != null)
-                {
-                    _defaultPollutionAmount = _fogProperties.m_PollutionAmount;
-                    _defaultFogDensity = _fogProperties.m_FogDensity;
-                    _defaultColorDecay = _fogProperties.m_ColorDecay;
-                }
             }
             catch (Exception e)
             {
@@ -169,11 +156,6 @@ namespace HideIt
                         ModConfig.Instance.GrassForestGroundColor,
                         ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
-                    ToggleFogEffects(
-                        ModConfig.Instance.PollutionFog,
-                        ModConfig.Instance.VolumeFog,
-                        ModConfig.Instance.DistanceFog,
-                        ModConfig.Instance.EdgeFog);
 
                     if (ModConfig.Instance.Birds)
                     {
@@ -486,24 +468,6 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] ModManager:ToggleWaterColor -> Exception: " + e.Message);
-            }
-        }
-
-        private void ToggleFogEffects(bool disablePollution, bool disableVolume, bool disableDistance, bool disableEdge)
-        {
-            try
-            {
-                if (_fogProperties != null)
-                {
-                    _fogProperties.m_PollutionAmount = disablePollution ? 0f : _defaultPollutionAmount;
-                    _fogProperties.m_FogDensity = disableVolume ? 0f : _defaultFogDensity;
-                    _fogProperties.m_ColorDecay = disableDistance ? 1f : _defaultColorDecay;
-                    _fogProperties.m_edgeFog = !disableEdge;
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("[Hide It!] ModManager:ToggleFogEffects -> Exception: " + e.Message);
             }
         }
     }

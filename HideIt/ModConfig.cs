@@ -114,10 +114,6 @@
         public bool PollutedArea { get; set; }
         public bool BurnedArea { get; set; }
         public bool DestroyedArea { get; set; }
-        public bool PollutionFog { get; set; }
-        public bool VolumeFog { get; set; }
-        public bool DistanceFog { get; set; }
-        public bool EdgeFog { get; set; }
 
         private static ModConfig instance;
 

@@ -830,34 +830,6 @@ namespace HideIt
                 ModConfig.Instance.DestroyedArea = sel;
                 ModConfig.Instance.Save();
             });
-
-            selected = ModConfig.Instance.PollutionFog;
-            group.AddCheckbox("Pollution Fog", selected, sel =>
-            {
-                ModConfig.Instance.PollutionFog = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.VolumeFog;
-            group.AddCheckbox("Volume Fog", selected, sel =>
-            {
-                ModConfig.Instance.VolumeFog = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.DistanceFog;
-            group.AddCheckbox("Distance Fog", selected, sel =>
-            {
-                ModConfig.Instance.DistanceFog = sel;
-                ModConfig.Instance.Save();
-            });
-
-            selected = ModConfig.Instance.EdgeFog;
-            group.AddCheckbox("Edge Fog", selected, sel =>
-            {
-                ModConfig.Instance.EdgeFog = sel;
-                ModConfig.Instance.Save();
-            });
         }
     }
 }
