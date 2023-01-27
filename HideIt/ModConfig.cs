@@ -35,6 +35,19 @@
         public bool RescueAnimals { get; set; }
         public bool Livestock { get; set; }
         public bool Pets { get; set; }
+        public bool NetsDrawSound { get; set; }
+        public bool AmbientWorldSound { get; set; }
+        public bool AmbientForestSound { get; set; }
+        public bool AmbientSeaSound { get; set; }
+        public bool AmbientStreamSound { get; set; }
+        public bool AmbientIndustrialSound { get; set; }
+        public bool AmbientPlazaSound { get; set; }
+        public bool AmbientSuburbanSound { get; set; }
+        public bool AmbientCitySound { get; set; }
+        public bool AmbientAgriculturalSound { get; set; }
+        public bool AmbientLeisureSound { get; set; }
+        public bool AmbientTouristSound { get; set; }
+        public bool AmbientRainSound { get; set; }
         public bool Flags { get; set; }
         public bool Ads { get; set; }
         public bool Billboards { get; set; }
@@ -114,6 +127,14 @@
         public bool PollutedArea { get; set; }
         public bool BurnedArea { get; set; }
         public bool DestroyedArea { get; set; }
+        public bool BuildingsBulldoze { get; set; }
+        public bool BuildingsPlacement { get; set; }
+        public bool NetsBulldoze { get; set; }
+        public bool NetsPlacement { get; set; }
+        public bool PropsBulldoze { get; set; }
+        public bool PropsPlacement { get; set; }
+        public bool TreesBulldoze { get; set; }
+        public bool TreesPlacement { get; set; }
 
         private static ModConfig instance;
 

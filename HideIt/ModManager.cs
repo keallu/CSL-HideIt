@@ -1,4 +1,5 @@
-﻿using ColossalFramework.UI;
+﻿using ColossalFramework;
+using ColossalFramework.UI;
 using HideIt.Helpers;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,48 @@ namespace HideIt
                     ToggleSingleUIComponentByVisibility("Sprite", "TSBar", ModConfig.Instance.ZoomAndUnlockBackground);
                     ToggleMultipleUIComponentsByVisibility("Separator", "MainToolstrip", ModConfig.Instance.Separators);
                     ToggleMultipleUIComponentsByVisibility("SmallSeparator", "MainToolstrip", ModConfig.Instance.Separators);
+
+                    if (ModConfig.Instance.Birds)
+                    {
+                        ObjectHelper.RefreshBirds();
+                    }
+
+                    if (ModConfig.Instance.Wildlife)
+                    {
+                        ObjectHelper.RefreshWildlife();
+                    }
+
+                    if (ModConfig.Instance.RescueAnimals)
+                    {
+                        ObjectHelper.RefreshRescueAnimals();
+                    }
+
+                    if (ModConfig.Instance.Livestock)
+                    {
+                        ObjectHelper.RefreshLivestock();
+                    }
+
+                    if (ModConfig.Instance.Pets)
+                    {
+                        ObjectHelper.RefreshPets();
+                    }
+
+                    ToggleSounds(
+                        ModConfig.Instance.NetsDrawSound,
+                        ModConfig.Instance.AmbientWorldSound,
+                        ModConfig.Instance.AmbientForestSound,
+                        ModConfig.Instance.AmbientSeaSound,
+                        ModConfig.Instance.AmbientStreamSound,
+                        ModConfig.Instance.AmbientIndustrialSound,
+                        ModConfig.Instance.AmbientPlazaSound,
+                        ModConfig.Instance.AmbientSuburbanSound,
+                        ModConfig.Instance.AmbientCitySound,
+                        ModConfig.Instance.AmbientAgriculturalSound,
+                        ModConfig.Instance.AmbientLeisureSound,
+                        ModConfig.Instance.AmbientTouristSound,
+                        ModConfig.Instance.AmbientRainSound
+                        );
+
                     if (!CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() || ModConfig.Instance.EnforcePropsHiding)
                     {
                         ToggleBuildingProps(
@@ -157,30 +200,16 @@ namespace HideIt
                         ModConfig.Instance.GrassPollutionGroundColor);
                     ToggleWaterColor(ModConfig.Instance.DirtyWaterColor);
 
-                    if (ModConfig.Instance.Birds)
-                    {
-                        ObjectHelper.RefreshBirds();
-                    }
-
-                    if (ModConfig.Instance.Wildlife)
-                    {
-                        ObjectHelper.RefreshWildlife();
-                    }
-
-                    if (ModConfig.Instance.RescueAnimals)
-                    {
-                        ObjectHelper.RefreshRescueAnimals();
-                    }
-
-                    if (ModConfig.Instance.Livestock)
-                    {
-                        ObjectHelper.RefreshLivestock();
-                    }
-
-                    if (ModConfig.Instance.Pets)
-                    {
-                        ObjectHelper.RefreshPets();
-                    }
+                    ToggleEffects(
+                        ModConfig.Instance.BuildingsBulldoze,
+                        ModConfig.Instance.BuildingsPlacement,
+                        ModConfig.Instance.NetsBulldoze,
+                        ModConfig.Instance.NetsPlacement,
+                        ModConfig.Instance.PropsBulldoze,
+                        ModConfig.Instance.PropsPlacement,
+                        ModConfig.Instance.TreesBulldoze,
+                        ModConfig.Instance.TreesPlacement
+                        );
 
                     TextureHelper.RefreshTexture();
 
@@ -273,6 +302,98 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] ModManager:ToggleMultipleUIComponentsByVisibility -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleSounds(bool disableNetsDraw, bool disableAmbientWorld, bool disableAmbientForest, bool disableAmbientSea, bool disableAmbientStream, bool disableAmbientIndustrial, bool disableAmbientPlaza, bool disableAmbientSuburban, bool disableAmbientCity, bool disableAmbientAgricultural, bool disableAmbientLeisure, bool disableAmbientTourist, bool disableAmbientRain)
+        {
+            try
+            {
+                NetProperties netProperties = Singleton<NetManager>.instance.m_properties;
+                netProperties.m_drawSound.m_volume = disableNetsDraw ? 0 : 1;
+
+                AudioProperties audioProperties = Singleton<AudioManager>.instance.m_properties;
+
+                for (int i = 0; i < audioProperties.m_ambients.Length; i++)
+                {
+                    switch (audioProperties.m_ambients[i].name)
+                    {
+                        case "Ambient World":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientWorld ? 0 : 1;
+                            break;
+                        case "Ambient Forest":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientForest ? 0 : 1;
+                            break;
+                        case "Ambient Sea":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientSea ? 0 : 1;
+                            break;
+                        case "Ambient Stream":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientStream ? 0 : 1;
+                            break;
+                        case "Ambient Industrial":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientIndustrial ? 0 : 1;
+                            break;
+                        case "Ambient Plaza":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientPlaza ? 0 : 1;
+                            break;
+                        case "Ambient Suburban":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientSuburban ? 0 : 1;
+                            break;
+                        case "Ambient City":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientCity ? 0 : 1;
+                            break;
+                        case "Ambient Agricultural":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientAgricultural ? 0 : 1;
+                            break;
+                        case "Ambient Rain":
+                            audioProperties.m_ambients[i].m_volume = disableAmbientRain ? 0 : 1;
+                            break;
+                    }
+                }
+
+                for (int i = 0; i < audioProperties.m_ambientsNight.Length; i++)
+                {
+                    switch (audioProperties.m_ambientsNight[i].name)
+                    {
+                        case "Ambient World":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientWorld ? 0 : 1;
+                            break;
+                        case "Ambient Forest Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientForest ? 0 : 1;
+                            break;
+                        case "Ambient Sea":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientSea ? 0 : 1;
+                            break;
+                        case "Ambient Stream":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientStream ? 0 : 1;
+                            break;
+                        case "Ambient City Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientCity ? 0 : 1;
+                            break;
+                        case "Ambient Plaza":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientPlaza ? 0 : 1;
+                            break;
+                        case "Ambient Suburban Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientSuburban ? 0 : 1;
+                            break;
+                        case "Ambient Agricultural Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientAgricultural ? 0 : 1;
+                            break;
+                        case "Ambient Leisure Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientLeisure ? 0 : 1;
+                            break;
+                        case "Ambient Tourist Night":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientTourist ? 0 : 1;
+                            break;
+                        case "Ambient Rain":
+                            audioProperties.m_ambientsNight[i].m_volume = disableAmbientRain ? 0 : 1;
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ModManager:ToggleSounds -> Exception: " + e.Message);
             }
         }
 
@@ -468,6 +589,53 @@ namespace HideIt
             catch (Exception e)
             {
                 Debug.Log("[Hide It!] ModManager:ToggleWaterColor -> Exception: " + e.Message);
+            }
+        }
+
+        private void ToggleEffects(bool disableBuildingsBulldoze, bool disableBuildingsPlacement, bool disableNetsBulldoze, bool disableNetsPlacement, bool disablePropsBulldoze, bool disablePropsPlacement, bool disableTreesBulldoze, bool disableTreesPlacement)
+        {
+            try
+            {
+                bool[] disables = new bool[8]
+                {
+                    disableBuildingsBulldoze,
+                    disableBuildingsPlacement,
+                    disableNetsBulldoze,
+                    disableNetsPlacement,
+                    disablePropsBulldoze,
+                    disablePropsPlacement,
+                    disableTreesBulldoze,
+                    disableTreesPlacement
+                };
+
+                BuildingProperties buildingProperties = Singleton<BuildingManager>.instance.m_properties;
+                NetProperties netProperties = Singleton<NetManager>.instance.m_properties;
+                PropProperties propProperties = Singleton<PropManager>.instance.m_properties;
+                TreeProperties treeProperties = Singleton<TreeManager>.instance.m_properties;
+
+                MultiEffect[] multiEffects = new MultiEffect[8]
+                {
+                    buildingProperties.m_bulldozeEffect as MultiEffect,
+                    buildingProperties.m_placementEffect as MultiEffect,
+                    netProperties.m_bulldozeEffect as MultiEffect,
+                    netProperties.m_placementEffect as MultiEffect,
+                    propProperties.m_bulldozeEffect as MultiEffect,
+                    propProperties.m_placementEffect as MultiEffect,
+                    treeProperties.m_bulldozeEffect as MultiEffect,
+                    treeProperties.m_placementEffect as MultiEffect
+                };
+
+                for (int i = 0; i < multiEffects.Length; i++)
+                {
+                    for (int j = 0; j < multiEffects[i].m_effects.Length; j++)
+                    {
+                        multiEffects[i].m_effects[j].m_probability = disables[i] ? 0 : 1;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[Hide It!] ModManager:ToggleEffects -> Exception: " + e.Message);
             }
         }
     }

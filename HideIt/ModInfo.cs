@@ -260,6 +260,99 @@ namespace HideIt
                 ModConfig.Instance.Save();
             });
 
+            group = helper.AddGroup("Sounds");
+
+            selected = ModConfig.Instance.NetsDrawSound;
+            group.AddCheckbox("Networks Draw", selected, sel =>
+            {
+                ModConfig.Instance.NetsDrawSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientWorldSound;
+            group.AddCheckbox("Ambient World", selected, sel =>
+            {
+                ModConfig.Instance.AmbientWorldSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientForestSound;
+            group.AddCheckbox("Ambient Forest", selected, sel =>
+            {
+                ModConfig.Instance.AmbientForestSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientSeaSound;
+            group.AddCheckbox("Ambient Sea", selected, sel =>
+            {
+                ModConfig.Instance.AmbientSeaSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientStreamSound;
+            group.AddCheckbox("Ambient Stream", selected, sel =>
+            {
+                ModConfig.Instance.AmbientStreamSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientIndustrialSound;
+            group.AddCheckbox("Ambient Industrial", selected, sel =>
+            {
+                ModConfig.Instance.AmbientIndustrialSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientPlazaSound;
+            group.AddCheckbox("Ambient Plaza", selected, sel =>
+            {
+                ModConfig.Instance.AmbientPlazaSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientSuburbanSound;
+            group.AddCheckbox("Ambient Suburban", selected, sel =>
+            {
+                ModConfig.Instance.AmbientSuburbanSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientCitySound;
+            group.AddCheckbox("Ambient City", selected, sel =>
+            {
+                ModConfig.Instance.AmbientCitySound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientAgriculturalSound;
+            group.AddCheckbox("Ambient Agricultural", selected, sel =>
+            {
+                ModConfig.Instance.AmbientAgriculturalSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientLeisureSound;
+            group.AddCheckbox("Ambient Leisure", selected, sel =>
+            {
+                ModConfig.Instance.AmbientLeisureSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientTouristSound;
+            group.AddCheckbox("Ambient Tourist", selected, sel =>
+            {
+                ModConfig.Instance.AmbientTouristSound = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.AmbientRainSound;
+            group.AddCheckbox("Ambient Rain", selected, sel =>
+            {
+                ModConfig.Instance.AmbientRainSound = sel;
+                ModConfig.Instance.Save();
+            });
+
             group = helper.AddGroup($"Props{(CompatibilityHelper.IsAnyPropsAndTreesManipulatingModsEnabled() ? " (Disabled unless enforcement is selected)" : "")}");
 
             selected = ModConfig.Instance.Flags;
@@ -828,6 +921,62 @@ namespace HideIt
             group.AddCheckbox("Destroyed Area", selected, sel =>
             {
                 ModConfig.Instance.DestroyedArea = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BuildingsBulldoze;
+            group.AddCheckbox("Buildings Bulldoze", selected, sel =>
+            {
+                ModConfig.Instance.BuildingsBulldoze = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.BuildingsPlacement;
+            group.AddCheckbox("Buildings Placement", selected, sel =>
+            {
+                ModConfig.Instance.BuildingsPlacement = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.NetsBulldoze;
+            group.AddCheckbox("Networks Bulldoze", selected, sel =>
+            {
+                ModConfig.Instance.NetsBulldoze = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.NetsPlacement;
+            group.AddCheckbox("Networks Placement", selected, sel =>
+            {
+                ModConfig.Instance.NetsPlacement = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PropsBulldoze;
+            group.AddCheckbox("Props Bulldoze", selected, sel =>
+            {
+                ModConfig.Instance.PropsBulldoze = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.PropsPlacement;
+            group.AddCheckbox("Props Placement", selected, sel =>
+            {
+                ModConfig.Instance.PropsPlacement = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TreesBulldoze;
+            group.AddCheckbox("Trees Bulldoze", selected, sel =>
+            {
+                ModConfig.Instance.TreesBulldoze = sel;
+                ModConfig.Instance.Save();
+            });
+
+            selected = ModConfig.Instance.TreesPlacement;
+            group.AddCheckbox("Trees Placement", selected, sel =>
+            {
+                ModConfig.Instance.TreesPlacement = sel;
                 ModConfig.Instance.Save();
             });
         }
